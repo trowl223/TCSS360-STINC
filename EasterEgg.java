@@ -5,7 +5,7 @@
 class EasterEgg {
     private String[] team;
     //Needs to be updated each time a new member adds their name.
-    private int numMems = 1;
+    private int numMems = 2;
     
     /* This method prints out a welcome statement.
      * This method doesn't take any arguments, and returns no values.
@@ -33,6 +33,7 @@ class EasterEgg {
         // ADD YOUR NAME UNDER THIS. YOU WILL ALSO NEED TO UPDATE THE numMems VALUE AT THE TOP
         //====================================================================================
         assignTeamMember("Taylor", 1);
+        assignTeamMember("Nicholas", 2);
         
         
         
