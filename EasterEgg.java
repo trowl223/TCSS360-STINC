@@ -21,7 +21,7 @@ class EasterEgg {
     }
     
     public static void main(String[] args) {
-        int numMems = 3;
+        int numMems = 4;
         String[] team = new String[numMems];
         printStinc();
         
@@ -32,6 +32,7 @@ class EasterEgg {
         assignTeamMember(team, "Taylor", 1);
         assignTeamMember(team, "Nicholas", 2);
         assignTeamMember(team, "Igor", 3);
+        assignTeamMember(team, "Stefan", 4);
         
         
         
