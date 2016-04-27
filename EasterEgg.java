@@ -6,7 +6,7 @@ class EasterEgg {
     /* This method prints out a welcome statement.
      * This method doesn't take any arguments, and returns no values.
      */
-    private void printStinc () {
+    private static void printStinc () {
         System.out.println("You've found team STINC's Easter Egg!");
     }
     
@@ -16,7 +16,7 @@ class EasterEgg {
      * @param anIndex the order the given member entered their name.
      * @return Void.
      */
-    private void assignTeamMember (String[] anArray, String aName, int anIndex) {
+    private static void assignTeamMember (String[] anArray, String aName, int anIndex) {
         anArray[anIndex-1] = aName;
     }
     
