@@ -2,11 +2,7 @@
     This class implements an easter egg which will print out the names of the members of this project team
 
 */
-class EasterEgg {
-    private String[] team;
-    //Needs to be updated each time a new member adds their name.
-    private int numMems = 3;
-    
+class EasterEgg {    
     /* This method prints out a welcome statement.
      * This method doesn't take any arguments, and returns no values.
      */
@@ -20,21 +16,22 @@ class EasterEgg {
      * @param anIndex the order the given member entered their name.
      * @return Void.
      */
-    private void assignTeamMember (String aName, int anIndex) {
-        team[anIndex-1] = aName;
+    private void assignTeamMember (String[] anArray, String aName, int anIndex) {
+        anArray[anIndex-1] = aName;
     }
     
     public static void main(String[] args) {
-        team = String[numMems];
+        int numMems = 3;
+        String[] team = new String[numMems];
         printStinc();
         
         //Team member assignment
         //====================================================================================
         // ADD YOUR NAME UNDER THIS. YOU WILL ALSO NEED TO UPDATE THE numMems VALUE AT THE TOP
         //====================================================================================
-        assignTeamMember("Taylor", 1);
-        assignTeamMember("Nicholas", 2);
-        assignTeamMember("Igor", 3);
+        assignTeamMember(team, "Taylor", 1);
+        assignTeamMember(team, "Nicholas", 2);
+        assignTeamMember(team, "Igor", 3);
         
         
         
@@ -44,7 +41,7 @@ class EasterEgg {
         System.out.print("We are: ");
         
         int i = 0;
-        for (i; i < numMems; i++) {
+        for (i = 0; i < numMems; i++) {
             if (i == numMems-1 && numMems > 1) {
                 System.out.println("and " + team[i]);
             } else if(i == numMems-1 && numMems <= 1){
