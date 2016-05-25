@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * Information used to identify a User
+ * @author Nicholas Mousel
+ * @version 5/24/2016
+ *
+ */
 public class User
 {
 	private int myLibraryID;

@@ -18,6 +18,9 @@ public class Contest
 	private List<Entry> myEntries;
 	private List<User> myJudges;
 	
+	/**
+	 * Constructs a Contest
+	 */
 	public Contest()
 	{
 		this("", "");
@@ -25,12 +28,24 @@ public class Contest
 		myJudges = new ArrayList<User>();
 	}
 	
+	/**
+	 * Constructs a Contest with the specified parameters
+	 * @param theName the Contest Name
+	 * @param theDescription the Contest Description
+	 */
 	public Contest(String theName, String theDescription)
 	{
 		myName = theName;
 		myDescription = theDescription;
 	}
 	
+	/**
+	 * Constructs a Contest with the specified parameters.
+	 * @param theName the Contest Name.
+	 * @param theDescription the Contest Description.
+	 * @param theEntries the Contest Entries.
+	 * @param theJudges the Judges for the Contest.
+	 */
 	public Contest(String theName, List<Entry> theEntries, List<User> theJudges, String theDescription)
 	{
 		this(theName, theDescription);
@@ -38,11 +53,20 @@ public class Contest
 		myJudges = theJudges;
 	}
 	
+	/**
+	 * Add the specified User as a Judge to the Contest
+	 * @param theUser the User allowed to Judge
+	 */
 	public void addJudge(User theUser)
 	{
 		myJudges.add(theUser);
 	}
 	
+	/**
+	 * Check if the User is a winner.
+	 * @param theUser the User to check.
+	 * @return true if user is winner, false otherwise
+	 */
 	public boolean isWinner(User theUser)
 	{
 		List<Entry> winners = getWinningEntries();
@@ -55,7 +79,10 @@ public class Contest
 		}
 		return false;
 	}
-	
+	/**
+	 * Get the winning Entries for the Contest.
+	 * @return list of winning entries.
+	 */
 	public  List<Entry> getWinningEntries()
 	{
 		List<Entry> result = new ArrayList<Entry>();
@@ -69,7 +96,11 @@ public class Contest
 		});
 		return result.subList(0, 3);
 	}
-	
+	/**
+	 * Remove Entry with specified ID.
+	 * @param theEntryID the entry to remove.
+	 * @return true if successful, false otherwise.
+	 */
 	public boolean removeEntry(int theEntryID)
 	{
 		for (Iterator<Entry> iterator = myEntries.iterator(); iterator.hasNext();)
@@ -84,7 +115,11 @@ public class Contest
 		}
 		return false;
 	}
-	
+	/**
+	 * Get the entries for a specified User.
+	 * @param theUser to get Entries for.
+	 * @return the User entries.
+	 */
 	public List<Entry> getUserEntries(User theUser)
 	{
 		List<Entry> result = new ArrayList<Entry>();
@@ -97,7 +132,11 @@ public class Contest
 		}
 		return result;
 	}
-	
+	/**
+	 * Checks to see if the User can judge the contest.
+	 * @param theUser the User to check.
+	 * @return true if the User can judge the Entry, false otherwise
+	 */
 	public boolean canJudge(User theUser)
 	{
 		if(myJudges.contains(theUser))
@@ -107,6 +146,10 @@ public class Contest
 		return false;
 	}
 	
+	/**
+	 * Gets the Contest ID.
+	 * @return the ID of the contest.
+	 */
 	public int getID()
 	{
 		return myID;
