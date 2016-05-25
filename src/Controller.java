@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Contest;
+
 /**
  * The controller for the View and Model
  * @author Nicholas Mousel

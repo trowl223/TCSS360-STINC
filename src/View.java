@@ -1,5 +1,7 @@
 import java.util.Observable;
 import java.util.Observer;
+
+import model.Contest;
 /**
  * The View is the GUI model.
  * @author Nicholas

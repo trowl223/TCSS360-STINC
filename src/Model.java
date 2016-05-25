@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
+
+import model.Contest;
 /**
  * The model is the data model.
  * @author Nicholas Mousel
