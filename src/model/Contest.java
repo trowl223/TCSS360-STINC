@@ -17,6 +17,7 @@ public class Contest
 	private String myDescription;
 	private List<Entry> myEntries;
 	private List<User> myJudges;
+	private int myAgeLimit;
 	
 	/**
 	 * Constructs a Contest
@@ -24,6 +25,7 @@ public class Contest
 	public Contest()
 	{
 		this("", "");
+		myAgeLimit = -1;
 		myEntries = new ArrayList<Entry>();
 		myJudges = new ArrayList<User>();
 	}
@@ -46,9 +48,10 @@ public class Contest
 	 * @param theEntries the Contest Entries.
 	 * @param theJudges the Judges for the Contest.
 	 */
-	public Contest(String theName, List<Entry> theEntries, List<User> theJudges, String theDescription)
+	public Contest(String theName, List<Entry> theEntries, List<User> theJudges, String theDescription, int theAgeLimit)
 	{
 		this(theName, theDescription);
+		myAgeLimit = theAgeLimit;
 		myEntries = theEntries;
 		myJudges = theJudges;
 	}
@@ -57,9 +60,9 @@ public class Contest
 	 * Add the specified User as a Judge to the Contest
 	 * @param theUser the User allowed to Judge
 	 */
-	public void addJudge(User theUser)
+	public boolean addJudge(User theUser)
 	{
-		myJudges.add(theUser);
+		return myJudges.add(theUser);
 	}
 	
 	/**
@@ -115,6 +118,32 @@ public class Contest
 		}
 		return false;
 	}
+	
+	public Entry getEntry(int theEntryID)
+	{
+		for (Entry e: myEntries)
+		{
+			if (e.getID() == theEntryID)
+			{
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public Entry getEntries(User theUser, int theEntryID)
+	{
+		List<Entry> es = getUserEntries(theUser);
+		for (Entry e: es)
+		{
+			if(e.getID() == theEntryID)
+			{
+				return e;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Get the entries for a specified User.
 	 * @param theUser to get Entries for.
@@ -132,6 +161,7 @@ public class Contest
 		}
 		return result;
 	}
+	
 	/**
 	 * Checks to see if the User can judge the contest.
 	 * @param theUser the User to check.
@@ -154,11 +184,21 @@ public class Contest
 	{
 		return myID;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+
+	public boolean addEntry(Entry theEntry) {
+		if (getUserEntries(theEntry.getOwner()).isEmpty())
+		{
+			return myEntries.add(theEntry);
+		}
+		return false;
+	}
+
+	public boolean isEligible(User theUser) {
+		return myAgeLimit <= theUser.getAge();
+	}
+
+	public boolean removeJudge(User theUser) {
+		return myJudges.remove(theUser);
 	}
 	
 }

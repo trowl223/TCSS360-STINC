@@ -23,6 +23,10 @@ public class User
 		myAge = theAge;
 	}
 	
+	public int getAge()
+	{
+		return myAge;
+	}
 	
 	@Override
 	public boolean equals(Object obj)

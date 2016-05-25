@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Observable;
 
 import model.Contest;
+import model.Entry;
+import model.User;
+
 /**
  * The model is the data model.
  * @author Nicholas Mousel
@@ -15,13 +18,13 @@ public class Model extends Observable
 	/**
 	 * The contests
 	 */
-	private List<Contest> contests;
+	private List<Contest> myContests;
 	
 	/**
 	 * Constructs the Model
 	 */
 	public Model() {
-		contests = new ArrayList<Contest>();
+		myContests = new ArrayList<Contest>();
 	}
 	
 	/**
@@ -31,14 +34,39 @@ public class Model extends Observable
 	 */
 	public boolean addContest(Contest theContest)
 	{
+		boolean result = false;
 		if (!contestExists(theContest))
 		{
-			contests.add(theContest);
+			result = myContests.add(theContest);
 			System.out.println("Add Contest");
 			setChanged();
 			notifyObservers();
 		}
-		return false;
+		return result;
+	}
+	
+	public boolean addEntry(int theContestID, Entry theEntry)
+	{
+		Contest c = getContest(theContestID);
+		boolean result = false;
+		if (c != null)
+		{
+			result = c.addEntry(theEntry);
+			setChanged();
+			notifyObservers();
+		}
+		return result;
+	}
+	
+	public Entry getEntry(int theContestID, int theEntryID)
+	{
+		Contest c = getContest(theContestID);
+		boolean result = false;
+		if (c != null)
+		{
+			return c.getEntry(theEntryID);
+		}
+		return null;
 	}
 	
 	/**
@@ -48,7 +76,7 @@ public class Model extends Observable
 	 */
 	public boolean contestExists(Contest theContest)
 	{
-		return contests.contains(theContest);
+		return myContests.contains(theContest);
 	}
 	
 	/**
@@ -60,7 +88,14 @@ public class Model extends Observable
 	public boolean removeEntry(int theEntryID, int theContestID)
 	{
 		Contest c = getContest(theContestID);
-		return c.removeEntry(theEntryID);
+		boolean result = false;
+		if (c != null)
+		{
+			result = c.removeEntry(theEntryID);
+			setChanged();
+			notifyObservers();
+		}
+		return result;
 	}
 	
 	/**
@@ -70,15 +105,19 @@ public class Model extends Observable
 	 */
 	public boolean removeEntry(int theEntryID)
 	{
-		for (Iterator<Contest> iterator = contests.iterator(); iterator.hasNext();)
+		boolean result = false;
+		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
-		    if(contest.removeEntry(theEntryID))
+		    
+		    if(contest.getID() == theEntryID)
 		    {
-		    	return true;
+		    	result = contest.removeEntry(theEntryID);
+				setChanged();
+				notifyObservers();
 		    }
 		}
-		return false;
+		return result;
 	}
 	
 	/**
@@ -88,7 +127,7 @@ public class Model extends Observable
 	 */
 	public Contest getContest(int theContestID)
 	{
-		for (Iterator<Contest> iterator = contests.iterator(); iterator.hasNext();)
+		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
 		    if (contest.getID() == theContestID)
@@ -106,15 +145,38 @@ public class Model extends Observable
 	 */
 	public boolean removeContest(int theContestID)
 	{
-		for (Iterator<Contest> iterator = contests.iterator(); iterator.hasNext();)
+		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
 		    if (contest.getID() == theContestID)
 		    {
 		        // Remove the current element from the iterator and the list.
 		        iterator.remove();
+				setChanged();
+				notifyObservers();
 		        return true;
 		    }
+		}
+		return false;
+	}
+	
+	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
+	{
+		Contest c = getContest(theContestID);
+		if(c != null)
+		{
+			if(c.canJudge(theUser))
+			{
+				Entry e = c.getEntry(theEntryID);
+				if (e != null)
+				{
+					e.judge(theUser, theScore);
+					setChanged();
+					notifyObservers();
+					return true;
+				}
+				
+			}
 		}
 		return false;
 	}
@@ -125,6 +187,48 @@ public class Model extends Observable
 	public void save()
 	{
 		//TODO: When I know what I am saving.
+	}
+
+	public List<Contest> getElegibleContests(User theUser) {
+		List<Contest> result = new ArrayList<Contest>();
+		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+		{
+		    Contest contest = iterator.next();
+		    if (contest.isEligible(theUser))
+		    {
+		    	result.add(contest);
+		    }
+		}
+		return result;
+	}
+	
+	public List<Contest> getContestsEntered(User theUser) {
+		List<Contest> result = new ArrayList<Contest>();
+		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+		{
+		    Contest contest = iterator.next();
+		    if(contest.getUserEntries(theUser).isEmpty())
+		    {		
+		    	result.add(contest);
+		    }
+		}
+		return result;
+	}
+
+	public List<Contest> getContests() {
+		return myContests;
+	}
+
+	public Entry getEntry(int theEntryID) {
+		for (Contest c : myContests)
+		{
+			Entry e = c.getEntry(theEntryID);
+			if (e != null)
+			{
+				return e;
+			}
+		}
+		return null;
 	}
 	
 }

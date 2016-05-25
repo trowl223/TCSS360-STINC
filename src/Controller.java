@@ -1,4 +1,8 @@
+import java.util.List;
+
 import model.Contest;
+import model.Entry;
+import model.User;
 
 /**
  * The controller for the View and Model
@@ -32,6 +36,75 @@ public class Controller {
 	public boolean removeContest(int theContestID)
 	{
 		return myModel.removeContest(theContestID);
+	}
+	
+	public Contest getContest(int theContestID)
+	{
+		return myModel.getContest(theContestID);
+	}
+	
+	public List<Contest> getCurrentContests()
+	{
+		return myModel.getContests();
+	}
+	
+	public List<Contest> getElegibleContests(User theUser)
+	{
+		return myModel.getElegibleContests(theUser);
+	}
+	
+	public List<Contest> getContestsEntered(User theUser)
+	{
+		return myModel.getContestsEntered(theUser);
+	}
+	
+	public boolean addEntry(int theContestID, Entry theEntry)
+	{
+		return myModel.addEntry(theContestID, theEntry);
+	}
+	
+	public boolean removeEntry(int theEntryID)
+	{
+		return myModel.removeEntry(theEntryID);
+	}
+	
+	public Entry getEntry(int theEntryID)
+	{
+		return myModel.getEntry(theEntryID);
+	}
+	
+	public boolean addJudge(int theContestID, User theUser)
+	{
+		if (theUser != null)
+		{
+			Contest c = myModel.getContest(theContestID);
+			if (c != null)
+			{
+				return c.addJudge(theUser);
+			}
+		}
+		return false;
+	}
+	
+	public boolean removeJudge(int theContestID, User theUser)
+	{
+		if (theUser != null)
+		{
+			Contest c = myModel.getContest(theContestID);
+			if (c != null)
+			{
+				if (c.canJudge(theUser))
+				{
+					return c.removeJudge(theUser);
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
+	{
+		return myModel.judgeEntry(theContestID, theEntryID, theUser, theScore);
 	}
 	
 	/**
