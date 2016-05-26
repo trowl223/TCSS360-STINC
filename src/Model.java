@@ -48,6 +48,7 @@ public class Model extends Observable
 	public boolean addEntry(int theContestID, Entry theEntry)
 	{
 		Contest c = getContest(theContestID);
+		
 		boolean result = false;
 		if (c != null)
 		{
@@ -148,6 +149,7 @@ public class Model extends Observable
 		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
+		    
 		    if (contest.getID() == theContestID)
 		    {
 		        // Remove the current element from the iterator and the list.
@@ -204,6 +206,7 @@ public class Model extends Observable
 	
 	public List<Contest> getContestsEntered(User theUser) {
 		List<Contest> result = new ArrayList<Contest>();
+		
 		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
@@ -216,6 +219,7 @@ public class Model extends Observable
 	}
 
 	public List<Contest> getContests() {
+		/*DatabaseConnector myQuery = new DatabaseConnector("getContests",myContests);*/
 		return myContests;
 	}
 
