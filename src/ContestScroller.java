@@ -31,6 +31,7 @@ public class ContestScroller extends JPanel {
 	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 55;
 	private static final int DEFAULT_WIDTH = 700;
 	private final List<Contest> myContests;
+	private final Controller myController;
 	
 	private final HashMap<Contest,JPanel> myContestBoxes = new HashMap<Contest, JPanel>();
 
@@ -38,8 +39,9 @@ public class ContestScroller extends JPanel {
 	 * Construct a ContestScroller from a list of Contests.
 	 * @param theContests the list of Contests.
 	 */
-	public ContestScroller(List<Contest> theContests) {
+	public ContestScroller(List<Contest> theContests, Controller theController) {
 		myContests = theContests;
+		myController = theController;
 		
 		setLayout(new BorderLayout());
 		
@@ -100,7 +102,7 @@ public class ContestScroller extends JPanel {
 		if (mySelectedContest != null) {
 			JPanel oldContestBox = myContestBoxes.get(mySelectedContest);
 			for(Component c : oldContestBox.getComponents()) {
-				if (c instanceof JTextArea) {
+				if (c instanceof JPanel) {
 					oldContestBox.remove(c);
 					break;
 				}
@@ -109,13 +111,49 @@ public class ContestScroller extends JPanel {
 		
 		// Add the details panel for the contest which was clicked.
 		JPanel contestBox = myContestBoxes.get(theContest);
-		JTextArea details = new JTextArea("Details:\n" + theContest.getDescription());
-		details.setPreferredSize(new Dimension(150, 200));
-		contestBox.add(details, BorderLayout.EAST);
+		
+		JPanel detailsPanel = new JPanel(new BorderLayout());
+		detailsPanel.setPreferredSize(new Dimension(150, 200));
+		
+		detailsPanel.add(new JLabel("Details"), BorderLayout.NORTH);
+		
+		
+		JTextArea details = new JTextArea(theContest.getDescription());
+		detailsPanel.add(details, BorderLayout.CENTER);
+		
+		JButton openButton = new JButton("Open");
+		openButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				myController.showContest(mySelectedContest);
+			}
+			
+		});
+		detailsPanel.add(openButton, BorderLayout.SOUTH);
+		
+		contestBox.add(detailsPanel, BorderLayout.EAST);
 		
 		mySelectedContest = theContest;
 		
-		this.revalidate();
+		revalidate();
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

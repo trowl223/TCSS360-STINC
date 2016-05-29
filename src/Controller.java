@@ -131,5 +131,10 @@ public class Controller {
 		// TODO CHRIS' SHIT GOES HERE
 		
 	}
+	
+	public void showContest(Contest theContest) {
+		// TODO Tell the view to load this contest
+		System.out.println("Stub: Load ContestView for " + theContest.getName());
+	}
 
 }

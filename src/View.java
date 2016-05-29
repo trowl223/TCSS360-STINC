@@ -3,8 +3,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
-
-import model.Contest;
 /**
  * The View is the GUI model.
  * @author Nicholas
@@ -48,7 +46,7 @@ public class View extends JFrame implements Observer
 		
 		setLayout(new BorderLayout());
 
-		ContestScroller scroller = new ContestScroller(myController.getCurrentContests());
+		ContestScroller scroller = new ContestScroller(myController.getCurrentContests(), myController);
 		add(scroller, BorderLayout.CENTER);
 		
 		
