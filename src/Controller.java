@@ -102,7 +102,7 @@ public class Controller {
 		return false;
 	}
 	
-	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
+	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)//change this to judge id, entry id and score
 	{
 		return myModel.judgeEntry(theContestID, theEntryID, theUser, theScore);
 	}
