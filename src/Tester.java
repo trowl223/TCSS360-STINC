@@ -15,8 +15,8 @@ public class Tester {
         DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
         myConnector.connect();
         ArrayList<String> loginFields = new ArrayList<>();
-        loginFields.add("testUser123");//this is the username
-        loginFields.add("testPass456");//this is the password
+        loginFields.add("testUser123");//this is the username, a string
+        loginFields.add("testPass456");//this is the password, a string
         DatabaseConnector myConnector = new DatabaseConnector("login", loginFields);//login and validate the user
         myConnector.connect();
         ArrayList<String> contests = new ArrayList<>();
