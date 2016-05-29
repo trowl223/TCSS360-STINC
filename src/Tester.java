@@ -24,17 +24,15 @@ public class Tester {
         //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
         myConnector.connect();
         ArrayList<String> contests = new ArrayList<>();
-        contests.add("eligible_contests");//all eligible contests for user_id 2
+        contests.add("contests_entered");//all entered contests for user_id 2
         contests.add("2");//user_id
-        DatabaseConnector myConnector = new DatabaseConnector("getContests", contests);
+        DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
         //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
         myConnector.connect();
          ArrayList<String> contests = new ArrayList<>();
         contests.add("eligible_contests");//all eligible contests for user_id 2
         contests.add("2");//user_id
-        DatabaseConnector myConnector = new DatabaseConnector("getContests", contests);
-        contests.add("contests_entered");//all entered contests for user_id 2
-        contests.add("2");//user_id
+        DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
         //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
         myConnector.connect();
         /*if(myConnector.getState() == myConnector.FAILURE) {//displays the success or failure of the query attempted
