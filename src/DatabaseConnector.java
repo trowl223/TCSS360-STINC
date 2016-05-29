@@ -18,7 +18,6 @@ public class DatabaseConnector {
     public static final int FAILURE = 3;//user input was incorrect
     public static final int SUCCESS = 1;//user input was correct
     public static final int BAD_CONNECTION = -1;//user input was correct
-    private static final String upload = "http://repos.insttech.washington.edu/~dejarc/library_upload.php";
     private static final String login = "http://repos.insttech.washington.edu/~dejarc/library_login.php";
     private static final String contests = "http://repos.insttech.washington.edu/~dejarc/display_contests.php";
     private static final String createEntry = "http://repos.insttech.washington.edu/~dejarc/add_entry.php";
@@ -41,12 +40,6 @@ public class DatabaseConnector {
 
     public void connect() {
         switch (myOperation) {
-            case "upload":
-                URL = upload;
-                myKeys.add("description");
-                myKeys.add("title");
-                QueryDB(myKeys);
-                break;
             case "login":
                 URL = login;
                 myKeys.add("username");
@@ -66,9 +59,6 @@ public class DatabaseConnector {
                 myKeys.add("user_id");
                 myKeys.add("contest_id");
                 QueryDB(myKeys);
-
-
-
         }
 
     }
