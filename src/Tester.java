@@ -20,7 +20,8 @@ public class Tester {
         DatabaseConnector myConnector = new DatabaseConnector("login", loginFields);//login and validate the user
         myConnector.connect();
         ArrayList<String> contests = new ArrayList<>();
-        DatabaseConnector myConnector = new DatabaseConnector("getContests", contests);//get all contests
+        DatabaseConnector myConnector = new DatabaseConnector("getContests", contests);
+        //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
         myConnector.connect();
         /*if(myConnector.getState() == myConnector.FAILURE) {//displays the success or failure of the query attempted
             System.out.println("what the hell?");
