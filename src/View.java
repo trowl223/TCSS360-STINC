@@ -1,5 +1,8 @@
+import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JFrame;
 
 import model.Contest;
 /**
@@ -7,7 +10,8 @@ import model.Contest;
  * @author Nicholas
  * @version 5/24/2016
  */
-public class View implements Observer
+@SuppressWarnings("serial")
+public class View extends JFrame implements Observer
 {
 	/**
 	 * The controller instance.
@@ -28,19 +32,28 @@ public class View implements Observer
 	}
 	
 	/**
-	 * Ignore this for now just a test
-	 */
-	public void test()
-	{
-		myController.addContest(new Contest());
-	}
-	
-	/**
 	 * Adds the controller to the view.
 	 * @param theController the Controller to add.
 	 */
 	public void addController(Controller theController)
 	{
 		myController = theController;
+	}
+	
+	/**
+	 * Show the View to the user.
+	 */
+	public void start() {
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		setLayout(new BorderLayout());
+
+		ContestScroller scroller = new ContestScroller(myController.getCurrentContests());
+		add(scroller, BorderLayout.CENTER);
+		
+		
+		pack();
+		
+		setVisible(true);
 	}
 }

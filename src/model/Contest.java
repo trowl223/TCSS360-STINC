@@ -18,6 +18,7 @@ public class Contest
 	private List<Entry> myEntries;
 	private List<User> myJudges;
 	private int myAgeLimit;
+	private String myImageURL;
 	
 	/**
 	 * Constructs a Contest
@@ -39,6 +40,17 @@ public class Contest
 	{
 		myName = theName;
 		myDescription = theDescription;
+	}
+	
+	/**
+	 * Constructs a Contest with a name, description, and image URL.
+	 * @param theName the Contest Name.
+	 * @param theDescription the Contest Description.
+	 * @param theImageURL the URL to fetch the image from.
+	 */
+	public Contest(String theName, String theDescription, String theImageURL) {
+		this(theName, theDescription);
+		myImageURL = theImageURL;
 	}
 	
 	/**
@@ -199,6 +211,30 @@ public class Contest
 
 	public boolean removeJudge(User theUser) {
 		return myJudges.remove(theUser);
+	}
+	
+	/**
+	 * Get the name of the contest.
+	 * @return the name of the contest.
+	 */
+	public String getName() {
+		return myName;
+	}
+	
+	/**
+	 * Get the description of the contest.
+	 * @return the contest's description.
+	 */
+	public String getDescription() {
+		return myDescription;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getImageURL() {
+		return myImageURL;
 	}
 	
 }
