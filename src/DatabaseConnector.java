@@ -10,7 +10,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 public class DatabaseConnector {
     private static String myOperation;
     private int mState;
@@ -21,6 +24,8 @@ public class DatabaseConnector {
     private static final String login = "http://repos.insttech.washington.edu/~dejarc/library_login.php";
     private static final String contests = "http://repos.insttech.washington.edu/~dejarc/display_contests.php";
     private static final String createEntry = "http://repos.insttech.washington.edu/~dejarc/add_entry.php";
+    private static final String getContestsEntered = "http://repos.insttech.washington.edu/~dejarc/user_contests.php";
+    private static final String judgeActions = "http://repos.insttech.washington.edu/~dejarc/judge_actions.php";
     private static String URL;
     private ArrayList<String> myVals;
     HttpURLConnection conn = null;
@@ -59,6 +64,14 @@ public class DatabaseConnector {
                 myKeys.add("user_id");
                 myKeys.add("contest_id");
                 QueryDB(myKeys);
+                break;
+            case "userContests":
+                URL = getContestsEntered;
+                myKeys.add("query_type");
+                myKeys.add("user_id");
+                QueryDB(myKeys);
+                break;
+
         }
 
     }
@@ -132,13 +145,32 @@ public class DatabaseConnector {
                 sb.append(line + "\n");
             }
             try {
-                jObj = new JSONObject(sb.toString());
-                if(jObj.getInt("status") == 1) {
+                if(URL.equals(getContestsEntered)) {
+                    jArr = new JSONArray(sb.toString());
+                    this.myVals.remove(1);
+                    this.myVals.remove(0);
+                    for(int i = 0; i < jArr.length(); i++) {
+                        JSONObject temp = jArr.getJSONObject(i);
+                        Iterator<?> allKeys =  temp.keys();
+                        while(allKeys.hasNext()) {
+                            String key = (String)allKeys.next();
+                            String value = (String)temp.get(key);
+                            this.myVals.add(value);
+                        }
+
+                    }
+                    is.close();
                     setState(SUCCESS);
                 } else {
-                    setState(FAILURE);
+                    jObj = new JSONObject(sb.toString());
+                    if (jObj.getInt("status") == 1) {
+                        setState(SUCCESS);
+                    } else {
+                        setState(FAILURE);
+                    }
                 }
             } catch (JSONException e) {
+                setState(BAD_CONNECTION);
                 e.printStackTrace();
             }
         } catch (IOException e) {
