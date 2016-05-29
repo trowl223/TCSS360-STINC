@@ -2,7 +2,7 @@
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -20,7 +20,9 @@ import model.Contest;
  */
 public class ContestScroller extends JPanel {
 	
-	private static final int DEFAULT_HEIGHT = 400;
+	private static final int IMAGE_WIDTH = 200;
+	private static final int IMAGE_HEIGHT = 200;
+	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 45;
 	private static final int DEFAULT_WIDTH = 700;
 	private final List<Contest> myContests;
 
@@ -42,7 +44,7 @@ public class ContestScroller extends JPanel {
 			nameLabel.setHorizontalAlignment(JLabel.CENTER);
 			contestBox.add(nameLabel, BorderLayout.SOUTH);
 			
-			BufferedImage image = ImageFetcher.fetchImage(c.getImageURL());
+			Image image = ImageFetcher.fetchImage(c.getImageURL(), IMAGE_WIDTH, IMAGE_HEIGHT);
 			if (image != null) {
 				JLabel imageLabel = new JLabel(new ImageIcon(image));
 				contestBox.add(imageLabel, BorderLayout.CENTER);
