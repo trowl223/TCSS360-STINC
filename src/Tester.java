@@ -35,6 +35,16 @@ public class Tester {
         DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
         //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
         myConnector.connect();
+        ArrayList<String> removeVals = new ArrayList<>();
+        removeVals.add("removeJudge");//keyword to remove a judge
+        removeVals.add("1");//this is the contest id
+        removeVals.add("1");//this is the judge id
+        DatabaseConnector myConnector = new DatabaseConnector("updateJudges", removeVals);
+        ArrayList<String> addVals = new ArrayList<>();
+        addVals.add("addJudge");//keyword to remove a judge
+        addVals.add("1");//this is the contest id
+        addVals.add("1");//this is the judge id
+        DatabaseConnector myConnector = new DatabaseConnector("updateJudges", addVals);
         /*if(myConnector.getState() == myConnector.FAILURE) {//displays the success or failure of the query attempted
             System.out.println("what the hell?");
         } else if(myConnector.getState() == myConnector.SUCCESS) {
