@@ -71,7 +71,13 @@ public class DatabaseConnector {
                 myKeys.add("user_id");
                 QueryDB(myKeys);
                 break;
-
+            case "updateJudges":
+                URL = judgeActions;
+                myKeys.add("query_type");
+                myKeys.add("contest_id");
+                myKeys.add("judge_id");
+                QueryDB(myKeys);
+                break;
         }
 
     }
