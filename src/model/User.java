@@ -41,4 +41,8 @@ public class User
 		}
 		return false;
 	}
+
+	public int getID() {
+		return myLibraryID;
+	}
 }

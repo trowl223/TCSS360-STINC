@@ -34,6 +34,7 @@ public class Model extends Observable
 	 */
 	public boolean addContest(Contest theContest)
 	{
+		
 		boolean result = false;
 		if (!contestExists(theContest))
 		{
@@ -47,20 +48,30 @@ public class Model extends Observable
 	
 	public boolean addEntry(int theContestID, Entry theEntry)
 	{
-		Contest c = getContest(theContestID);
-		
-		boolean result = false;
-		if (c != null)
-		{
-			result = c.addEntry(theEntry);
-			setChanged();
-			notifyObservers();
-		}
-		return result;
+        ArrayList<String> entryFields = new ArrayList<>();
+        entryFields.add(theEntry.getSubmissionPath());//this is the url link, a string
+        entryFields.add(theEntry.getDescription());//this is the description, a string
+        entryFields.add(theEntry.getName());//this is the entry name, a string
+        entryFields.add(theEntry.getDateString());//this is the entry date, a string
+        entryFields.add(String.valueOf(theEntry.getOwner().getID()));//this is the user id, an integer
+        entryFields.add(String.valueOf(theContestID));//this is the contest id, an integer
+        DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
+        myConnector.connect();
+//		Contest c = getContest(theContestID);
+//		
+//		boolean result = false;
+//		if (c != null)
+//		{
+//			result = c.addEntry(theEntry);
+//			setChanged();
+//			notifyObservers();
+//		}
+		return myConnector.getState() == myConnector.SUCCESS;
 	}
 	
 	public Entry getEntry(int theContestID, int theEntryID)
 	{
+		
 		Contest c = getContest(theContestID);
 		boolean result = false;
 		if (c != null)

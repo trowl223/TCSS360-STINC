@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 /**
@@ -10,6 +12,7 @@ import java.util.List;
 public class Entry implements Comparable<Entry>
 {
 	private User myUser;
+	private String myName;
 	private int myID;
 	private String myDescription;
 	private String mySubmissionPath;
@@ -101,5 +104,19 @@ public class Entry implements Comparable<Entry>
 	@Override
 	public int compareTo(Entry theOther) {
 		return theOther.myScore - myScore;
+	}
+	
+	public String getDescription() {
+		return myDescription;
+	}
+	public String getSubmissionPath() {
+		return mySubmissionPath;
+	}
+	public String getName() {
+		return myName;
+	}
+	public String getDateString() {
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		return df.format(myDate);
 	}
 }
