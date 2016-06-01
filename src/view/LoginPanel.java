@@ -1,3 +1,5 @@
+package view;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+import stinc.Controller;
 /**
  * @author igorgonchar
  * The login Panel allows a user to login to the system. 
@@ -20,8 +22,9 @@ import javax.swing.SwingConstants;
  */
 
 @SuppressWarnings("serial")
-public class LoginPanel extends JPanel {
-	
+public class LoginPanel extends JPanel
+{
+	private Controller myController;
 	private JTextField username;		//Field for username
 	private JPasswordField password;	//Field for password
 	private JButton submit;				//Login submit button
@@ -30,8 +33,9 @@ public class LoginPanel extends JPanel {
 	 * Creates a new Login Panel
 	 * @return 
 	 */
-	public LoginPanel() {
+	public LoginPanel(Controller theController) {
 		super();
+		myController = theController;
 		username = new JTextField();
 		password = new JPasswordField();
 		submit = new JButton("Login");
@@ -62,24 +66,33 @@ public class LoginPanel extends JPanel {
 	 */
 	private void LoginAction() {
 		submit.addActionListener(new ActionListener() {
-
-
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				if (username.getText().isEmpty() || password.getPassword().length == 0) {
 					JOptionPane.showMessageDialog(null, "All fields have not been entered.", "Oops! Please Try Again", JOptionPane.ERROR_MESSAGE);
 				
-				} else if (username.getText().equalsIgnoreCase("User") && Arrays.equals(password.getPassword(), new char[]{'u','s','e','r','p','w','d'})) {
-					JOptionPane.showMessageDialog(null, "Logged in as a USER!", "Success!", JOptionPane.PLAIN_MESSAGE);
-					
-				} else if (username.getText().equalsIgnoreCase("Judge") && Arrays.equals(password.getPassword(), new char[]{'j','u','d','g','e','p','w','d'})) {
-					JOptionPane.showMessageDialog(null, "Logged in as a Judge!", "Success!", JOptionPane.PLAIN_MESSAGE);
-				
-				} else if (username.getText().equalsIgnoreCase("Admin") && Arrays.equals(password.getPassword(), new char[]{'a','d','m','i','n','p','w','d'})) {
-					JOptionPane.showMessageDialog(null, "Logged in as an Admin!", "Success!", JOptionPane.PLAIN_MESSAGE);
-				
-				} else {
-					JOptionPane.showMessageDialog(null, "Incorrect Login.", "Oops! Please Try Again", JOptionPane.ERROR_MESSAGE);
 				}
+				else
+				{
+					if(myController.login(username.getText(), String.valueOf(password.getPassword())))
+					{
+						System.out.println("We login");
+						myController.showContentFrame();
+					}
+				}
+				
+//				else if (username.getText().equalsIgnoreCase("User") && Arrays.equals(password.getPassword(), new char[]{'u','s','e','r','p','w','d'})) {
+//					JOptionPane.showMessageDialog(null, "Logged in as a USER!", "Success!", JOptionPane.PLAIN_MESSAGE);
+//					
+//				} else if (username.getText().equalsIgnoreCase("Judge") && Arrays.equals(password.getPassword(), new char[]{'j','u','d','g','e','p','w','d'})) {
+//					JOptionPane.showMessageDialog(null, "Logged in as a Judge!", "Success!", JOptionPane.PLAIN_MESSAGE);
+//				
+//				} else if (username.getText().equalsIgnoreCase("Admin") && Arrays.equals(password.getPassword(), new char[]{'a','d','m','i','n','p','w','d'})) {
+//					JOptionPane.showMessageDialog(null, "Logged in as an Admin!", "Success!", JOptionPane.PLAIN_MESSAGE);
+//				
+//				} else {
+//					JOptionPane.showMessageDialog(null, "Incorrect Login.", "Oops! Please Try Again", JOptionPane.ERROR_MESSAGE);
+//				}
 			}
 		});
 	}

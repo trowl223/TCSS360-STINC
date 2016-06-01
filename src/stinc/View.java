@@ -1,8 +1,19 @@
+package stinc;
+
 import java.awt.BorderLayout;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+
+import model.Contest;
+import model.User;
+import view.ContentFrame;
+import view.ContestScroller;
+import view.LoginPanel;
+import stinc.Controller;
+
 /**
  * The View is the GUI model.
  * @author Nicholas
@@ -44,14 +55,32 @@ public class View extends JFrame implements Observer
 	public void start() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		setLayout(new BorderLayout());
+//		setLayout(new BorderLayout());
 
-		ContestScroller scroller = new ContestScroller(myController.getCurrentContests(), myController);
-		add(scroller, BorderLayout.CENTER);
-		
-		
+//		ContestScroller scroller = new ContestScroller(myController.getCurrentContests(), myController);
+//		add(new LoginPanel(myController));
+//		testContentScroller();
+		add(new LoginPanel(myController));
+//		add(new ContentFrame(myController));
 		pack();
-		
+//		
+		setVisible(true);
+	}
+	
+
+	public void showContentFrame() {
+		removeAll();
+//		add(new ContentFrame());	
+	}
+	
+	public void testContentScroller()
+	{
+//		System.out.print();
+		List<Contest> contests = myController.getElegibleContests(myController.getCurrentUser());
+		System.out.println(contests);
+		removeAll();
+		add(new ContestScroller(contests, myController));
+		pack();
 		setVisible(true);
 	}
 }

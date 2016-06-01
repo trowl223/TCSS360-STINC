@@ -1,9 +1,12 @@
+package stinc;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
 import model.Contest;
+import model.DatabaseConnector;
 import model.Entry;
 import model.User;
 
@@ -19,12 +22,14 @@ public class Model extends Observable
 	 * The contests
 	 */
 	private List<Contest> myContests;
+	private User myCurrentUser;
 	
 	/**
 	 * Constructs the Model
 	 */
 	public Model() {
 		myContests = new ArrayList<Contest>();
+		myCurrentUser = null;
 	}
 	
 	/**
@@ -202,17 +207,35 @@ public class Model extends Observable
 		//TODO: When I know what I am saving.
 	}
 
-	public List<Contest> getElegibleContests(User theUser) {
+	public List<Contest> getElegibleContests(User theUser) 
+	{
 		List<Contest> result = new ArrayList<Contest>();
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+		ArrayList<String> contests = new ArrayList<>();
+		contests.add("eligible_contests");//all eligible contests for user_id 2
+		contests.add(String.valueOf(theUser.getID()));//user_id
+		DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
+		//get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
+		myConnector.connect();
+		
+		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-		    Contest contest = iterator.next();
-		    if (contest.isEligible(theUser))
-		    {
-		    	result.add(contest);
-		    }
+			System.out.println(contests);
+			for(int i = 0; i < contests.size(); i += 4)
+			{
+				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
+			}
 		}
 		return result;
+//		List<Contest> result = new ArrayList<Contest>();
+//		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+//		{
+//		    Contest contest = iterator.next();
+//		    if (contest.isEligible(theUser))
+//		    {
+//		    	result.add(contest);
+//		    }
+//		}
+//		return result;
 	}
 	
 	public List<Contest> getContestsEntered(User theUser) {
@@ -244,6 +267,25 @@ public class Model extends Observable
 			}
 		}
 		return null;
+	}
+
+	public boolean login(String theUsername, String thePassword) {
+        ArrayList<String> loginFields = new ArrayList<>();
+        loginFields.add(theUsername);//this is the username, a string
+        loginFields.add(thePassword);//this is the password, a string
+        DatabaseConnector myConnector = new DatabaseConnector("login", loginFields);//login and validate the user
+        myConnector.connect();
+        if (myConnector.getState() == myConnector.SUCCESS)
+        {
+        	System.out.println(loginFields);
+        	myCurrentUser = new User(Integer.valueOf(loginFields.get(0)), Boolean.valueOf(loginFields.get(1)), Boolean.valueOf(loginFields.get(2)));
+        	return true;
+        }
+		return false;
+	}
+
+	public User getCurrentUser() {
+		return myCurrentUser;
 	}
 	
 }

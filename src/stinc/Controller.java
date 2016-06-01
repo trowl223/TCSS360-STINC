@@ -1,3 +1,5 @@
+package stinc;
+
 import java.util.List;
 
 import model.Contest;
@@ -135,6 +137,20 @@ public class Controller {
 	public void showContest(Contest theContest) {
 		// TODO Tell the view to load this contest
 		System.out.println("Stub: Load ContestView for " + theContest.getName());
+	}
+	
+	public void showContentFrame()
+	{
+		myView.testContentScroller();
+	}
+
+	public boolean login(String theUsername, String thePassword) 
+	{
+		return myModel.login(theUsername, thePassword);
+	}
+
+	public User getCurrentUser() {
+		return myModel.getCurrentUser();
 	}
 
 }
