@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 import model.Contest;
+import model.User;
 import view.ContentFrame;
 import view.ContestScroller;
 import view.LoginPanel;
@@ -74,7 +75,12 @@ public class View extends JFrame implements Observer
 	
 	public void testContentScroller()
 	{
+//		System.out.print();
 		List<Contest> contests = myController.getElegibleContests(myController.getCurrentUser());
+		System.out.println(contests);
+		removeAll();
 		add(new ContestScroller(contests, myController));
+		pack();
+		setVisible(true);
 	}
 }

@@ -216,10 +216,14 @@ public class Model extends Observable
 		DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
 		//get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
 		myConnector.connect();
-	  
-		for(int i = 0; i < contests.size(); i++)
+		
+		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-			result.add(new Contest(contests.get(i), contests.get(++i)));
+			System.out.println(contests);
+			for(int i = 0; i < contests.size(); i += 4)
+			{
+				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
+			}
 		}
 		return result;
 //		List<Contest> result = new ArrayList<Contest>();
@@ -273,6 +277,7 @@ public class Model extends Observable
         myConnector.connect();
         if (myConnector.getState() == myConnector.SUCCESS)
         {
+        	System.out.println(loginFields);
         	myCurrentUser = new User(Integer.valueOf(loginFields.get(0)), Boolean.valueOf(loginFields.get(1)), Boolean.valueOf(loginFields.get(2)));
         	return true;
         }

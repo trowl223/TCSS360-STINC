@@ -36,6 +36,19 @@ public class Contest
 	 * @param theName the Contest Name
 	 * @param theDescription the Contest Description
 	 */
+	public Contest(String theName, String theDescription, int theID, String theImageURL)
+	{
+		myName = theName;
+		myID = theID;
+		myDescription = theDescription;
+		myImageURL = theImageURL;
+	}
+	
+	/**
+	 * Constructs a Contest with the specified parameters
+	 * @param theName the Contest Name
+	 * @param theDescription the Contest Description
+	 */
 	public Contest(String theName, String theDescription)
 	{
 		myName = theName;

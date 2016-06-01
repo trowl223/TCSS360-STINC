@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel
 					if(myController.login(username.getText(), String.valueOf(password.getPassword())))
 					{
 						System.out.println("We login");
-//						myController.showContentFrame();
+						myController.showContentFrame();
 					}
 				}
 				

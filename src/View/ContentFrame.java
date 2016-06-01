@@ -40,36 +40,10 @@ public class ContentFrame extends JFrame {
 	public ContentFrame(Controller theController) {
 		super();
 		myController = theController;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		myContentPane = new JPanel();
-		myContentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		myContentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(myContentPane);
+
 	}
 	
-	public void loadPanel(User theUser)
-	{
-		if (theUser == null)
-		{
-			myContentPane = new LoginPanel(myController);
-		}
-		else
-		{
-			if (theUser.isAdmin())
-			{
-//				myContentPane = new AdminPanel
-			} 
-			else if (theUser.isJudge())
-			{
-				
-			}
-			else
-			{
-				
-			}
-		}
-	}
+
 	
 	public void loadUtility(int aContestID, int aUserType) {
 		myContestID = aContestID;
