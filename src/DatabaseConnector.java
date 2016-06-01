@@ -170,14 +170,16 @@ public class DatabaseConnector {
                 } else {
                     jObj = new JSONObject(sb.toString());
                     if (jObj.getInt("status") == 1) {
-                        this.myVals.remove(1);
-                        this.myVals.remove(0);
-                        JSONObject temp = jObj.getJSONObject("name");
-                        Iterator<?> allKeys =  temp.keys();
-                        while(allKeys.hasNext()) {
-                            String key = (String)allKeys.next();
-                            String value = (String)temp.get(key);
-                            this.myVals.add(value);
+                        if(myOperation.equalsIgnoreCase("login")) {
+                            this.myVals.remove(1);
+                            this.myVals.remove(0);
+                            JSONObject temp = jObj.getJSONObject("name");
+                            Iterator<?> allKeys = temp.keys();
+                            while (allKeys.hasNext()) {
+                                String key = (String) allKeys.next();
+                                String value = (String) temp.get(key);
+                                this.myVals.add(value);
+                            }
                         }
                         setState(SUCCESS);
                     } else {
