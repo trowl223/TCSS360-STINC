@@ -9,6 +9,9 @@ import model.Contest;
  */
 public class Main
 {
+//	User
+//	User: cdejarc
+//	Pass: 12345y
     /**
      * The main method.
      * @param args the Arguments to use.

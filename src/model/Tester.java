@@ -14,11 +14,6 @@
 //        entryFields.add("1");//this is the contest id, an integer
 //        DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
 //        myConnector.connect();
-//        ArrayList<String> loginFields = new ArrayList<>();
-//        loginFields.add("testUser123");//this is the username, a string
-//        loginFields.add("testPass456");//this is the password, a string
-//        DatabaseConnector myConnector = new DatabaseConnector("login", loginFields);//login and validate the user
-//        myConnector.connect();
 //        ArrayList<String> contests = new ArrayList<>();
 //        DatabaseConnector myConnector = new DatabaseConnector("getContests", contests);
 //        //get all contests, these will populate the data structure passed in. The format that is returned is in arraylist is contest name, then description
