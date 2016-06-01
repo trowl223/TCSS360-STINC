@@ -78,7 +78,7 @@ public class View extends JFrame implements Observer
 //		System.out.print();
 		List<Contest> contests = myController.getElegibleContests(myController.getCurrentUser());
 		System.out.println(contests);
-		removeAll();
+		getContentPane().removeAll();
 		add(new ContestScroller(contests, myController));
 		pack();
 		setVisible(true);
