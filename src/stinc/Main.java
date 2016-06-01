@@ -1,3 +1,5 @@
+package stinc;
+
 import model.Contest;
 
 /**

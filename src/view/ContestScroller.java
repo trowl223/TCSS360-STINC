@@ -1,3 +1,5 @@
+package view;
+
 
 
 import java.awt.BorderLayout;
@@ -17,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import model.Contest;
+import stinc.Controller;
 
 @SuppressWarnings("serial")
 /**

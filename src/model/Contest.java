@@ -205,10 +205,6 @@ public class Contest
 		return false;
 	}
 
-	public boolean isEligible(User theUser) {
-		return myAgeLimit <= theUser.getAge();
-	}
-
 	public boolean removeJudge(User theUser) {
 		return myJudges.remove(theUser);
 	}

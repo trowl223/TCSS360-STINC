@@ -9,17 +9,18 @@ public class User
 {
 	private int myLibraryID;
 	private boolean myAdmin;
+	private boolean myJudge;
 	private int myAge;
 	
-	public User(int theLibraryID, boolean theAdmin)
+	public User(int theLibraryID, boolean theAdmin, boolean theJudge)
 	{
 		myLibraryID = theLibraryID;
 		myAdmin = theAdmin;
 	}
 	
-	public User(int theLibraryID, boolean theAdmin, int theAge)
+	public User(int theLibraryID, boolean theAdmin, boolean theJudge, int theAge)
 	{
-		this(theLibraryID, theAdmin);
+		this(theLibraryID, theAdmin, theJudge);
 		myAge = theAge;
 	}
 	
@@ -44,5 +45,13 @@ public class User
 
 	public int getID() {
 		return myLibraryID;
+	}
+
+	public boolean isJudge() {
+		return myJudge;
+	}
+
+	public boolean isAdmin() {
+		return myAdmin;
 	}
 }
