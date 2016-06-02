@@ -1,6 +1,5 @@
 package stinc;
 
-import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,11 +7,9 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 import model.Contest;
-import model.User;
-import view.ContentFrame;
+import stinc.view.UploadPanel;
 import view.ContestScroller;
 import view.LoginPanel;
-import stinc.Controller;
 
 /**
  * The View is the GUI model.
@@ -80,6 +77,15 @@ public class View extends JFrame implements Observer
 		System.out.println(contests);
 		getContentPane().removeAll();
 		add(new ContestScroller(contests, myController));
+		pack();
+		setVisible(true);
+	}
+
+	public void showUploadPanel(Contest theContest) {
+		getContentPane().removeAll();
+		
+		add(new UploadPanel(theContest, myController));
+		
 		pack();
 		setVisible(true);
 	}

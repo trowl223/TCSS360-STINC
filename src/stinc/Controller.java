@@ -1,5 +1,6 @@
 package stinc;
 
+import java.util.Date;
 import java.util.List;
 
 import model.Contest;
@@ -60,9 +61,12 @@ public class Controller {
 		return myModel.getContestsEntered(theUser);
 	}
 	
-	public boolean addEntry(int theContestID, Entry theEntry)
+	public boolean addEntry(Contest theContest, Entry theEntry)
 	{
-		return myModel.addEntry(theContestID, theEntry);
+		theEntry.setUser(getCurrentUser());
+		theEntry.setDate(new Date());
+		theEntry.setContestID(theContest.getID());
+		return myModel.addEntry(theEntry);
 	}
 	
 	public boolean removeEntry(int theEntryID)
@@ -137,6 +141,7 @@ public class Controller {
 	public void showContest(Contest theContest) {
 		// TODO Tell the view to load this contest
 		System.out.println("Stub: Load ContestView for " + theContest.getName());
+		myView.showUploadPanel(theContest);
 	}
 	
 	public void showContentFrame()
