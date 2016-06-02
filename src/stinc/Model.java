@@ -187,7 +187,10 @@ public class Model extends Observable
 	{
 		/*ArrayList<String> entryFields = new ArrayList<>();
 	        entryFields.add("judgeEntry");//this is the tag
-	        entryFields.add("" + theUser. + "");//this should be a string
+	        entryFields.add("" + theEntryID + "");//this should be a string
+	        entryFields.add("" + theUser.getID() + "");//this should be a string
+	        entryFields.add("" + theScore + "");//this should be a string
+	        entryFields.add("comments for the user");//this should be a string
 	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
 	        myConnector.connect();*/
 		Contest c = getContest(theContestID);
