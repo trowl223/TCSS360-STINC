@@ -238,20 +238,21 @@ public class Model extends Observable
 //		return result;
 	}
 	
-	public List<Contest> getContestsEntered(User theUser) {
-		ArrayList<String> contests = new ArrayList<>();
-		contests.add("contests_entered");
-		contests.add(String.valueOf(theUser.getID()));
-	    DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
+	public List<Entry> getContestsEntered(User theUser) {
+		ArrayList<String> entries = new ArrayList<>();
+		entries.add("contests_entered");
+		entries.add(String.valueOf(theUser.getID()));
+	    DatabaseConnector myConnector = new DatabaseConnector("userContests", entries);
 	    myConnector.connect();
-		List<Contest> result = new ArrayList<Contest>();
+		List<Entry> result = new ArrayList<Entry>();
 		
 		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-			System.out.println(contests);
-			for(int i = 0; i < contests.size(); i += 4)
+			System.out.println(entries);
+			for(int i = 0; i < entries.size(); i += 4)
 			{
-				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
+				result.add(new Entry(Integer.valueOf(entries.get(i)),entries.get(i + 1),entries.get(i + 2), entries.get(i + 3)));
+//				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
 			}
 		}
 		
