@@ -251,6 +251,15 @@ public class Model extends Observable
 		}
 		return result;
 	}
+	
+	/*public List<Contest> getJudgableContests(User theUser) {
+		List<Contest> result = new ArrayList<Contest>();
+		
+		DatabaseConnector myQuery = new DatabaseConnector("getJudgables", myCurrentUser.getID(), result);
+		myQuery.connect();
+		
+		return result;
+	}*/
 
 	public List<Contest> getContests() {
 		/*DatabaseConnector myQuery = new DatabaseConnector("getContests",myContests);*/

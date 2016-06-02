@@ -61,6 +61,11 @@ public class Controller {
 		return myModel.getContestsEntered(theUser);
 	}
 	
+	/*public List<Contest> getJudgableContests(User theUser) {
+		
+		return myModel.getJudgableContests(theUser);
+	}*/
+	
 	public boolean addEntry(Contest theContest, Entry theEntry)
 	{
 		theEntry.setUser(getCurrentUser());

@@ -20,9 +20,8 @@ public class HomePanel extends JPanel {
 	 * required serialVersionUID
 	 */
 	private static final long serialVersionUID = 1780272080173534812L;
-	private ContestScroller myFeatCont;
-	private ContestScroller myCont;
-	private ContestScroller myMiscCont;
+	private ContestScroller myCont1;
+	private ContestScroller myCont2;
 	
 	private Controller myController;
 	
@@ -32,9 +31,8 @@ public class HomePanel extends JPanel {
 	 */
 	public HomePanel(Controller aController, ContestScroller[] someScrollers) {
 		myController = aController;
-		myFeatCont = someScrollers[0];
-		myCont = someScrollers[1];
-		myMiscCont = someScrollers[2];
+		myCont1 = someScrollers[0];
+		myCont2 = someScrollers[1];
 		create();
 	}
 	
@@ -52,14 +50,28 @@ public class HomePanel extends JPanel {
 		c.gridwidth = 6;
 		cPane.setBackground(Color.WHITE);
 		
-		
 		//Make labels
-		JLabel fLabel = new JLabel("Featured Contests:", SwingConstants.LEFT);
-		fLabel.setPreferredSize(new Dimension(160,15));
-		JLabel mLabel = new JLabel("My Contests:", SwingConstants.LEFT);
-		mLabel.setPreferredSize(new Dimension(120,15));
-		JLabel oLabel = new JLabel("Other Contests:", SwingConstants.LEFT);
-		oLabel.setPreferredSize(new Dimension(120,15));
+		JLabel tLabel;
+		JLabel bLabel;
+		//top label
+		if (myController.getCurrentUser().isAdmin()) {
+			tLabel = new JLabel("Open Contests:", SwingConstants.LEFT);
+		} else if(myController.getCurrentUser().isJudge()) {
+			tLabel = new JLabel("Judgeable Contests:", SwingConstants.LEFT);
+		} else {//user
+			tLabel = new JLabel("My Contests:", SwingConstants.LEFT);
+		}
+		tLabel.setPreferredSize(new Dimension(160,15));
+		
+		//bottom label
+		if (myController.getCurrentUser().isAdmin()) {
+			bLabel = new JLabel("", SwingConstants.LEFT);
+		} else if(myController.getCurrentUser().isJudge()) {
+			bLabel = new JLabel("", SwingConstants.LEFT);
+		} else {//user
+			bLabel = new JLabel("Entered Contests:", SwingConstants.LEFT);
+			bLabel.setPreferredSize(new Dimension(120,15));
+		}
 		
 		//Add stuff to the panel
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -68,41 +80,29 @@ public class HomePanel extends JPanel {
 		c.weightx = .5;
 		c.weighty =1;
 		//c.anchor = GridBagConstraints.FIRST_LINE_START;
-		cPane.add(fLabel, c);
+		cPane.add(tLabel, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 1;
 		c.weightx = .5;
 		c.weighty = 0;
 		//c.anchor = GridBagConstraints.FIRST_LINE_END;
-		cPane.add(myFeatCont,c);
+		cPane.add(myCont1,c);
 		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 2;
-		c.weightx = .5;
-		//c.anchor = GridBagConstraints.LINE_START;
-		cPane.add(mLabel, c);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 3;
-		c.weightx = .5;
-		//c.anchor = GridBagConstraints.LINE_END;
-		cPane.add(myCont, c);
-		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 4;
-		c.weightx = .5;
-		//c.anchor = GridBagConstraints.LAST_LINE_START;
-		cPane.add(oLabel, c);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 5;
-		c.weightx = .5;
-		//c.anchor = GridBagConstraints.LAST_LINE_END;
-		cPane.add(myMiscCont, c);
-		
+		if (!myController.getCurrentUser().isAdmin() && !myController.getCurrentUser().isJudge()) {
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.gridx = 0;
+			c.gridy = 2;
+			c.weightx = .5;
+			//c.anchor = GridBagConstraints.LINE_START;
+			cPane.add(bLabel, c);
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.gridx = 0;
+			c.gridy = 3;
+			c.weightx = .5;
+			//c.anchor = GridBagConstraints.LINE_END;
+			cPane.add(myCont2, c);
+		}
 		
 		JScrollPane scrollPane = new JScrollPane(cPane);
 		
@@ -112,27 +112,4 @@ public class HomePanel extends JPanel {
 		
 		add(scrollPane, BorderLayout.CENTER);
 	}
-//	public Contest getFeatCont(int anIndex) {
-//		Contest toReturn = null;
-//		if () {
-//			toReturn =;
-//		}
-//		return toReturn;
-//	}
-//	
-//	public Contest getMyCont(int anIndex) {
-//		Contest toReturn = null;
-//		if () {
-//			toReturn =;
-//		}
-//		return toReturn;
-//	}
-//	
-//	public Contest getMiscCont(int anIndex) {
-//		Contest toReturn = null;
-//		if () {
-//			toReturn = myMiscCont.;
-//		}
-//		return toReturn;
-//	}
 }

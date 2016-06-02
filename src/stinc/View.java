@@ -89,9 +89,21 @@ public class View extends JFrame implements Observer
 	 */
 	public void showHomePage() {
 		ContestScroller[] theScrollers = new ContestScroller[3];
-		theScrollers[0] = new ContestScroller(someContests(), myController);
-		theScrollers[1] = new ContestScroller(someContests(), myController);
-		theScrollers[2] = new ContestScroller(someContests(), myController);
+		
+		if (myController.getCurrentUser().isJudge()) {
+			//theScrollers[0] = new ContestScroller(myController.getJudgableContests(myController.getCurrentUser()), myController);
+			theScrollers[0] = new ContestScroller(someContests(), myController);
+			theScrollers[1] = null;
+		} else {
+			theScrollers[0] = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
+			theScrollers[1] = new ContestScroller(myController.getContestsEntered(myController.getCurrentUser()), myController);
+		}
+		//TODO add third scroller with "featured" contests
+
+		
+		
+		
+		
 		
 		getContentPane().removeAll();
 		//
@@ -131,7 +143,7 @@ public class View extends JFrame implements Observer
 	public void showAdminPanel(Contest theContest) {
 		getContentPane().removeAll();
 		
-		add(new AdminPanel(theContest, myController));
+		//add(new AdminPanel(theContest, myController));
 		
 		pack();
 		setVisible(true);
@@ -140,7 +152,7 @@ public class View extends JFrame implements Observer
 	public void showJudgePanel(Contest theContest) {
 		getContentPane().removeAll();
 		
-		add(new JudgePanel(theContest, myController));
+		//add(new JudgePanel(theContest, myController));
 		
 		pack();
 		setVisible(true);
