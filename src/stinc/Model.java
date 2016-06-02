@@ -43,7 +43,7 @@ public class Model extends Observable
 		entryFields.add(theContest.getName());
 		entryFields.add(theContest.getDescription());
 		entryFields.add("" + theContest.getAgeLimit() + "");
-		entryFields.add(theContest.getImageUrl());
+		entryFields.add(theContest.getImageURL());
 		boolean result = false;
 		if (!contestExists(theContest))
 		{

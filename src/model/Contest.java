@@ -245,5 +245,9 @@ public class Contest
 	public String getImageURL() {
 		return myImageURL;
 	}
+
+	public int getAgeLimit() {
+		return myAgeLimit;
+	}
 	
 }
