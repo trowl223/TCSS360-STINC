@@ -123,7 +123,9 @@ public class View extends JFrame implements Observer
 	public void showUploadPanel(Contest theContest) {
 		getContentPane().removeAll();
 		
-		add(new UploadPanel(theContest, myController));
+		UploadPanel upload = new UploadPanel(theContest, myController);
+		upload.setup();
+		add(upload);
 		
 		pack();
 		setVisible(true);

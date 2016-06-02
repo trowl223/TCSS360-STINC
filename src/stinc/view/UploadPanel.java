@@ -37,7 +37,9 @@ public class UploadPanel extends JPanel {
 	public UploadPanel(Contest theContest, Controller theController) {
 		myContest = theContest;
 		myController = theController;
-		
+	}
+	
+	public void setup() {
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints left = new GridBagConstraints();
@@ -54,14 +56,14 @@ public class UploadPanel extends JPanel {
 		right.insets = new Insets(3, 3, 3, 3);
 		
 		// Row 0 Contest Name
-		add(new JLabel(theContest.getName()), left);
+		add(new JLabel(myContest.getName()), left);
 		
 		
 		// Row 1 Contest Description
 		left.gridy++;
 		right.gridy++;
 		add(new JLabel("Contest Description:", JLabel.RIGHT), left);
-		JTextArea contestDesc = new JTextArea(theContest.getDescription());
+		JTextArea contestDesc = new JTextArea(myContest.getDescription());
 		contestDesc.setEditable(false);
 		contestDesc.setWrapStyleWord(true);
 		contestDesc.setLineWrap(true);
@@ -120,8 +122,6 @@ public class UploadPanel extends JPanel {
 			
 		});
 		add(submitButton, right);
-		
-		
 	}
 	
 	private void submit() {
