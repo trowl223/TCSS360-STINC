@@ -1,6 +1,5 @@
 package stinc;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -10,8 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import model.Contest;
+import model.Entry;
 import stinc.view.UploadPanel;
 import view.ContestScroller;
+import view.JudgePanel;
 import view.HomePanel;
 import view.LoginPanel;
 
@@ -61,11 +62,22 @@ public class View extends JFrame implements Observer
 //		ContestScroller scroller = new ContestScroller(myController.getCurrentContests(), myController);
 //		add(new LoginPanel(myController));
 //		testContentScroller();
-		add(new LoginPanel(myController));
 //		add(new ContentFrame(myController));
-		pack();
+
 //		
+		add(new LoginPanel(myController));
+//		myController.addEntry(new Entry(theName, theDescription, theSubmissionPath))
+//		List<Entry> es = new ArrayList<>();
+//		es.add(new Entry("BANANAS", "ARE CRAZY", "http://www.thelogofactory.com/logo_blog/wp-content/uploads/2014/08/ghostbusters.png"));
+//		es.add(new Entry("BANANAS", "ARE CRAZY", "http://www.thelogofactory.com/logo_blog/wp-content/uploads/2014/08/ghostbusters.png"));
+//		es.add(new Entry("BANANAS", "ARE CRAZY", "http://www.thelogofactory.com/logo_blog/wp-content/uploads/2014/08/ghostbusters.png"));
+//
+//		JudgePanel jp = new JudgePanel(myController, new Contest("a", "a"));
+//		add(jp);
+//		jp.populate(es);
+		pack();
 		setVisible(true);
+		
 	}
 	
 

@@ -53,6 +53,14 @@ public class Entry implements Comparable<Entry>
 		myDescription = theDescription;
 		mySubmissionPath = theSubmissionPath;
 	}
+	
+	public Entry(int theEntryID, String theSubmissionPath, String theName, String theDescription)
+	{
+		myID = theEntryID;
+		myName = theName;
+		myDescription = theDescription;
+		mySubmissionPath = theSubmissionPath;
+	}
 	/**
 	 * Get the User that owns the Entry.
 	 * @return the User that owns the Entry.

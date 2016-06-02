@@ -122,6 +122,11 @@ public class Model extends Observable
 	 */
 	public boolean removeEntry(int theEntryID)
 	{
+		/*ArrayList<String> entryFields = new ArrayList<>();
+	        entryFields.add("removeEntry");//this is the tag
+	        entryFields.add("" + theEntryID + "");//this should be a string
+	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+	        myConnector.connect();*/
 		boolean result = false;
 		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
@@ -180,6 +185,14 @@ public class Model extends Observable
 	
 	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
 	{
+		/*ArrayList<String> entryFields = new ArrayList<>();
+	        entryFields.add("judgeEntry");//this is the tag
+	        entryFields.add("" + theEntryID + "");//this should be a string
+	        entryFields.add("" + theUser.getID() + "");//this should be a string
+	        entryFields.add("" + theScore + "");//this should be a string
+	        entryFields.add("comments for the user");//this should be a string
+	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+	        myConnector.connect();*/
 		Contest c = getContest(theContestID);
 		if(c != null)
 		{
@@ -238,17 +251,32 @@ public class Model extends Observable
 //		return result;
 	}
 	
-	public List<Contest> getContestsEntered(User theUser) {
-		List<Contest> result = new ArrayList<Contest>();
+	public List<Entry> getContestsEntered(User theUser) {
+		ArrayList<String> entries = new ArrayList<>();
+		entries.add("contests_entered");
+		entries.add(String.valueOf(theUser.getID()));
+	    DatabaseConnector myConnector = new DatabaseConnector("userContests", entries);
+	    myConnector.connect();
+		List<Entry> result = new ArrayList<Entry>();
 		
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-		    Contest contest = iterator.next();
-		    if(contest.getUserEntries(theUser).isEmpty())
-		    {		
-		    	result.add(contest);
-		    }
+			System.out.println(entries);
+			for(int i = 0; i < entries.size(); i += 4)
+			{
+				result.add(new Entry(Integer.valueOf(entries.get(i)),entries.get(i + 1),entries.get(i + 2), entries.get(i + 3)));
+//				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
+			}
 		}
+		
+//		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+//		{
+//		    Contest contest = iterator.next();
+//		    if(contest.getUserEntries(theUser).isEmpty())
+//		    {		
+//		    	result.add(contest);
+//		    }
+//		}
 		return result;
 	}
 	

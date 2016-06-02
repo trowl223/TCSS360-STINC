@@ -1,8 +1,5 @@
 package model;
 
-/**
- * Created by root on 5/24/16.
- */
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +12,9 @@ import java.net.URLEncoder;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * Created by root on 5/24/16.
+ */
 public class DatabaseConnector {
     private static String myOperation;
     private int mState;
@@ -28,6 +27,7 @@ public class DatabaseConnector {
     private static final String createEntry = "http://repos.insttech.washington.edu/~dejarc/add_entry.php";
     private static final String getContestsEntered = "http://repos.insttech.washington.edu/~dejarc/user_contests.php";
     private static final String judgeActions = "http://repos.insttech.washington.edu/~dejarc/judge_actions.php";
+    private static final String updateEntries = "http://repos.insttech.washington.edu/~dejarc/update_entries.php";
     private static String URL;
     private ArrayList<String> myVals;
     HttpURLConnection conn = null;
@@ -80,8 +80,16 @@ public class DatabaseConnector {
                 myKeys.add("judge_id");
                 QueryDB(myKeys);
                 break;
+            case "updateEntries":
+                URL = updateEntries;
+                myKeys.add("query_type");
+                myKeys.add("entry_id");
+                myKeys.add("judge_id");
+                myKeys.add("entry_score");
+                myKeys.add("entry_comments");
+                QueryDB(myKeys);
+                break;
         }
-
     }
     public void FetchContests(ArrayList<String> myContests) {
         try {
@@ -103,10 +111,14 @@ public class DatabaseConnector {
                 jArr = new JSONArray(sb.toString());
                 for(int i = 0; i < jArr.length(); i++) {
                     JSONObject objectInArray = jArr.getJSONObject(i);
+                    String id = objectInArray.getString("contest_id");
                     String name = objectInArray.getString("name");
                     String description = objectInArray.getString("description");
+                    String image = objectInArray.getString("contest_image");
+                    myContests.add(id);
                     myContests.add(name);
                     myContests.add(description);
+                    myContests.add(image);
                 }
                 is.close();
                 setState(SUCCESS);
@@ -152,46 +164,54 @@ public class DatabaseConnector {
             while ((line = br.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            try {
-                if(URL.equals(getContestsEntered)) {
-                    jArr = new JSONArray(sb.toString());
-                    this.myVals.remove(1);
-                    this.myVals.remove(0);
-                    for(int i = 0; i < jArr.length(); i++) {
-                        JSONObject temp = jArr.getJSONObject(i);
-                        Iterator<?> allKeys =  temp.keys();
-                        while(allKeys.hasNext()) {
-                            String key = (String)allKeys.next();
-                            String value = (String)temp.get(key);
-                            this.myVals.add(value);
-                        }
-
-                    }
-                    is.close();
-                    setState(SUCCESS);
-                } else {
-                    jObj = new JSONObject(sb.toString());
-                    if (jObj.getInt("status") == 1) {
-                        if(myOperation.equalsIgnoreCase("login")) {
+            //this indicates
+                try {
+                    if (URL.equals(getContestsEntered)) {
+                        if (sb.toString().charAt(0) != '{') {
+                            jArr = new JSONArray(sb.toString());
                             this.myVals.remove(1);
                             this.myVals.remove(0);
-                            JSONObject temp = jObj.getJSONObject("name");
-                            Iterator<?> allKeys = temp.keys();
-                            while (allKeys.hasNext()) {
-                                String key = (String) allKeys.next();
-                                String value = (String) temp.get(key);
-                                this.myVals.add(value);
+                            for (int i = 0; i < jArr.length(); i++) {
+                                JSONObject temp = jArr.getJSONObject(i);
+                                Iterator<?> allKeys = temp.keys();
+                                while (allKeys.hasNext()) {
+                                    String key = (String) allKeys.next();
+                                    if (temp.get(key) != null) {
+                                        String value = (String) temp.get(key);
+                                        this.myVals.add(value);
+                                    }
+                                }
+
                             }
+                            is.close();
+                            setState(SUCCESS);
+                        } else {
+                            setState(FAILURE);
                         }
-                        setState(SUCCESS);
                     } else {
-                        setState(FAILURE);
+                        jObj = new JSONObject(sb.toString());
+                        if (jObj.getInt("status") == 1) {
+                            if (myOperation.equalsIgnoreCase("login")) {
+                                this.myVals.remove(1);
+                                this.myVals.remove(0);
+                                JSONObject temp = jObj.getJSONObject("name");
+                                Iterator<?> allKeys = temp.keys();
+                                while (allKeys.hasNext()) {
+                                    String key = (String) allKeys.next();
+                                    String value = (String) temp.get(key);
+                                    this.myVals.add(value);
+                                }
+                            }
+                            setState(SUCCESS);
+                        } else {
+                            setState(FAILURE);
+                        }
                     }
+                } catch (JSONException e) {
+                    setState(BAD_CONNECTION);
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                setState(BAD_CONNECTION);
-                e.printStackTrace();
-            }
+
         } catch (IOException e) {
             setState(BAD_CONNECTION);
             e.printStackTrace();
@@ -203,6 +223,4 @@ public class DatabaseConnector {
     public synchronized void setState(int myState) {
         mState = myState;
     }
-
-
 }
