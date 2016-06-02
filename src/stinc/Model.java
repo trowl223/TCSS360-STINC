@@ -275,7 +275,19 @@ public class Model extends Observable
 			System.out.println(entries);
 			for(int i = 0; i < entries.size(); i += 4)
 			{
-				result.add(new Entry(Integer.valueOf(entries.get(i)),entries.get(i + 1),entries.get(i + 2), entries.get(i + 3)));
+				
+				int id = Integer.valueOf(entries.get(i));
+				String path = entries.get(i + 1);
+				String name = entries.get(i + 2);
+				String desc = entries.get(i + 3);
+
+				result.add( new Entry(
+						id,	// ID
+						path,					// Path
+						name, 				// Name
+						desc)  				// Description
+				);
+				// Name of entry, Date, URL, Description
 //				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
 			}
 		}
