@@ -35,7 +35,9 @@ public class ImageFetcher {
 		try {
 			URL u = new URL(url);
 			
-			return ImageIO.read(u);
+			BufferedImage thing = ImageIO.read(u);
+			if (thing == null) return fetchImage(PLACEHOLDER_IMAGE_URL);
+			return thing;
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

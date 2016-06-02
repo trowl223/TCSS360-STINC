@@ -19,7 +19,7 @@ public class HomePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1780272080173534812L;
 	private ContestScroller myCont1;
-	private ContestScroller myCont2;
+	private EntryScroller myEnt1;
 	
 	private Controller myController;
 	
@@ -27,10 +27,10 @@ public class HomePanel extends JPanel {
 	/**
 	 * Create the panel with scrollers.
 	 */
-	public HomePanel(Controller aController, ContestScroller[] someScrollers) {
+	public HomePanel(Controller aController, ContestScroller someContests, EntryScroller someEntries) {
 		myController = aController;
-		myCont1 = someScrollers[0];
-		myCont2 = someScrollers[1];
+		myCont1 = someContests;
+		myEnt1 = someEntries;
 		create();
 	}
 	
@@ -67,7 +67,7 @@ public class HomePanel extends JPanel {
 		} else if(myController.getCurrentUser().isJudge()) {
 			bLabel = new JLabel("", SwingConstants.LEFT);
 		} else {//user
-			bLabel = new JLabel("Entered Contests:", SwingConstants.LEFT);
+			bLabel = new JLabel("My Entries:", SwingConstants.LEFT);
 			bLabel.setPreferredSize(new Dimension(120,15));
 		}
 		
@@ -99,7 +99,7 @@ public class HomePanel extends JPanel {
 			c.gridy = 3;
 			c.weightx = .5;
 			//c.anchor = GridBagConstraints.LINE_END;
-			cPane.add(myCont2, c);
+			cPane.add(myEnt1, c);
 		}
 		
 		JScrollPane scrollPane = new JScrollPane(cPane);

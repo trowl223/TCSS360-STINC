@@ -12,6 +12,7 @@ import model.Contest;
 import model.Entry;
 import stinc.view.UploadPanel;
 import view.ContestScroller;
+import view.EntryScroller;
 import view.JudgePanel;
 import view.HomePanel;
 import view.LoginPanel;
@@ -101,15 +102,15 @@ public class View extends JFrame implements Observer
 	 * 
 	 */
 	public void showHomePage() {
-		ContestScroller[] theScrollers = new ContestScroller[3];
+		ContestScroller someContests;
+		EntryScroller someEntries = null;
 		
 		if (myController.getCurrentUser().isJudge()) {
 			//theScrollers[0] = new ContestScroller(myController.getJudgableContests(myController.getCurrentUser()), myController);
-			theScrollers[0] = new ContestScroller(someContests(), myController);
-			theScrollers[1] = null;
+			someContests = new ContestScroller(someContests(), myController);
 		} else {
-			theScrollers[0] = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
-			theScrollers[1] = new ContestScroller(myController.getContestsEntered(myController.getCurrentUser()), myController);
+			someContests = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
+			someEntries = new EntryScroller(myController.getContestsEntered(myController.getCurrentUser()), myController);
 		}
 		//TODO add third scroller with "featured" contests
 
@@ -120,7 +121,7 @@ public class View extends JFrame implements Observer
 		
 		getContentPane().removeAll();
 		//
-		add(new HomePanel(myController, theScrollers));
+		add(new HomePanel(myController, someContests, someEntries));
 		pack();
 		setVisible(true);
 		

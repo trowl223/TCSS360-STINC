@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import model.User;
 /**
  * An Entry contains information from a user submission for a Contest.
  * @author Nicholas Mousel

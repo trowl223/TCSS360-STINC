@@ -56,7 +56,7 @@ public class Controller {
 		return myModel.getElegibleContests(theUser);
 	}
 	
-	public List<Contest> getContestsEntered(User theUser)
+	public List<Entry> getContestsEntered(User theUser)
 	{
 		return myModel.getContestsEntered(theUser);
 	}
