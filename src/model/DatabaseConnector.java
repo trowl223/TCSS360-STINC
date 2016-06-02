@@ -27,6 +27,7 @@ public class DatabaseConnector {
     private static final String createEntry = "http://repos.insttech.washington.edu/~dejarc/add_entry.php";
     private static final String getContestsEntered = "http://repos.insttech.washington.edu/~dejarc/user_contests.php";
     private static final String judgeActions = "http://repos.insttech.washington.edu/~dejarc/judge_actions.php";
+    private static final String updateEntries = "http://repos.insttech.washington.edu/~dejarc/update_entries.php";
     private static String URL;
     private ArrayList<String> myVals;
     HttpURLConnection conn = null;
@@ -80,12 +81,12 @@ public class DatabaseConnector {
                 QueryDB(myKeys);
                 break;
             case "updateEntries":
-                URL = judgeActions;
+                URL = updateEntries;
                 myKeys.add("query_type");
                 myKeys.add("entry_id");
                 myKeys.add("judge_id");
                 myKeys.add("entry_score");
-                myKeys.add("comments");
+                myKeys.add("entry_comments");
                 QueryDB(myKeys);
                 break;
         }
