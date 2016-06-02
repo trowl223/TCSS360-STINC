@@ -39,7 +39,11 @@ public class Model extends Observable
 	 */
 	public boolean addContest(Contest theContest)
 	{
+		ArrayList<String> entryFields = new ArrayList<>();
+		entryFields.add(theContest.getName());
+		entryFields.add(theContest.getDescription());
 		
+		entryFields.add(theContest.getImageUrl());
 		boolean result = false;
 		if (!contestExists(theContest))
 		{
