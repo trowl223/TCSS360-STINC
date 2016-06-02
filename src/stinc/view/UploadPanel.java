@@ -1,13 +1,17 @@
 package stinc.view;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,11 +19,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import model.Contest;
 import model.Entry;
 import stinc.Controller;
-import view.ImageFetcher;
 
 @SuppressWarnings("serial")
 public class UploadPanel extends JPanel {
@@ -87,6 +91,9 @@ public class UploadPanel extends JPanel {
 		right.gridy++;
 		add(new JLabel("Submission Description:", JLabel.RIGHT), left);
 		subDescBox = new JTextArea();
+		makeTabChangeFocus(subDescBox);
+		// TODO prevent tabs from making characters
+		// TODO make multiple lines
 		add(subDescBox, right);
 		
 		// Row 4 URL
@@ -117,7 +124,7 @@ public class UploadPanel extends JPanel {
 		
 	}
 	
-	void submit() {
+	private void submit() {
 		String errorText = "";
 		
 		String name = subTitleBox.getText();
@@ -147,11 +154,32 @@ public class UploadPanel extends JPanel {
 					url
 			);
 			
-			myController.addEntry(myContest, entry);
+			if (myController.addEntry(myContest, entry)) {
+				JOptionPane.showMessageDialog(null,  "Your entry has been submitted.", "Submission successful", JOptionPane.PLAIN_MESSAGE);
+				myController.showContentFrame();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "An error prevented the submission from completing.\nPlease talk to the database administrator.", "Database Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(null, errorText, "Submission Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	/**
+     * Patch the behaviour of a component. 
+     * TAB transfers focus to the next focusable component,
+     * SHIFT+TAB transfers focus to the previous focusable component.
+     * 
+     * @param c The component to be patched.
+     */
+	private static void makeTabChangeFocus(Component c) {
+		Set<KeyStroke> 
+        strokes = new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke("pressed TAB")));
+        c.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, strokes);
+        strokes = new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke("shift pressed TAB")));
+        c.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, strokes);
 	}
 
 }
