@@ -141,7 +141,14 @@ public class Controller {
 	public void showContest(Contest theContest) {
 		// TODO Tell the view to load this contest
 		System.out.println("Stub: Load ContestView for " + theContest.getName());
-		myView.showUploadPanel(theContest);
+		//myView.showUploadPanel(theContest);
+		if (myModel.getCurrentUser().isAdmin()) {
+			myView.showAdminPanel(theContest);
+		} else if(myModel.getCurrentUser().isJudge()) {
+			myView.showJudgePanel(theContest);
+		} else {
+			myView.showUploadPanel(theContest);
+		}
 	}
 	
 	public void showContentFrame()
@@ -154,7 +161,7 @@ public class Controller {
 	 * displays the HomePanel on the contentFrame
 	 */
 	public void showHomePage() {
-		myView.setupHomePage();
+		myView.showHomePage();
 	}
 
 	public boolean login(String theUsername, String thePassword) 

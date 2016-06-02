@@ -9,6 +9,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 import model.Contest;
+import stinc.view.UploadPanel;
 import view.ContestScroller;
 import view.HomePanel;
 import view.LoginPanel;
@@ -86,7 +87,7 @@ public class View extends JFrame implements Observer
 	/**
 	 * 
 	 */
-	public void setupHomePage() {
+	public void showHomePage() {
 		ContestScroller[] theScrollers = new ContestScroller[3];
 		theScrollers[0] = new ContestScroller(someContests(), myController);
 		theScrollers[1] = new ContestScroller(someContests(), myController);
@@ -122,6 +123,24 @@ public class View extends JFrame implements Observer
 		getContentPane().removeAll();
 		
 		add(new UploadPanel(theContest, myController));
+		
+		pack();
+		setVisible(true);
+	}
+
+	public void showAdminPanel(Contest theContest) {
+		getContentPane().removeAll();
+		
+		add(new AdminPanel(theContest, myController));
+		
+		pack();
+		setVisible(true);
+	}
+
+	public void showJudgePanel(Contest theContest) {
+		getContentPane().removeAll();
+		
+		add(new JudgePanel(theContest, myController));
 		
 		pack();
 		setVisible(true);
