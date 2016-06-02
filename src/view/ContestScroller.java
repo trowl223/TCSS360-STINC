@@ -60,7 +60,22 @@ public class ContestScroller extends JPanel {
 			contestBox.add(nameLabel, BorderLayout.SOUTH);
 			
 			Image image = ImageFetcher.fetchImage(c.getImageURL(), IMAGE_WIDTH, IMAGE_HEIGHT);
-			if (image != null) {
+			
+			// image will only be null if the real image and the placeholder image both fail to load
+			if (image == null) {
+				JButton notImageButton = new JButton(c.getName());
+
+				notImageButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						showContestDetails(c);
+					}
+					
+				});
+				contestBox.add(notImageButton, BorderLayout.CENTER);
+			}
+			else {
 				JButton imageButton = new JButton(new ImageIcon(image));
 				imageButton.setBorderPainted(false);
 				imageButton.setContentAreaFilled(false);

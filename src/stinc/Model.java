@@ -51,7 +51,7 @@ public class Model extends Observable
 		return result;
 	}
 	
-	public boolean addEntry(int theContestID, Entry theEntry)
+	public boolean addEntry(Entry theEntry)
 	{
         ArrayList<String> entryFields = new ArrayList<>();
         entryFields.add(theEntry.getSubmissionPath());//this is the url link, a string
@@ -59,7 +59,7 @@ public class Model extends Observable
         entryFields.add(theEntry.getName());//this is the entry name, a string
         entryFields.add(theEntry.getDateString());//this is the entry date, a string
         entryFields.add(String.valueOf(theEntry.getOwner().getID()));//this is the user id, an integer
-        entryFields.add(String.valueOf(theContestID));//this is the contest id, an integer
+        entryFields.add(String.valueOf(theEntry.getID()));//this is the contest id, an integer
         DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
         myConnector.connect();
 //		Contest c = getContest(theContestID);
@@ -71,7 +71,7 @@ public class Model extends Observable
 //			setChanged();
 //			notifyObservers();
 //		}
-		return myConnector.getState() == myConnector.SUCCESS;
+		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
 	
 	public Entry getEntry(int theContestID, int theEntryID)

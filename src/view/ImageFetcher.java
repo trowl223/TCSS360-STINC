@@ -15,6 +15,8 @@ import javax.imageio.ImageIO;
  */
 public class ImageFetcher {
 	
+	private static final String PLACEHOLDER_IMAGE_URL = "http://www.viscofoods.com/wp-content/themes/456market/assets//img/placeholder.png";
+	
 	/**
 	 * Download an image from a URL.
 	 * 
@@ -25,7 +27,10 @@ public class ImageFetcher {
 	 */
 	public static BufferedImage fetchImage(String url) {
 		if (url == null)
-			return null;
+			return fetchImage(PLACEHOLDER_IMAGE_URL);
+		
+		if (url == PLACEHOLDER_IMAGE_URL)
+			throw new RuntimeException("Could not load placeholder image.");
 		
 		try {
 			URL u = new URL(url);
@@ -35,11 +40,11 @@ public class ImageFetcher {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			return fetchImage(PLACEHOLDER_IMAGE_URL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			return fetchImage(PLACEHOLDER_IMAGE_URL);
 		}
 	}
 	

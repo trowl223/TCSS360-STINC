@@ -18,6 +18,7 @@ public class Entry implements Comparable<Entry>
 	private String mySubmissionPath;
 	private Date myDate;
 	private int myScore;
+	private int myContestID;
 	/**
 	 * Judges that have judged this Entry.
 	 */
@@ -44,6 +45,13 @@ public class Entry implements Comparable<Entry>
 		myDate = theDate;
 		myScore = theScore;
 		myID = theID;
+	}
+
+	public Entry(String theName, String theDescription, String theSubmissionPath)
+	{
+		myName = theName;
+		myDescription = theDescription;
+		mySubmissionPath = theSubmissionPath;
 	}
 	/**
 	 * Get the User that owns the Entry.
@@ -118,5 +126,19 @@ public class Entry implements Comparable<Entry>
 	public String getDateString() {
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		return df.format(myDate);
+	}
+	public void setUser(User theUser) {
+		myUser = theUser;
+	}
+	public void setID(int theID) {
+		myID = theID;
+	}
+	
+	public void setDate(Date theDate) {
+		myDate = theDate;
+	}
+
+	public void setContestID(int theContestID) {
+		myContestID = theContestID;
 	}
 }
