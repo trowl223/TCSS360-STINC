@@ -122,6 +122,11 @@ public class Model extends Observable
 	 */
 	public boolean removeEntry(int theEntryID)
 	{
+		/*ArrayList<String> entryFields = new ArrayList<>();
+	        entryFields.add("removeEntry");//this is the tag
+	        entryFields.add("" + theEntryID + "");//this should be a string
+	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+	        myConnector.connect();*/
 		boolean result = false;
 		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
@@ -180,6 +185,11 @@ public class Model extends Observable
 	
 	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
 	{
+		/*ArrayList<String> entryFields = new ArrayList<>();
+	        entryFields.add("judgeEntry");//this is the tag
+	        entryFields.add("" + theUser. + "");//this should be a string
+	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+	        myConnector.connect();*/
 		Contest c = getContest(theContestID);
 		if(c != null)
 		{
