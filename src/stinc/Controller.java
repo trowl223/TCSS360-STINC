@@ -142,6 +142,14 @@ public class Controller {
 	public void showContentFrame()
 	{
 		myView.testContentScroller();
+		
+	}
+	
+	/**
+	 * displays the HomePanel on the contentFrame
+	 */
+	public void showHomePage() {
+		myView.setupHomePage();
 	}
 
 	public boolean login(String theUsername, String thePassword) 

@@ -50,7 +50,7 @@ public class ContestScroller extends JPanel {
 		
 		JPanel contents = new JPanel();
 		
-		for(Contest c : myContests) {
+		for(final Contest c : myContests) {
 			JPanel contestBox = new JPanel();
 			contestBox.setLayout(new BorderLayout());
 			contents.add(contestBox);
