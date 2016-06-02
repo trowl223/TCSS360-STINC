@@ -276,9 +276,9 @@ public class Model extends Observable
 			for(int i = 0; i < entries.size(); i += 4)
 			{
 				
-				int id = Integer.valueOf(entries.get(i));
-				String path = entries.get(i + 1);
-				String name = entries.get(i + 2);
+				int id = Integer.valueOf(entries.get(i + 1));
+				String path = entries.get(i + 2);
+				String name = entries.get(i + 0);
 				String desc = entries.get(i + 3);
 
 				result.add( new Entry(
