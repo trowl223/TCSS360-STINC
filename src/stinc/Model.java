@@ -44,6 +44,8 @@ public class Model extends Observable
 		entryFields.add(theContest.getDescription());
 		entryFields.add("" + theContest.getAgeLimit() + "");
 		entryFields.add(theContest.getImageURL());
+		DatabaseConnector myConnector = new DatabaseConnector("addContest", entryFields);//create an entry
+        	myConnector.connect();
 		boolean result = false;
 		if (!contestExists(theContest))
 		{
@@ -171,6 +173,11 @@ public class Model extends Observable
 	 */
 	public boolean removeContest(int theContestID)
 	{
+		ArrayList<String> vals = new ArrayList<>();
+        	vals.add("removeContest");
+        	vals.add("" + theContestID + "");//returns in order name,date,link,description
+        	DatabaseConnector myConnector = new DatabaseConnector("removeContest", vals);
+        	myConnector.connect();
 		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
 		{
 		    Contest contest = iterator.next();
