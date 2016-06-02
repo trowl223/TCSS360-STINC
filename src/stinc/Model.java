@@ -239,16 +239,30 @@ public class Model extends Observable
 	}
 	
 	public List<Contest> getContestsEntered(User theUser) {
+		ArrayList<String> contests = new ArrayList<>();
+		contests.add("contests_entered");
+		contests.add(String.valueOf(theUser.getID()));
+	    DatabaseConnector myConnector = new DatabaseConnector("userContests", contests);
+	    myConnector.connect();
 		List<Contest> result = new ArrayList<Contest>();
 		
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-		    Contest contest = iterator.next();
-		    if(contest.getUserEntries(theUser).isEmpty())
-		    {		
-		    	result.add(contest);
-		    }
+			System.out.println(contests);
+			for(int i = 0; i < contests.size(); i += 4)
+			{
+				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
+			}
 		}
+		
+//		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
+//		{
+//		    Contest contest = iterator.next();
+//		    if(contest.getUserEntries(theUser).isEmpty())
+//		    {		
+//		    	result.add(contest);
+//		    }
+//		}
 		return result;
 	}
 
