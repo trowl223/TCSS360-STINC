@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import model.Contest;
 import stinc.view.UploadPanel;
@@ -130,8 +131,9 @@ public class View extends JFrame implements Observer
 
 	public void showAdminPanel(Contest theContest) {
 		getContentPane().removeAll();
-		
-		add(new AdminPanel(theContest, myController));
+		// TODO Add AdminPanel
+		add(new JLabel("Admin Panel"));
+//		add(new AdminPanel(theContest, myController));
 		
 		pack();
 		setVisible(true);
@@ -139,8 +141,9 @@ public class View extends JFrame implements Observer
 
 	public void showJudgePanel(Contest theContest) {
 		getContentPane().removeAll();
-		
-		add(new JudgePanel(theContest, myController));
+		// TODO Add JudgePanel
+		add(new JLabel("Judge Panel"));
+//		add(new JudgePanel(theContest, myController));
 		
 		pack();
 		setVisible(true);
