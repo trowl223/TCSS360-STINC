@@ -61,6 +61,11 @@ public class Controller {
 		return myModel.getContestsEntered(theUser);
 	}
 	
+	/*public List<Contest> getJudgableContests(User theUser) {
+		
+		return myModel.getJudgableContests(theUser);
+	}*/
+	
 	public boolean addEntry(Contest theContest, Entry theEntry)
 	{
 		theEntry.setUser(getCurrentUser());
@@ -141,12 +146,27 @@ public class Controller {
 	public void showContest(Contest theContest) {
 		// TODO Tell the view to load this contest
 		System.out.println("Stub: Load ContestView for " + theContest.getName());
-		myView.showUploadPanel(theContest);
+		//myView.showUploadPanel(theContest);
+		if (myModel.getCurrentUser().isAdmin()) {
+			myView.showAdminPanel(theContest);
+		} else if(myModel.getCurrentUser().isJudge()) {
+			myView.showJudgePanel(theContest);
+		} else {
+			myView.showUploadPanel(theContest);
+		}
 	}
 	
 	public void showContentFrame()
 	{
 		myView.testContentScroller();
+		
+	}
+	
+	/**
+	 * displays the HomePanel on the contentFrame
+	 */
+	public void showHomePage() {
+		myView.showHomePage();
 	}
 
 	public boolean login(String theUsername, String thePassword) 

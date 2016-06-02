@@ -141,4 +141,8 @@ public class Entry implements Comparable<Entry>
 	public void setContestID(int theContestID) {
 		myContestID = theContestID;
 	}
+
+	public int getContestID() {
+		return myContestID;
+	}
 }

@@ -95,7 +95,7 @@ public class Contest
 	 * @param theUser the User to check.
 	 * @return true if user is winner, false otherwise
 	 */
-	public boolean isWinner(User theUser)
+	/*public boolean isWinner(User theUser)
 	{
 		List<Entry> winners = getWinningEntries();
 		for(Entry e : winners)
@@ -106,12 +106,12 @@ public class Contest
 			}
 		}
 		return false;
-	}
+	}*/
 	/**
 	 * Get the winning Entries for the Contest.
 	 * @return list of winning entries.
 	 */
-	public  List<Entry> getWinningEntries()
+	/*public  List<Entry> getWinningEntries()
 	{
 		List<Entry> result = new ArrayList<Entry>();
 		result.sort(new Comparator<Entry>() {
@@ -123,7 +123,7 @@ public class Contest
 			}
 		});
 		return result.subList(0, 3);
-	}
+	}*/
 	/**
 	 * Remove Entry with specified ID.
 	 * @param theEntryID the entry to remove.

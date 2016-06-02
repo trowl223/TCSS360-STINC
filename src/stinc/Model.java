@@ -59,7 +59,7 @@ public class Model extends Observable
         entryFields.add(theEntry.getName());//this is the entry name, a string
         entryFields.add(theEntry.getDateString());//this is the entry date, a string
         entryFields.add(String.valueOf(theEntry.getOwner().getID()));//this is the user id, an integer
-        entryFields.add(String.valueOf(theEntry.getID()));//this is the contest id, an integer
+        entryFields.add(String.valueOf(theEntry.getContestID()));//this is the contest id, an integer
         DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
         myConnector.connect();
 //		Contest c = getContest(theContestID);
@@ -265,6 +265,15 @@ public class Model extends Observable
 //		}
 		return result;
 	}
+	
+	/*public List<Contest> getJudgableContests(User theUser) {
+		List<Contest> result = new ArrayList<Contest>();
+		
+		DatabaseConnector myQuery = new DatabaseConnector("getJudgables", myCurrentUser.getID(), result);
+		myQuery.connect();
+		
+		return result;
+	}*/
 
 	public List<Contest> getContests() {
 		/*DatabaseConnector myQuery = new DatabaseConnector("getContests",myContests);*/
