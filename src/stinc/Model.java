@@ -42,7 +42,7 @@ public class Model extends Observable
 		ArrayList<String> entryFields = new ArrayList<>();
 		entryFields.add(theContest.getName());
 		entryFields.add(theContest.getDescription());
-		
+		entryFields.add("" + theContest.getAgeLimit() + "");
 		entryFields.add(theContest.getImageUrl());
 		boolean result = false;
 		if (!contestExists(theContest))
