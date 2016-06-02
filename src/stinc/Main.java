@@ -27,7 +27,7 @@ public class Main
 		myModel.addObserver(myView);
 		
 		// Create some dummy contests
-		createDummyData(myModel);
+//		createDummyData(myModel);
 
 		// Create Controller. tell it about Model and View, initialize model
 		Controller myController = new Controller();
