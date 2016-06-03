@@ -29,24 +29,35 @@ public class ImageFetcher {
 		if (url == null)
 			return fetchImage(PLACEHOLDER_IMAGE_URL);
 		
-		if (url == PLACEHOLDER_IMAGE_URL)
-			throw new RuntimeException("Could not load placeholder image.");
 		
 		try {
 			URL u = new URL(url);
 			
 			BufferedImage thing = ImageIO.read(u);
-			if (thing == null) return fetchImage(PLACEHOLDER_IMAGE_URL);
+			if (thing == null)  {
+
+				if (url == PLACEHOLDER_IMAGE_URL)
+					throw new RuntimeException("Could not load placeholder image.");
+				else
+					return fetchImage(PLACEHOLDER_IMAGE_URL);
+			}
 			return thing;
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return fetchImage(PLACEHOLDER_IMAGE_URL);
+
+			if (url == PLACEHOLDER_IMAGE_URL)
+				throw new RuntimeException("Could not load placeholder image.");
+			else
+				return fetchImage(PLACEHOLDER_IMAGE_URL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return fetchImage(PLACEHOLDER_IMAGE_URL);
+			if (url == PLACEHOLDER_IMAGE_URL)
+				throw new RuntimeException("Could not load placeholder image.");
+			else
+				return fetchImage(PLACEHOLDER_IMAGE_URL);
 		}
 	}
 	

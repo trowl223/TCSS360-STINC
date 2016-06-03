@@ -16,6 +16,7 @@ public class User
 	{
 		myLibraryID = theLibraryID;
 		myAdmin = theAdmin;
+		myJudge = theJudge;
 	}
 	
 	public User(int theLibraryID, boolean theAdmin, boolean theJudge, int theAge)

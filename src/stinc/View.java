@@ -9,12 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import model.Contest;
-import model.Entry;
 import stinc.view.UploadPanel;
+import view.AdminPanel;
 import view.ContestScroller;
 import view.EntryScroller;
-import view.JudgePanel;
 import view.HomePanel;
+import view.JudgePanel;
 import view.LoginPanel;
 
 /**
@@ -107,8 +107,21 @@ public class View extends JFrame implements Observer
 		
 		if (myController.getCurrentUser().isJudge()) {
 			//theScrollers[0] = new ContestScroller(myController.getJudgableContests(myController.getCurrentUser()), myController);
-			someContests = new ContestScroller(someContests(), myController);
-		} else {
+			someContests = new ContestScroller(
+					myController.getJudgableContests(myController.getCurrentUser()), myController);
+			
+		} 
+		else if (myController.getCurrentUser().isAdmin()) {
+
+			getContentPane().removeAll();
+			
+			add(new AdminPanel(myController));
+			pack();
+			setVisible(true);
+			return;
+			// TODO fix this horrible code
+		}
+		else {
 			someContests = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
 			someEntries = new EntryScroller(myController.getContestsEntered(myController.getCurrentUser()), myController);
 		}
@@ -170,8 +183,8 @@ public class View extends JFrame implements Observer
 	public void showJudgePanel(Contest theContest) {
 		getContentPane().removeAll();
 		// TODO Add JudgePanel
-		add(new JLabel("Judge Panel"));
-//		add(new JudgePanel(theContest, myController));
+//		add(new JLabel("Judge Panel"));
+		add(new JudgePanel(myController, theContest));
 		
 		pack();
 		setVisible(true);

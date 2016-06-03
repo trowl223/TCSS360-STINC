@@ -276,10 +276,10 @@ public class Model extends Observable
 			for(int i = 0; i < entries.size(); i += 4)
 			{
 				
-				int id = Integer.valueOf(entries.get(i + 1));
-				String path = entries.get(i + 2);
+				int id = Integer.valueOf(entries.get(i + 3));
+				String path = entries.get(i + 1);
 				String name = entries.get(i + 0);
-				String desc = entries.get(i + 3);
+				String desc = entries.get(i + 2);
 
 				result.add( new Entry(
 						id,	// ID
@@ -303,14 +303,46 @@ public class Model extends Observable
 		return result;
 	}
 	
-	/*public List<Contest> getJudgableContests(User theUser) {
+	public List<Contest> getJudgableContests(User theUser) {
 		List<Contest> result = new ArrayList<Contest>();
 		
-		DatabaseConnector myQuery = new DatabaseConnector("getJudgables", myCurrentUser.getID(), result);
-		myQuery.connect();
+//		DatabaseConnector myQuery = new DatabaseConnector("getJudgables", myCurrentUser.getID(), result);
+		ArrayList<String> dumb = new ArrayList<String>();
+		dumb.add("judgeContests");
+		dumb.add("" + theUser.getID());
+		
+
+        DatabaseConnector myConnector = new DatabaseConnector(
+        		"userContests", dumb);
+		myConnector.connect();
+		
+		if (myConnector.getState() == DatabaseConnector.SUCCESS) {
+			
+			for (int i = 0; i < dumb.size(); i += 4) {
+				String name = dumb.get(i + 0);
+				String desc = dumb.get(i + 1);
+				int id = Integer.valueOf(dumb.get(i + 2));
+				String url = dumb.get(i + 3);
+				
+				result.add(new Contest(
+						name,
+						desc, 
+						id, 
+						url
+				));
+				
+				
+			}
+			
+			
+			
+			
+		}
+		
+//		myQuery.connect();
 		
 		return result;
-	}*/
+	}
 
 	public List<Contest> getContests() {
 		/*DatabaseConnector myQuery = new DatabaseConnector("getContests",myContests);*/
@@ -338,7 +370,16 @@ public class Model extends Observable
         if (myConnector.getState() == myConnector.SUCCESS)
         {
         	System.out.println(loginFields);
-        	myCurrentUser = new User(Integer.valueOf(loginFields.get(0)), Boolean.valueOf(loginFields.get(1)), Boolean.valueOf(loginFields.get(2)));
+        	
+        	int id = Integer.valueOf(loginFields.get(0));
+        	boolean admin = false;
+        	if (loginFields.get(1).equals("1"))
+        		admin = true;
+        	boolean judge = false;
+        	if (loginFields.get(2).equals("1"))
+        		judge = true;
+        	
+        	myCurrentUser = new User(id, admin, judge);
         	return true;
         }
 		return false;
