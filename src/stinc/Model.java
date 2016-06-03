@@ -65,7 +65,7 @@ public class Model extends Observable
         entryFields.add(theEntry.getName());//this is the entry name, a string
         entryFields.add(theEntry.getDateString());//this is the entry date, a string
         entryFields.add(String.valueOf(theEntry.getOwner().getID()));//this is the user id, an integer
-        entryFields.add(String.valueOf(theEntry.getID()));//this is the contest id, an integer
+        entryFields.add(String.valueOf(theEntry.getContestID()));//this is the contest id, an integer
         DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
         myConnector.connect();
 //		Contest c = getContest(theContestID);
