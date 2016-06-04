@@ -63,9 +63,6 @@ public class Controller {
 	
 	public boolean addEntry(Contest theContest, Entry theEntry)
 	{
-		theEntry.setUser(getCurrentUser());
-		theEntry.setDate(new Date());
-		theEntry.setContestID(theContest.getID());
 		return myModel.addEntry(theEntry);
 	}
 	

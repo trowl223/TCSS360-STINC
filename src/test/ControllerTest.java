@@ -8,7 +8,7 @@ import org.junit.Test;
 import stinc.Controller;
 import stinc.Model;
 
-public class ModelTest {
+public class ControllerTest {
 	
 	private Controller myController;
 	
