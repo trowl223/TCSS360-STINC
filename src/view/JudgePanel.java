@@ -40,6 +40,11 @@ public class JudgePanel extends JPanel
 	private JPanel myContent;
 	private Contest myContest;
 	
+	/**
+	 * Creates a panel for judges to judge entries of a contest.
+	 * @param theController reference.
+	 * @param theContest that is being judged.
+	 */
 	public JudgePanel(Controller theController, Contest theContest) 
 	{
 		super();
@@ -53,6 +58,10 @@ public class JudgePanel extends JPanel
 		add(createSubmit(), BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Populate the box with entries
+	 * @param theEntries to populate with.
+	 */
 	public void populate(List<Entry> theEntries)
 	{
 		for (Entry e : theEntries)
@@ -61,6 +70,10 @@ public class JudgePanel extends JPanel
 		}
 	}
 	
+	/**
+	 * JPanel containing the Contest info.
+	 * @return the Contest info.
+	 */
 	private JPanel contestInfo()
 	{
 		JPanel contest = new JPanel();
@@ -74,6 +87,11 @@ public class JudgePanel extends JPanel
 		return contest;
 	}
 	
+	/**
+	 * The box the judge uses to judge entries.
+	 * @param theEntry to judge.
+	 * @return JPanel containing the entry info.
+	 */
 	public JPanel judgeBox (Entry theEntry)
 	{
 		JPanel judgeBox = new JPanel();
@@ -84,6 +102,11 @@ public class JudgePanel extends JPanel
 		return judgeBox;
 	}
 	
+	/**
+	 * Shows the judge info.
+	 * @param theEntry info  to show.
+	 * @return the judge info panel.
+	 */
 	public JPanel createJudgeInfo (Entry theEntry)
 	{
 		JPanel judgeInfo = new JPanel();
@@ -121,27 +144,19 @@ public class JudgePanel extends JPanel
 		left.gridy++;
 		right.gridy++;
 		judgeInfo.add(new JLabel("Score: ", JLabel.LEFT), left);
-//		left.gridy++;
 		left.gridx++;
 		right.gridy++;
 		JTextField score = new JTextField(2);
 		myEntryBoxes.put(theEntry, score);
 		judgeInfo.add(score, left);
 		
-//		judgeInfo.add(submitButton, right);
-//		judgeInfo.setLayout(new BoxLayout(judgeInfo, BoxLayout.Y_AXIS));
-//		
-//		JLabel entryName = new JLabel(theEntry.getName());
-//		JLabel entryDesc = new JLabel(theEntry.getDescription());
-//		judgeInfo.add(new JLabel("Name: "));
-//		judgeInfo.add(entryName);
-//		
-//		judgeInfo.add(new JLabel("Description: "));
-//		judgeInfo.add(entryDesc);
-//		judgeInfo.add(createScorePanel());
 		return judgeInfo;
 	}
 	
+	/**
+	 * Creates the submit button.
+	 * @return the submit button.
+	 */
 	public JButton createSubmit ()
 	{
 		JButton submitButton = new JButton("Submit");
@@ -158,6 +173,9 @@ public class JudgePanel extends JPanel
 		return submitButton;
 	}
 	
+	/**
+	 * Submits the entries scored.
+	 */
 	private void submit() 
 	{
 		for (Entry e : myEntryBoxes.keySet())
@@ -169,7 +187,7 @@ public class JudgePanel extends JPanel
 			    if (in != null)
 			    {
 						System.out.println(in);
-//						myController.judgeEntry(myContest.getID(), e.getID(), myController.getCurrentUser(), in.intValue());
+						myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
 				}
 			}
 			catch (NumberFormatException e1) {
@@ -179,6 +197,10 @@ public class JudgePanel extends JPanel
 		}		
 	}
 	
+	/**
+	 * Creates the score panel.
+	 * @return the score panel.
+	 */
 	public JPanel createScorePanel ()
 	{
 		JPanel scorePanel = new JPanel();
@@ -192,6 +214,11 @@ public class JudgePanel extends JPanel
 		return scorePanel;
 	}
 	
+	/**
+	 * Creates the scroll pane the Content will be placed in.
+	 * @param theContent the content to scroll.
+	 * @return the scroll pane.
+	 */
 	public JScrollPane judgeScroll(JPanel theContent)
 	{
 		JScrollPane scrollPane = new JScrollPane(theContent);
@@ -201,52 +228,4 @@ public class JudgePanel extends JPanel
 		scrollPane.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		return scrollPane;
 	}
-	
-//	private void showContestDetails(Contest theContest) 
-//	{
-//		// If the user clicked the same contest again, do nothing.
-//		if (theContest == mySelectedContest)
-//			return;
-//		
-//		// If a contest was previously clicked, remove its details panel.
-//		if (mySelectedContest != null) {
-//			JPanel oldContestBox = myContestBoxes.get(mySelectedContest);
-//			for(Component c : oldContestBox.getComponents()) {
-//				if (c instanceof JPanel) {
-//					oldContestBox.remove(c);
-//					break;
-//				}
-//			}
-//		}
-//		
-//		// Add the details panel for the contest which was clicked.
-//		JPanel contestBox = myContestBoxes.get(theContest);
-//		
-//		JPanel detailsPanel = new JPanel(new BorderLayout());
-//		detailsPanel.setPreferredSize(new Dimension(150, 200));
-//		
-//		detailsPanel.add(new JLabel("Details"), BorderLayout.NORTH);
-//		
-//		
-//		JTextArea details = new JTextArea(theContest.getDescription());
-//		detailsPanel.add(details, BorderLayout.CENTER);
-//		
-//		JButton openButton = new JButton("Open");
-//		openButton.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				myController.showContest(mySelectedContest);
-//			}
-//			
-//		});
-//		detailsPanel.add(openButton, BorderLayout.SOUTH);
-//		
-//		contestBox.add(detailsPanel, BorderLayout.EAST);
-//		
-//		mySelectedContest = theContest;
-//		
-//		revalidate();
-//	}
-	
 }
