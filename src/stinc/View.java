@@ -123,7 +123,7 @@ public class View extends JFrame implements Observer
 		}
 		else {
 			someContests = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
-			someEntries = new EntryScroller(myController.getContestsEntered(myController.getCurrentUser()), myController);
+			someEntries = new EntryScroller(myController.getEntries(myController.getCurrentUser()), myController);
 		}
 		//TODO add third scroller with "featured" contests
 

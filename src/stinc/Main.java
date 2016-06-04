@@ -33,7 +33,6 @@ public class Main
 		Controller myController = new Controller();
 		myController.addModel(myModel);
 		myController.addView(myView);
-		myController.initModel();
 		
 		// Tell View about Controller 
 		myView.addController(myController);

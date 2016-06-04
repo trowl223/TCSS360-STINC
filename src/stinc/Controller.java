@@ -41,12 +41,7 @@ public class Controller {
 		return myModel.removeContest(theContestID);
 	}
 	
-	public Contest getContest(int theContestID)
-	{
-		return myModel.getContest(theContestID);
-	}
-	
-	public List<Contest> getCurrentContests()
+	public List<Contest> getContests()
 	{
 		return myModel.getContests();
 	}
@@ -56,9 +51,9 @@ public class Controller {
 		return myModel.getElegibleContests(theUser);
 	}
 	
-	public List<Entry> getContestsEntered(User theUser)
+	public List<Entry> getEntries(User theUser)
 	{
-		return myModel.getContestsEntered(theUser);
+		return myModel.getEntries(theUser);
 	}
 	
 	public List<Contest> getJudgableContests(User theUser) {
@@ -79,43 +74,9 @@ public class Controller {
 		return myModel.removeEntry(theEntryID);
 	}
 	
-	public Entry getEntry(int theEntryID)
+	public boolean judgeEntry(User theUser, int theEntryID, int theScore, String theComments)
 	{
-		return myModel.getEntry(theEntryID);
-	}
-	
-	public boolean addJudge(int theContestID, User theUser)
-	{
-		if (theUser != null)
-		{
-			Contest c = myModel.getContest(theContestID);
-			if (c != null)
-			{
-				return c.addJudge(theUser);
-			}
-		}
-		return false;
-	}
-	
-	public boolean removeJudge(int theContestID, User theUser)
-	{
-		if (theUser != null)
-		{
-			Contest c = myModel.getContest(theContestID);
-			if (c != null)
-			{
-				if (c.canJudge(theUser))
-				{
-					return c.removeJudge(theUser);
-				}
-			}
-		}
-		return false;
-	}
-	
-	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)//change this to judge id, entry id and score
-	{
-		return myModel.judgeEntry(theContestID, theEntryID, theUser, theScore);
+		return myModel.judgeEntry(theUser, theEntryID, theScore, theComments);
 	}
 	
 	/**
@@ -133,13 +94,6 @@ public class Controller {
 	 */
 	public void addView(View theView) {
 		myView = theView;
-		
-	}
-	/**
-	 * Initializes the model.
-	 */
-	public void initModel() {
-		// TODO CHRIS' SHIT GOES HERE
 		
 	}
 	

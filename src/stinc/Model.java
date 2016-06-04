@@ -45,18 +45,16 @@ public class Model extends Observable
 		entryFields.add("" + theContest.getAgeLimit() + "");
 		entryFields.add(theContest.getImageURL());
 		DatabaseConnector myConnector = new DatabaseConnector("addContest", entryFields);//create an entry
-        	myConnector.connect();
-		boolean result = false;
-		if (!contestExists(theContest))
-		{
-			result = myContests.add(theContest);
-			System.out.println("Add Contest");
-			setChanged();
-			notifyObservers();
-		}
-		return result;
+        myConnector.connect();
+        
+		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
 	
+	/**
+	 * Adds a Entry.
+	 * @param theEntry the Entry to add.
+	 * @return true if successful, false otherwise.
+	 */
 	public boolean addEntry(Entry theEntry)
 	{
         ArrayList<String> entryFields = new ArrayList<>();
@@ -68,102 +66,22 @@ public class Model extends Observable
         entryFields.add(String.valueOf(theEntry.getContestID()));//this is the contest id, an integer
         DatabaseConnector myConnector = new DatabaseConnector("createEntry", entryFields);//create an entry
         myConnector.connect();
-//		Contest c = getContest(theContestID);
-//		
-//		boolean result = false;
-//		if (c != null)
-//		{
-//			result = c.addEntry(theEntry);
-//			setChanged();
-//			notifyObservers();
-//		}
 		return myConnector.getState() == DatabaseConnector.SUCCESS;
-	}
-	
-	public Entry getEntry(int theContestID, int theEntryID)
-	{
-		
-		Contest c = getContest(theContestID);
-		boolean result = false;
-		if (c != null)
-		{
-			return c.getEntry(theEntryID);
-		}
-		return null;
-	}
-	
-	/**
-	 * Checks if the Contest already exists.
-	 * @param theContest the Contest to check for
-	 * @return true if Contest exists, false otherwise.
-	 */
-	public boolean contestExists(Contest theContest)
-	{
-		return myContests.contains(theContest);
 	}
 	
 	/**
 	 * Remove an Entry.
 	 * @param theEntryID the ID of the Entry to remove.
-	 * @param theContestID the ID of the Contest to remove.
-	 * @return true if successful, false otherwise.
-	 */
-	public boolean removeEntry(int theEntryID, int theContestID)
-	{
-		Contest c = getContest(theContestID);
-		boolean result = false;
-		if (c != null)
-		{
-			result = c.removeEntry(theEntryID);
-			setChanged();
-			notifyObservers();
-		}
-		return result;
-	}
-	
-	/**
-	 * Remove an Entry without knowing the contest it came from.
-	 * @param theEntryID the ID of the Entry to remove.
 	 * @return true if successful, false otherwise.
 	 */
 	public boolean removeEntry(int theEntryID)
 	{
-		/*ArrayList<String> entryFields = new ArrayList<>();
-	        entryFields.add("removeEntry");//this is the tag
-	        entryFields.add("" + theEntryID + "");//this should be a string
-	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
-	        myConnector.connect();*/
-		boolean result = false;
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
-		{
-		    Contest contest = iterator.next();
-		    
-		    if(contest.getID() == theEntryID)
-		    {
-		    	result = contest.removeEntry(theEntryID);
-				setChanged();
-				notifyObservers();
-		    }
-		}
-		return result;
-	}
-	
-	/**
-	 * Gets the Contest with the specified  ID.
-	 * @param theContestID the Contest ID to get.
-	 * @return if successful the Contest with the specified ID, null otherwise.
-	 */
-	public Contest getContest(int theContestID)
-	{
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
-		{
-		    Contest contest = iterator.next();
-		    if (contest.getID() == theContestID)
-		    {
-		    	return contest;
-		    }
-		}
-		return null;
+		ArrayList<String> entryFields = new ArrayList<>();
+        entryFields.add("removeEntry");//this is the tag
+        entryFields.add("" + theEntryID);//this should be a string
+        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+        myConnector.connect();
+        return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
 	
 	/**
@@ -174,63 +92,39 @@ public class Model extends Observable
 	public boolean removeContest(int theContestID)
 	{
 		ArrayList<String> vals = new ArrayList<>();
-        	vals.add("removeContest");
-        	vals.add("" + theContestID + "");//returns in order name,date,link,description
-        	DatabaseConnector myConnector = new DatabaseConnector("removeContest", vals);
-        	myConnector.connect();
-		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
-		{
-		    Contest contest = iterator.next();
-		    
-		    if (contest.getID() == theContestID)
-		    {
-		        // Remove the current element from the iterator and the list.
-		        iterator.remove();
-				setChanged();
-				notifyObservers();
-		        return true;
-		    }
-		}
-		return false;
+        vals.add("removeContest");
+        vals.add("" + theContestID);//returns in order name,date,link,description
+        DatabaseConnector myConnector = new DatabaseConnector("removeContest", vals);
+        myConnector.connect();
+        
+		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
-	
-	public boolean judgeEntry(int theContestID, int theEntryID, User theUser, int theScore)
+	/**
+	 * Judge an Entry with a score
+	 * @param theEntryID the Entry ID to judge
+	 * @param theUser the User judging the Entry
+	 * @param theScore the score of the Entry
+	 * @param theComments the comments for the Entry
+	 * @return true if successful, false otherwise.
+	 */
+	public boolean judgeEntry( User theUser, int theEntryID, int theScore, String theComments)
 	{
-		/*ArrayList<String> entryFields = new ArrayList<>();
-	        entryFields.add("judgeEntry");//this is the tag
-	        entryFields.add("" + theEntryID + "");//this should be a string
-	        entryFields.add("" + theUser.getID() + "");//this should be a string
-	        entryFields.add("" + theScore + "");//this should be a string
-	        entryFields.add("comments for the user");//this should be a string
-	        DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
-	        myConnector.connect();*/
-		Contest c = getContest(theContestID);
-		if(c != null)
-		{
-			if(c.canJudge(theUser))
-			{
-				Entry e = c.getEntry(theEntryID);
-				if (e != null)
-				{
-					e.judge(theUser, theScore);
-					setChanged();
-					notifyObservers();
-					return true;
-				}
-				
-			}
-		}
-		return false;
+		ArrayList<String> entryFields = new ArrayList<>();
+	    entryFields.add("judgeEntry");//this is the tag
+	    entryFields.add("" + theEntryID);//this should be a string
+	    entryFields.add("" + theUser.getID());//this should be a string
+	    entryFields.add("" + theScore);//this should be a string
+	    entryFields.add(theComments);//this should be a string
+	    DatabaseConnector myConnector = new DatabaseConnector("updateEntries", entryFields);//create an entry
+	    myConnector.connect();
+		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
 	
 	/**
-	 * Saves the data to the database.
+	 * Gets the Contests the User is able to enter
+	 * @param theUser to query for.
+	 * @return List of Contests the User is able to enter.
 	 */
-	public void save()
-	{
-		//TODO: When I know what I am saving.
-	}
-
 	public List<Contest> getElegibleContests(User theUser) 
 	{
 		List<Contest> result = new ArrayList<Contest>();
@@ -250,19 +144,15 @@ public class Model extends Observable
 			}
 		}
 		return result;
-//		List<Contest> result = new ArrayList<Contest>();
-//		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
-//		{
-//		    Contest contest = iterator.next();
-//		    if (contest.isEligible(theUser))
-//		    {
-//		    	result.add(contest);
-//		    }
-//		}
-//		return result;
 	}
 	
-	public List<Entry> getContestsEntered(User theUser) {
+	/**
+	 * Gets the List of Entry the User has submitted.
+	 * @param theUser to query Entry for.
+	 * @return list of User submitted Entry.
+	 */
+	public List<Entry> getEntries(User theUser)
+	{
 		ArrayList<String> entries = new ArrayList<>();
 		entries.add("contests_entered");
 		entries.add(String.valueOf(theUser.getID()));
@@ -287,31 +177,22 @@ public class Model extends Observable
 						name, 				// Name
 						desc)  				// Description
 				);
-				// Name of entry, Date, URL, Description
-//				result.add(new Contest(contests.get(i), contests.get(i + 1), Integer.valueOf(contests.get(i + 2)), contests.get(i + 3)));
-			}
+		   }
 		}
-		
-//		for (Iterator<Contest> iterator = myContests.iterator(); iterator.hasNext();)
-//		{
-//		    Contest contest = iterator.next();
-//		    if(contest.getUserEntries(theUser).isEmpty())
-//		    {		
-//		    	result.add(contest);
-//		    }
-//		}
 		return result;
 	}
-	
-	public List<Contest> getJudgableContests(User theUser) {
+	/**
+	 * Gets the Contests a User can judge.
+	 * @param theUser to query contests for.
+	 * @return Contests the User can judge.
+	 */
+	public List<Contest> getJudgableContests(User theUser)
+	{
 		List<Contest> result = new ArrayList<Contest>();
-		
-//		DatabaseConnector myQuery = new DatabaseConnector("getJudgables", myCurrentUser.getID(), result);
 		ArrayList<String> dumb = new ArrayList<String>();
 		dumb.add("judgeContests");
 		dumb.add("" + theUser.getID());
 		
-
         DatabaseConnector myConnector = new DatabaseConnector(
         		"userContests", dumb);
 		myConnector.connect();
@@ -330,38 +211,47 @@ public class Model extends Observable
 						id, 
 						url
 				));
-				
-				
-			}
-			
-			
-			
-			
+			}	
 		}
-		
-//		myQuery.connect();
 		
 		return result;
 	}
-
+	
+	/**
+	 * Gets a list of all the Contests
+	 * @return a list of all Contests
+	 */
 	public List<Contest> getContests() {
-		/*DatabaseConnector myQuery = new DatabaseConnector("getContests",myContests);*/
-		return myContests;
-	}
-
-	public Entry getEntry(int theEntryID) {
-		for (Contest c : myContests)
-		{
-			Entry e = c.getEntry(theEntryID);
-			if (e != null)
-			{
-				return e;
-			}
+		List<Contest> result = new ArrayList<>();
+		ArrayList<String> contests = new ArrayList<>();
+		DatabaseConnector myQuery = new DatabaseConnector("getContests", contests);
+		if (myQuery.getState() == DatabaseConnector.SUCCESS) {
+			System.out.println(contests);
+			for (int i = 0; i < contests.size(); i += 4) {
+				String name = contests.get(i + 0);
+				String desc = contests.get(i + 1);
+				int id = Integer.valueOf(contests.get(i + 2));
+				String url = contests.get(i + 3);
+				
+				result.add(new Contest(
+						name,
+						desc, 
+						id, 
+						url
+				));
+			}	
 		}
-		return null;
+		return result;
 	}
-
-	public boolean login(String theUsername, String thePassword) {
+	
+	/**
+	 * Logins the user into the program.
+	 * @param theUsername for the user.
+	 * @param thePassword for the user.
+	 * @return true if success, false otherwise
+	 */
+	public boolean login(String theUsername, String thePassword)
+	{
         ArrayList<String> loginFields = new ArrayList<>();
         loginFields.add(theUsername);//this is the username, a string
         loginFields.add(thePassword);//this is the password, a string
@@ -372,20 +262,18 @@ public class Model extends Observable
         	System.out.println(loginFields);
         	
         	int id = Integer.valueOf(loginFields.get(0));
-        	boolean admin = false;
-        	if (loginFields.get(1).equals("1"))
-        		admin = true;
-        	boolean judge = false;
-        	if (loginFields.get(2).equals("1"))
-        		judge = true;
-        	
-        	myCurrentUser = new User(id, admin, judge);
+        	myCurrentUser = new User(id, loginFields.get(1).equals("1"), loginFields.get(2).equals("1"));
         	return true;
         }
 		return false;
 	}
-
-	public User getCurrentUser() {
+	
+	/**
+	 * Gets the logged in user.
+	 * @return current logged in user.
+	 */
+	public User getCurrentUser() 
+	{
 		return myCurrentUser;
 	}
 	
