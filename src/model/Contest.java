@@ -121,8 +121,18 @@ public class Contest
 	 * @param theOther a contest.
 	 * @return true if equal, false otherwise.
 	 */
-	public boolean equals(Contest theOther) {
-		return theOther.getID() == myID;
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Contest)
+		{
+			Contest temp = ((Contest) obj);
+			if (temp.myID == myID)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

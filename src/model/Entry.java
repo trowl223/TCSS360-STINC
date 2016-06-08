@@ -3,7 +3,7 @@ package model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
 /**
  * An Entry contains information from a user submission for a Contest.
  * @author Nicholas Mousel
@@ -19,14 +19,7 @@ public class Entry implements Comparable<Entry>
 	private Date myDate;
 	private int myScore;
 	private int myContestID;
-	/**
-	 * Judges that have judged this Entry.
-	 */
-	private List<User> myJudgedBy;
-	/**
-	 * Judges that are allowed to judge this Entry.
-	 */
-	private List<User> myAllowedJudges;
+	
 	/**
 	 * Constructs an Entry.
 	 * @param theUser the user that submitted this Entry.
