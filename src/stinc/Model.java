@@ -42,7 +42,7 @@ public class Model extends Observable
 		ArrayList<String> entryFields = new ArrayList<>();
 		entryFields.add(theContest.getName());
 		entryFields.add(theContest.getDescription());
-		entryFields.add("" + theContest.getAgeLimit() + "");
+		entryFields.add(theContest.getAgeLimit() + "");
 		entryFields.add(theContest.getImageURL());
 		DatabaseConnector myConnector = new DatabaseConnector("addContest", entryFields);//create an entry
         myConnector.connect();
@@ -99,6 +99,7 @@ public class Model extends Observable
         
 		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
+	
 	/**
 	 * Judge an Entry with a score
 	 * @param theEntryID the Entry ID to judge
@@ -181,6 +182,7 @@ public class Model extends Observable
 		}
 		return result;
 	}
+	
 	/**
 	 * Gets the Contests a User can judge.
 	 * @param theUser to query contests for.
@@ -197,8 +199,8 @@ public class Model extends Observable
         		"userContests", dumb);
 		myConnector.connect();
 		
-		if (myConnector.getState() == DatabaseConnector.SUCCESS) {
-			
+		if (myConnector.getState() == DatabaseConnector.SUCCESS)
+		{		
 			for (int i = 0; i < dumb.size(); i += 4) {
 				String name = dumb.get(i + 0);
 				String desc = dumb.get(i + 1);
