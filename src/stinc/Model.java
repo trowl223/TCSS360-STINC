@@ -43,7 +43,7 @@ public class Model extends Observable
 		entryFields.add("createContest");
 		entryFields.add(theContest.getName());
 		entryFields.add(theContest.getDescription());
-		entryFields.add(theContest.getAgeLimit() + "");
+		entryFields.add("" + theContest.getAgeLimit());
 		entryFields.add(theContest.getImageURL());
 		DatabaseConnector myConnector = new DatabaseConnector("addContest", entryFields);//create an entry
         myConnector.connect();

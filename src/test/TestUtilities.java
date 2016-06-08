@@ -6,7 +6,7 @@ import model.Contest;
 
 public class TestUtilities 
 {
-	private static String dummyCName = "jTest";
+	private static String dummyCName = "jTestNew";
 	private static String dummyCDesc = "test";
 	private static int dummyCID = -1;
 	

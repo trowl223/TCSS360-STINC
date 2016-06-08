@@ -16,13 +16,23 @@ import stinc.Model;
 public class UserControllerTest {
 
 	private Controller myController;
+	private String myUserUser;
+	private String myUserPass;
 
 	@Before
 	public void setUp() throws Exception {
 		Model myModel = new Model();
 		myController = new Controller();
 		myController.addModel(myModel);
-		myController.login("test", "test");
+//		myController.login("myUserUser", "myUserPass");
+	}
+	
+	@Test
+	public void loginUserTest()
+	{
+		assertTrue("User was not able to login.", myController.login(myUserUser, myUserPass));
+		assertFalse("User login is a Judge", myController.getCurrentUser().isJudge());
+		assertFalse("User login is an Admin", myController.getCurrentUser().isAdmin());
 	}
 	
 	@Test
