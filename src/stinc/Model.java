@@ -183,6 +183,37 @@ public class Model extends Observable
 		return result;
 	}
 	
+	public List<Entry> getContestEntries(Contest theContest) {
+		int STRIDE = 5;
+		
+		ArrayList<String> entries = new ArrayList<String>();
+		// TODO fix this
+		entries.add("asdf_jkl");
+		entries.add("" + theContest.getID());
+		DatabaseConnector myConnector = new DatabaseConnector("asdf_jkl", entries);
+		myConnector.connect();
+		
+		List<Entry> retList = new ArrayList<Entry>();
+		
+		if (myConnector.getState() == DatabaseConnector.SUCCESS) {
+			for (int i = 0; i < entries.size(); i += STRIDE) {
+				
+				int entryID = Integer.valueOf(entries.get(i + 0));
+				String entryName = entries.get(i + 1);
+				String entryDesc = entries.get(i + 2);
+				String entryPath = entries.get(i + 3);
+				int entryScore = Integer.valueOf(entries.get(i + 4));
+				
+				Entry e = new Entry(entryID, entryPath, entryName, entryDesc);
+				e.setScore(entryScore);
+				
+				retList.add(e);
+			}
+		}
+		
+		return retList;
+	}
+	
 	/**
 	 * Gets the Contests a User can judge.
 	 * @param theUser to query contests for.

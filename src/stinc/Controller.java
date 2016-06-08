@@ -49,7 +49,10 @@ public class Controller {
 	{
 		return myModel.getContests();
 	}
-	
+
+	public List<Entry> getContestEntries(Contest theContest) {
+		return myModel.getContestEntries(theContest);
+	}
 	/**
 	 * Gets the Contests the User is able to enter
 	 * @param theUser to query for.

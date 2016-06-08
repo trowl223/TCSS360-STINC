@@ -81,6 +81,10 @@ public class Entry implements Comparable<Entry>
 		return myScore;
 	}
 	
+	public void setScore(int theScore) {
+		myScore = theScore;
+	}
+
 	@Override
 	public int compareTo(Entry theOther) {
 		return theOther.myScore - myScore;

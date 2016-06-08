@@ -36,17 +36,17 @@ public class AdminPanel extends JPanel {
 	private static final int IMAGE_HEIGHT = 100;
 	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 200;
 	private static final int DEFAULT_WIDTH = 800;
-	private final List<Contest> myContests;
+	private final Contest myContest;
 	private final Controller myController;
 
 	
 	/**
 	 * Creates a new Admin Panel
 	 */
-	public AdminPanel(Controller theController) {
+	public AdminPanel(Contest theContest, Controller theController) {
 		super();
 		myController = theController;
-		myContests = null;
+		myContest = theContest;
 		
 		JPanel container = new JPanel();
 		container.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
@@ -70,20 +70,26 @@ public class AdminPanel extends JPanel {
 		
 		container.add(new JLabel("This panel allows you to Accept/Reject entries."), BorderLayout.NORTH);
 		
+		for (Entry e : myController.getContestEntries(myContest)) {
+			container.add(populate(e));
+		}
+		
 		/**
 		 * Generate dummy entries
 		 */
-		List<Entry> theEntries = new ArrayList<Entry>();
-		theEntries.add(new Entry(new User(01, false, false), "Description_I", "https://cdn2.iconfinder.com/data/icons/ballicons-2-free/100/wrench-512.png", new Date(02,04,2015), 02, 03));
-		theEntries.add(new Entry(new User(02, false, false), "Description_II", "http://gapcode.com/atom-editor-icon/2/atom-icon.png", new Date(02,05,2015), 03, 04));
-		theEntries.add(new Entry(new User(03, false, false), "Description_III", "https://cdn4.iconfinder.com/data/icons/flat-icon-set/2133/flat_icons-graficheria.it-01.png", new Date(02,06,2015), 04, 05));
+//		List<Entry> theEntries = new ArrayList<Entry>();
+//		theEntries.add(new Entry(new User(01, false, false), "Description_I", "https://cdn2.iconfinder.com/data/icons/ballicons-2-free/100/wrench-512.png", new Date(02,04,2015), 02, 03));
+//		theEntries.add(new Entry(new User(02, false, false), "Description_II", "http://gapcode.com/atom-editor-icon/2/atom-icon.png", new Date(02,05,2015), 03, 04));
+//		theEntries.add(new Entry(new User(03, false, false), "Description_III", "https://cdn4.iconfinder.com/data/icons/flat-icon-set/2133/flat_icons-graficheria.it-01.png", new Date(02,06,2015), 04, 05));
+		
+		
 		
 		/**
 		 * For each entry, generate an ACCEPT/REJECT strip in the AdminPanel
 		 */
-		container.add(populate(theEntries.get(0)));
-		container.add(populate(theEntries.get(1)));
-		container.add(populate(theEntries.get(2)));
+//		container.add(populate(theEntries.get(0)));
+//		container.add(populate(theEntries.get(1)));
+//		container.add(populate(theEntries.get(2)));
 		
 //		for (Entry e : theEntries) {
 //			container.add(populate(e));

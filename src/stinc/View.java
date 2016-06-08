@@ -1,5 +1,7 @@
 package stinc;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,17 +14,17 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Contest;
-import view.UploadPanel;
+import model.Entry;
 import view.AdminPanel;
 import view.ContestScroller;
 import view.EntryScroller;
 import view.HomePanel;
 import view.JudgePanel;
 import view.LoginPanel;
+import view.UploadPanel;
 
 /**
  * The View is the GUI model.
@@ -105,158 +107,115 @@ public class View extends JFrame implements Observer
 		setVisible(true);
 	}
 	
-	
-	/*
-	 * 
-	 * 
-	 */
-	
 	/**
 	 * 
 	 */
 	public void showHomePage() {
-		JPanel frame = new JPanel();
-		JPanel header= new JPanel();
-
-		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
+		Container pane = getContentPane();
 		
-		header.add(new JButton("Back"));
-		header.getComponent(0).setEnabled(false);
-		header.add(Box.createHorizontalGlue());
-		header.add(Box.createRigidArea(new Dimension(10,10)));
-		frame.add(header);
-		ContestScroller someContests;
-		EntryScroller someEntries = null;
+		pane.removeAll();
 		
-		if (myController.getCurrentUser().isJudge()) {
-			//theScrollers[0] = new ContestScroller(myController.getJudgableContests(myController.getCurrentUser()), myController);
-			someContests = new ContestScroller(
-					myController.getJudgableContests(myController.getCurrentUser()), myController);
-			
-		} 
-		else if (myController.getCurrentUser().isAdmin()) {
-			
-			getContentPane().removeAll();
-			
-			add(new AdminPanel(myController));
-			pack();
-			setVisible(true);
-			return;
-			// TODO fix this horrible code
-		}
-		else {
-			someContests = new ContestScroller(myController.getElegibleContests(myController.getCurrentUser()), myController);
-			someEntries = new EntryScroller(myController.getEntries(myController.getCurrentUser()), myController);
-		}
-		//TODO add third scroller with "featured" contests
-
-		
-		
-		
-		
-		
-		getContentPane().removeAll();
-		//
-		frame.add(new HomePanel(myController, someContests, someEntries));
-		pack();
-		frame.setVisible(true);
-		frame.setPreferredSize(new Dimension(500,300));
-		add(frame);
-		setVisible(true);
-		
-	}
-	
-	private List<Contest> someContests() {
-		List<Contest> retList = new ArrayList<Contest>();
-		Contest c1 = new Contest(
-				"Jurrasic Park", 
-				"desc", 
-				"https://upload.wikimedia.org/wikipedia/en/9/96/Jurassic_Park_logo.jpg"
-		);
-		retList.add(c1);
-		
-		Contest c2 = new Contest(
-				"Ghost Busters", 
-				"desc", 
-				"http://www.thelogofactory.com/logo_blog/wp-content/uploads/2014/08/ghostbusters.png"
-		);
-		retList.add(c2);
-		return retList;
-	}
-
-	public void showUploadPanel(Contest theContest) {
-		getContentPane().removeAll();
-		
-		JPanel frame = new JPanel();
-		JPanel header= new JPanel();
-		JButton back = new JButton("Back");
-		back.addActionListener(new ActionListener() {
+		// Add the back button
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				showHomePage();
 			}
 		});
-		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
-		header.add(back);
-		header.getComponent(0).setEnabled(false);
-		header.add(Box.createHorizontalGlue());
-		header.add(Box.createRigidArea(new Dimension(10,10)));
-		frame.add(header);
+		backButton.setEnabled(false);
+		pane.add(backButton, BorderLayout.NORTH);
+		
+		// Add ContestScroller
+		ContestScroller someContests;
+		EntryScroller someEntries = null;
+		
+		if (myController.getCurrentUser().isJudge()) {
+			List<Contest> judgableContests = myController.getJudgableContests(myController.getCurrentUser()); 
+			someContests = new ContestScroller(judgableContests, myController);
+		} 
+		else if (myController.getCurrentUser().isAdmin()) {
+			List<Contest> contests = myController.getContests();
+			someContests = new ContestScroller(contests, myController);
+		}
+		else {
+			List<Contest> elegibleContests = myController.getElegibleContests(myController.getCurrentUser());
+			List<Entry> entries = myController.getEntries(myController.getCurrentUser());
+			
+			someContests = new ContestScroller(elegibleContests, myController);
+			someEntries = new EntryScroller(entries, myController);
+		}
+		//TODO add third scroller with "featured" contests
+
+		
+		pane.add(new HomePanel(myController, someContests, someEntries), BorderLayout.CENTER);
+		setVisible(true);
+//		setPreferredSize(new Dimension(500,300));
+		
+		pack();
+		setVisible(true);
+	}
+	
+
+	public void showUploadPanel(Contest theContest) {
+		Container pane = getContentPane();
+		pane.removeAll();
+
+		// Add the back button
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				showHomePage();
+			}
+		});
+		pane.add(backButton, BorderLayout.NORTH);
+		
 		
 		UploadPanel upload = new UploadPanel(theContest, myController);
 		upload.setup();
-		add(upload);
+		add(upload, BorderLayout.CENTER);
 		
 		pack();
 		setVisible(true);
 	}
 
 	public void showAdminPanel(Contest theContest) {
-		getContentPane().removeAll();
-		
-		JPanel frame = new JPanel();
-		JPanel header= new JPanel();
-		JButton back = new JButton("Back");
-		back.addActionListener(new ActionListener() {
+		Container pane = getContentPane();
+		pane.removeAll();
+
+		// Add the back button
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				showHomePage();
 			}
 		});
-		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
-		header.add(back);
-		header.getComponent(0).setEnabled(false);
-		header.add(Box.createHorizontalGlue());
-		header.add(Box.createRigidArea(new Dimension(10,10)));
-		frame.add(header);
-
-		add(new JLabel("Admin Panel"));
-		add(new AdminPanel(myController));
+		pane.add(backButton, BorderLayout.NORTH);
+		 
+		
+		add(new AdminPanel(theContest, myController), BorderLayout.CENTER);
 		
 		pack();
 		setVisible(true);
 	}
 
 	public void showJudgePanel(Contest theContest) {
-		getContentPane().removeAll();
+		Container pane = getContentPane();
+		pane.removeAll();
 		
-		JPanel frame = new JPanel();
-		JPanel header= new JPanel();
-		JButton back = new JButton("Back");
-		back.addActionListener(new ActionListener() {
+
+		// Add the back button
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				showHomePage();
 			}
 		});
-		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
-		header.add(back);
-		header.getComponent(0).setEnabled(false);
-		header.add(Box.createHorizontalGlue());
-		header.add(Box.createRigidArea(new Dimension(10,10)));
-		frame.add(header);
+		pane.add(backButton, BorderLayout.NORTH);
 		
-//		add(new JLabel("Judge Panel"));
 		add(new JudgePanel(myController, theContest));
 		
 		pack();
