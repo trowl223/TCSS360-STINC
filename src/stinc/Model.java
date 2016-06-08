@@ -188,9 +188,9 @@ public class Model extends Observable
 		
 		ArrayList<String> entries = new ArrayList<String>();
 		// TODO fix this
-		entries.add("asdf_jkl");
+		entries.add("allEntries");
 		entries.add("" + theContest.getID());
-		DatabaseConnector myConnector = new DatabaseConnector("asdf_jkl", entries);
+		DatabaseConnector myConnector = new DatabaseConnector("contestEntries", entries);
 		myConnector.connect();
 		
 		List<Entry> retList = new ArrayList<Entry>();
@@ -198,11 +198,11 @@ public class Model extends Observable
 		if (myConnector.getState() == DatabaseConnector.SUCCESS) {
 			for (int i = 0; i < entries.size(); i += STRIDE) {
 				
-				int entryID = Integer.valueOf(entries.get(i + 0));
-				String entryName = entries.get(i + 1);
-				String entryDesc = entries.get(i + 2);
-				String entryPath = entries.get(i + 3);
-				int entryScore = Integer.valueOf(entries.get(i + 4));
+				int entryID = Integer.valueOf(entries.get(i + 4));
+				String entryName = entries.get(i + 0);
+				String entryDesc = entries.get(i + 3);
+				String entryPath = entries.get(i + 2);
+				int entryScore = Integer.valueOf(entries.get(i + 1));
 				
 				Entry e = new Entry(entryID, entryPath, entryName, entryDesc);
 				e.setScore(entryScore);
