@@ -33,7 +33,7 @@ public class Controller {
 	
 	/**
 	 * Removes a Contest from the model.
-	 * @param contestID the ID of the Contest to remove.
+	 * @param theContestID the ID of the Contest to remove.
 	 * @return true if succeeds, false otherwise.
 	 */
 	public boolean removeContest(int theContestID)
