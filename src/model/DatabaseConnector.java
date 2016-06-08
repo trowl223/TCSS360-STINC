@@ -1,20 +1,19 @@
 package model;
 
+/**
+ * Created by root on 5/24/16.
+ */
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Iterator;
-/**
- * Created by root on 5/24/16.
- */
+
 public class DatabaseConnector {
     private static String myOperation;
     private int mState;
