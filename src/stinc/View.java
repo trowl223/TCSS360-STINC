@@ -1,15 +1,22 @@
 package stinc;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import model.Contest;
-import stinc.view.UploadPanel;
+import view.UploadPanel;
 import view.AdminPanel;
 import view.ContestScroller;
 import view.EntryScroller;
@@ -98,10 +105,26 @@ public class View extends JFrame implements Observer
 		setVisible(true);
 	}
 	
+	
+	/*
+	 * 
+	 * 
+	 */
+	
 	/**
 	 * 
 	 */
 	public void showHomePage() {
+		JPanel frame = new JPanel();
+		JPanel header= new JPanel();
+
+		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
+		
+		header.add(new JButton("Back"));
+		header.getComponent(0).setEnabled(false);
+		header.add(Box.createHorizontalGlue());
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		frame.add(header);
 		ContestScroller someContests;
 		EntryScroller someEntries = null;
 		
@@ -112,7 +135,7 @@ public class View extends JFrame implements Observer
 			
 		} 
 		else if (myController.getCurrentUser().isAdmin()) {
-
+			
 			getContentPane().removeAll();
 			
 			add(new AdminPanel(myController));
@@ -134,8 +157,11 @@ public class View extends JFrame implements Observer
 		
 		getContentPane().removeAll();
 		//
-		add(new HomePanel(myController, someContests, someEntries));
+		frame.add(new HomePanel(myController, someContests, someEntries));
 		pack();
+		frame.setVisible(true);
+		frame.setPreferredSize(new Dimension(500,300));
+		add(frame);
 		setVisible(true);
 		
 	}
@@ -161,6 +187,22 @@ public class View extends JFrame implements Observer
 	public void showUploadPanel(Contest theContest) {
 		getContentPane().removeAll();
 		
+		JPanel frame = new JPanel();
+		JPanel header= new JPanel();
+		JButton back = new JButton("Back");
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				showHomePage();
+			}
+		});
+		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
+		header.add(back);
+		header.getComponent(0).setEnabled(false);
+		header.add(Box.createHorizontalGlue());
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		frame.add(header);
+		
 		UploadPanel upload = new UploadPanel(theContest, myController);
 		upload.setup();
 		add(upload);
@@ -171,10 +213,25 @@ public class View extends JFrame implements Observer
 
 	public void showAdminPanel(Contest theContest) {
 		getContentPane().removeAll();
+		
+		JPanel frame = new JPanel();
+		JPanel header= new JPanel();
+		JButton back = new JButton("Back");
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				showHomePage();
+			}
+		});
+		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
+		header.add(back);
+		header.getComponent(0).setEnabled(false);
+		header.add(Box.createHorizontalGlue());
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		frame.add(header);
 
-		// TODO Add AdminPanel
 		add(new JLabel("Admin Panel"));
-//		add(new AdminPanel(theContest, myController));
+		add(new AdminPanel(myController));
 		
 		pack();
 		setVisible(true);
@@ -182,7 +239,23 @@ public class View extends JFrame implements Observer
 
 	public void showJudgePanel(Contest theContest) {
 		getContentPane().removeAll();
-		// TODO Add JudgePanel
+		
+		JPanel frame = new JPanel();
+		JPanel header= new JPanel();
+		JButton back = new JButton("Back");
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				showHomePage();
+			}
+		});
+		header.setLayout(new BoxLayout(header, BoxLayout.PAGE_AXIS));
+		header.add(back);
+		header.getComponent(0).setEnabled(false);
+		header.add(Box.createHorizontalGlue());
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		frame.add(header);
+		
 //		add(new JLabel("Judge Panel"));
 		add(new JudgePanel(myController, theContest));
 		
