@@ -80,6 +80,9 @@ public class LoginPanel extends JPanel
 						myController.showHomePage();
 						
 					}
+					else {
+						JOptionPane.showMessageDialog(null, "The username and password do not match an account.", "Login Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 //				else if (username.getText().equalsIgnoreCase("User") && Arrays.equals(password.getPassword(), new char[]{'u','s','e','r','p','w','d'})) {

@@ -134,6 +134,8 @@ public class Entry implements Comparable<Entry>
 		return myName;
 	}
 	public String getDateString() {
+		if (myDate == null)
+			return "00-00-0000";
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		return df.format(myDate);
 	}

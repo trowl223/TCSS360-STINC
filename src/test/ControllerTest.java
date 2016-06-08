@@ -28,7 +28,8 @@ public class ControllerTest {
 	@Test
 	public void getContestsTest()
 	{
-		System.out.println(myController.getContests());
+		myController.getContests();
+//		System.out.println(myController.getContests());
 	}
 
 }
