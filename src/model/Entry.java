@@ -81,35 +81,6 @@ public class Entry implements Comparable<Entry>
 		return myScore;
 	}
 	
-	/**
-	 * Checks if the specified User has judged the Entry.
-	 * @param theUser the User judging the Entry.
-	 * @return true if the Entry was judged, false otherwise.
-	 */
-	public boolean wasJudged(User theUser)
-	{
-		if (myJudgedBy.contains(theUser))
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Reward the Entry with the specified amount of points by the specified User.
-	 * @param theUser the User scoring the Entry.
-	 * @param theScore the Score rewarded to that entry.
-	 */
-	public void judge(User theUser, int theScore)
-	{
-		if(!wasJudged(theUser))
-		{
-			myScore += theScore;
-			myJudgedBy.add(theUser);
-		}
-		System.out.println("This User has already judged the submission");
-	}
-
 	@Override
 	public int compareTo(Entry theOther) {
 		return theOther.myScore - myScore;
