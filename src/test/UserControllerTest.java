@@ -54,7 +54,37 @@ public class UserControllerTest {
 		assertFalse("There should be a contest named test.", nameTest.size() == 0);
 		assertTrue("There should only be one contest named test.", nameTest.size() == 1);
 	}
-
+	
+	@Test
+	public void removeEntryTest()
+	{
+		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
+		List<Contest> contests = myController.getContests();
+		TestUtilities.checkForDummy(contests);
+		assertTrue("The contest could not be removed.", myController.removeContest(TestUtilities.getDummyCID()));
+		
+		contests = myController.getContests();
+		
+		assertFalse("The co")
+		for (Contest c : contests)
+		{
+			if (c.getName().equals("jTest"))
+			{
+				if (c.getDescription().equals("test"))
+				{
+					fail("jTest contest was not removed");
+				}
+			}
+		}
+	}
+	
+	@Test
+	public void getEntriesTest ()
+	{
+		//TODO: get user entries tests
+	}
+	
+	
 	@Test
 	public void test() {
 		fail("Not yet implemented");

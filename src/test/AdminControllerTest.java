@@ -83,16 +83,7 @@ public class AdminControllerTest {
 		assertTrue("The contest could not be removed.", myController.removeContest(id));
 		
 		contests = myController.getContests();
-		for (Contest c : contests)
-		{
-			if (c.getName().equals("jTest"))
-			{
-				if (c.getDescription().equals("test"))
-				{
-					fail("jTest contest was not removed");
-				}
-			}
-		}
+		assertFalse("The dummy should not be removed.", TestUtilities.checkForDummy(contests));
 	}
 	
 	@Test

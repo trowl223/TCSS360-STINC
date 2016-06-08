@@ -19,10 +19,19 @@ public class JudgeControllerTest {
 		myController.addModel(myModel);
 		myController.login("test", "test");
 	}
-
+	
 	@Test
-	public void test() {
+	public void getJudgableContestsTest()
+	{
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void getJudgeEntryTest()
+	{
+		fail("Not yet implemented");
+	}
+	
+	
 
 }
