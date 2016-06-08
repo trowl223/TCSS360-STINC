@@ -47,6 +47,7 @@ public class ControllerTest {
 		}
 		assertFalse("There should be a contest named test.", nameTest.size() == 0);
 		assertTrue("There should only be one contest named test.", nameTest.size() == 1);
+		
 	}
 	
 	@Test
