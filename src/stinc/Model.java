@@ -228,9 +228,9 @@ public class Model extends Observable
 		myQuery.connect();
 		if (myQuery.getState() == DatabaseConnector.SUCCESS) {
 			for (int i = 0; i < contests.size(); i += 4) {
+				int id = Integer.valueOf(contests.get(i + 0));
 				String name = contests.get(i + 1);
 				String desc = contests.get(i + 2);
-				int id = Integer.valueOf(contests.get(i + 0));
 				String url = contests.get(i + 3);
 				
 				result.add(new Contest(
