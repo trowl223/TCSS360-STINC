@@ -40,13 +40,13 @@ public class Model extends Observable
 	public boolean addContest(Contest theContest)
 	{
 		ArrayList<String> entryFields = new ArrayList<>();
+		entryFields.add("createContest");
 		entryFields.add(theContest.getName());
 		entryFields.add(theContest.getDescription());
 		entryFields.add(theContest.getAgeLimit() + "");
 		entryFields.add(theContest.getImageURL());
 		DatabaseConnector myConnector = new DatabaseConnector("addContest", entryFields);//create an entry
         myConnector.connect();
-        
 		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
 	

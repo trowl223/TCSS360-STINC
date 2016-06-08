@@ -38,7 +38,7 @@ public class UserControllerTest {
 	public void addEntryTest()
 	{
 		// TODO: Finish
-		assertTrue("The contest was not able to be added", myController.addEntry(new Entry("test", "test")));
+//		assertTrue("The contest was not able to be added", myController.addEntry(new Entry("test", "test")));
 		List<Contest> contests = myController.getContests();
 		List<Contest> nameTest = new ArrayList<>();
 		for (Contest c : contests)
@@ -65,7 +65,7 @@ public class UserControllerTest {
 		
 		contests = myController.getContests();
 		
-		assertFalse("The co")
+		assertFalse("The Entry should be removed", false);
 		for (Contest c : contests)
 		{
 			if (c.getName().equals("jTest"))

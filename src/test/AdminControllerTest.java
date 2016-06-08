@@ -86,41 +86,40 @@ public class AdminControllerTest {
 		assertFalse("The dummy should not be removed.", TestUtilities.checkForDummy(contests));
 	}
 	
-	@Test
-	public void removeEntryTest()
-	{
-		//TODO: Finish
-		assertTrue("The contest was not able to be added", myController.addContest(new Contest("jTest", "test")));
-		List<Contest> contests = myController.getContests();
-		List<Contest> nameTest = new ArrayList<>();
-		int id = -1;
-		for (Contest c : contests)
-		{
-			if (c.getName().equals("jTest"))
-			{
-				if (c.getDescription().equals("test"))
-				{
-					nameTest.add(c);
-					id = c.getID();
-					
-				}
-			}
-		}
-		assertFalse("There should be a contest named jTest.", nameTest.size() == 0);
-		assertTrue("There should only be one contest named jTest.", nameTest.size() == 1);
-		assertTrue("The contest could not be removed.", myController.removeContest(id));
-		
-		contests = myController.getContests();
-		for (Contest c : contests)
-		{
-			if (c.getName().equals("jTest"))
-			{
-				if (c.getDescription().equals("test"))
-				{
-					fail("jTest contest was not removed");
-				}
-			}
-		}
-	}
-
+//	@Test
+//	public void removeEntryTest()
+//	{
+//		//TODO: Finish
+//		assertTrue("The contest was not able to be added", myController.addContest(new Contest("jTest", "test")));
+//		List<Contest> contests = myController.getContests();
+//		List<Contest> nameTest = new ArrayList<>();
+//		int id = -1;
+//		for (Contest c : contests)
+//		{
+//			if (c.getName().equals("jTest"))
+//			{
+//				if (c.getDescription().equals("test"))
+//				{
+//					nameTest.add(c);
+//					id = c.getID();
+//					
+//				}
+//			}
+//		}
+//		assertFalse("There should be a contest named jTest.", nameTest.size() == 0);
+//		assertTrue("There should only be one contest named jTest.", nameTest.size() == 1);
+//		assertTrue("The contest could not be removed.", myController.removeContest(id));
+//		
+//		contests = myController.getContests();
+//		for (Contest c : contests)
+//		{
+//			if (c.getName().equals("jTest"))
+//			{
+//				if (c.getDescription().equals("test"))
+//				{
+//					fail("jTest contest was not removed");
+//				}
+//			}
+//		}
+//	}
 }
