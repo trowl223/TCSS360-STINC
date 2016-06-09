@@ -138,7 +138,7 @@ public class EntryScroller extends JPanel {
 		detailsPanel.add(new JLabel("Details"), BorderLayout.NORTH);
 		
 		
-		JTextArea details = new JTextArea(theEntry.getDescription());
+		JTextArea details = new JTextArea(theEntry.getComment());
 		detailsPanel.add(details, BorderLayout.CENTER);
 		
 		contestBox.add(detailsPanel, BorderLayout.EAST);
