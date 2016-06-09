@@ -55,6 +55,17 @@ public class JudgeControllerTest {
 	}
 	
 	/**
+	 * Test the judge getting the not judged entries.
+	 */
+	@Test
+	public void getNotJudgedEntriesTest()
+	{
+		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
+		List<Entry> entries = myController.getNotJudgedEntries(contests.get(0).getID(), myController.getCurrentUser());
+		assertTrue("Judge should have unjudged entries.", entries.size() > 0);
+	}
+	
+	/**
 	 * Test judging a entry in a contest.
 	 */
 	@Test
@@ -63,7 +74,7 @@ public class JudgeControllerTest {
 		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
 		if (contests.size() > 0)
 		{
-			List<Entry> contestEntries = myController.getUnjudgedEntries(contests.get(0).getID(), myController.getCurrentUser());
+			List<Entry> contestEntries = myController.getNotJudgedEntries(contests.get(0).getID(), myController.getCurrentUser());
 			if (contestEntries.size() > 0)
 			{
 				Entry testScore = contestEntries.get(0);
@@ -75,7 +86,6 @@ public class JudgeControllerTest {
 				{
 					if(e.getID() == testScore.getID())
 					{
-						System.out.println(e.getScore());
 						assertTrue(e.getScore() == 99);
 					}
 				}
