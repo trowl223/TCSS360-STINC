@@ -220,9 +220,9 @@ public class View extends JFrame implements Observer
 			}
 		});
 		pane.add(backButton, BorderLayout.NORTH);
-		
-		add(new JudgePanel(myController, theContest));
-		
+		JudgePanel jp = new JudgePanel(myController, theContest);
+		add(jp);
+		jp.populate(myController.getNotJudgedEntries(theContest.getID(), myController.getCurrentUser()));
 		pack();
 		setVisible(true);
 	}

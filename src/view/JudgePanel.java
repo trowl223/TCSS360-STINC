@@ -185,22 +185,32 @@ public class JudgePanel extends JPanel
 	 */
 	private void submit() 
 	{
-		for (Entry e : myEntryBoxes.keySet())
+		if(!myEntryBoxes.isEmpty())
 		{
-			JTextField jt = myEntryBoxes.get(e);
-			try 
+			for (Entry e : myEntryBoxes.keySet())
 			{
-			    Integer in = Integer.parseInt(jt.getText());
-			    if (in != null)
-			    {
-						//System.out.println(in);
-					myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
+				JTextField jt = myEntryBoxes.get(e);
+				if (jt.getText().length() > 0)
+				{
+					try 
+					{
+					    Integer in = Integer.parseInt(jt.getText());
+					    if (in != null)
+					    {
+								//System.out.println(in);
+							myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
+						}
+					}
+					catch (NumberFormatException e1) {
+						 JOptionPane.showMessageDialog(null, "You must input a valid number for the entry called: " + e.getName(), "Submission Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
-			catch (NumberFormatException e1) {
-				 JOptionPane.showMessageDialog(null, "You must input a valid number for the entry called: " + e.getName(), "Submission Error", JOptionPane.ERROR_MESSAGE);
-			}
-		}		
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Nothing to sumbit", "Submission Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	/**

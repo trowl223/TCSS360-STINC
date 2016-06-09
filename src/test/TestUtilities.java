@@ -7,7 +7,7 @@ import model.Entry;
 
 public class TestUtilities 
 {
-	private static String dummyCName = "nudgeNuggetsBBBBBBBBB";
+	private static String dummyCName = "banananmamaaaaaaaaa";
 	private static String dummyCDesc = "test";
 	private static int dummyCID = -1;
 	private static String dummyEName = "bbb";
