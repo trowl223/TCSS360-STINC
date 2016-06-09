@@ -50,11 +50,21 @@ public class Controller {
 		return myModel.getContests();
 	}
 	
+	/**
+	 * Gets the Entries a User can judge.
+	 * @param theUser to query entries for.
+	 * @return Contests the User can judge.
+	 */
 	public List<Entry> getNotJudgedEntries(int theContest, User theUser)
 	{
 		return myModel.getUnjudgedEntries(theContest, theUser);
 	}
-
+	
+	/**
+	 * Gets all the entries for a Contest
+	 * @param theContest to search for Entries.
+	 * @return list of Entry.
+	 */
 	public List<Entry> getContestEntries(Contest theContest) {
 		return myModel.getContestEntries(theContest);
 	}

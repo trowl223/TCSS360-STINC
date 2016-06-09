@@ -90,12 +90,6 @@ public class View extends JFrame implements Observer
 		
 	}
 	
-
-	public void showContentFrame() {
-		removeAll();
-//		add(new ContentFrame());	
-	}
-	
 	/*public void testContentScroller()
 	{
 //		System.out.print();

@@ -12,6 +12,12 @@ public class User
 	private boolean myJudge;
 	private int myAge;
 	
+	/**
+	 * Constructs the User.
+	 * @param theLibraryID ID of the User.
+	 * @param theAdmin Flag for denoting if the user is an Admin.
+	 * @param theJudge Flag for denoting if the user is a Judge.
+	 */
 	public User(int theLibraryID, boolean theAdmin, boolean theJudge)
 	{
 		myLibraryID = theLibraryID;
@@ -19,6 +25,13 @@ public class User
 		myJudge = theJudge;
 	}
 	
+	/**
+	 * Constructs the User.
+	 * @param theLibraryID ID of the User.
+	 * @param theAdmin Flag for denoting if the user is an Admin.
+	 * @param theJudge Flag for denoting if the user is a Judge.
+	 * @param theAge How old the user is.
+	 */
 	public User(int theLibraryID, boolean theAdmin, boolean theJudge, int theAge)
 	{
 		this(theLibraryID, theAdmin, theJudge);
