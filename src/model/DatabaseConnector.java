@@ -71,6 +71,7 @@ public class DatabaseConnector {
                 URL = getContestsEntered;
                 myKeys.add("query_type");
                 myKeys.add("user_id");
+                myKeys.add("contest_id");
                 QueryDB(myKeys);
                 break;
             case "contestEntries":
@@ -190,6 +191,9 @@ public class DatabaseConnector {
                     if (URL.equals(getContestsEntered)) {
                         if (sb.toString().charAt(0) != '{') {
                             jArr = new JSONArray(sb.toString());
+                            if(myVals.get(0).equals("unjudgedEntries")) {
+                                myVals.remove(2);
+                            }
                             this.myVals.remove(1);
                             this.myVals.remove(0);
                             for (int i = 0; i < jArr.length(); i++) {
