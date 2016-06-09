@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -192,13 +193,12 @@ public class JudgePanel extends JPanel
 			    Integer in = Integer.parseInt(jt.getText());
 			    if (in != null)
 			    {
-						System.out.println(in);
-						myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
+						//System.out.println(in);
+					myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
 				}
 			}
 			catch (NumberFormatException e1) {
-			     //Not an integer
-				System.out.print("balls");
+				 JOptionPane.showMessageDialog(null, "You must input a valid number for the entry called: " + e.getName(), "Submission Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}		
 	}
