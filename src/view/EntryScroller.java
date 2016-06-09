@@ -41,8 +41,9 @@ public class EntryScroller extends JPanel {
 	private final HashMap<Entry,JPanel> myEntryBoxes = new HashMap<Entry, JPanel>();
 
 	/**
-	 * Construct a ContestScroller from a list of Contests.
-	 * @param theContests the list of Contests.
+	 * Construct an EntryScroller from a list of Entries
+	 * @param theContests The list of entries.
+	 * @param theController The controller of the View.
 	 */
 	public EntryScroller(List<Entry> theEntries, Controller theController) {
 		myEntries = theEntries;
@@ -113,6 +114,12 @@ public class EntryScroller extends JPanel {
 	
 	private Entry mySelectedEntry = null;
 	
+	/**
+	 * Shows a context box with information about the entry, including title
+	 * and any admin or judge comments, including weather the entry was
+	 * rejected from the contest.
+	 * @param theEntry The entry clicked on.
+	 */
 	private void showContestDetails(Entry theEntry) {
 		// If the user clicked the same contest again, do nothing.
 		if (theEntry == mySelectedEntry)
@@ -138,7 +145,7 @@ public class EntryScroller extends JPanel {
 		detailsPanel.add(new JLabel("Details"), BorderLayout.NORTH);
 		
 		
-		JTextArea details = new JTextArea(theEntry.getDescription());
+		JTextArea details = new JTextArea(theEntry.getComment());
 		detailsPanel.add(details, BorderLayout.CENTER);
 		
 		contestBox.add(detailsPanel, BorderLayout.EAST);

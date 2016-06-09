@@ -43,7 +43,9 @@ public class AdminPanel extends JPanel {
 
 	
 	/**
-	 * Creates a new Admin Panel
+	 * Creates a new AdminPanel.
+	 * @param theContest the contest that the Admin wil be looking at.
+	 * @param theController The View's Controller.
 	 */
 	public AdminPanel(Contest theContest, Controller theController) {
 		super();
@@ -57,6 +59,7 @@ public class AdminPanel extends JPanel {
 
 	/**
 	 * Create the ScrollPanel 
+	 * @param container The container of the UI elements.
 	 */
 	private void create(JPanel container) {
 		
@@ -94,8 +97,9 @@ public class AdminPanel extends JPanel {
 	}
 	
 	/**
-	 * Fills in the ScrollPanel with Entries/GUI
-	 * @return myContent
+	 * Fills in the ScrollPanel with Entries/GUI.
+	 * @param e the entry to add to the list.
+	 * @return myContent Returns the Component to be added to the list.
 	 */
 	public Component populate(final Entry e) {
 		

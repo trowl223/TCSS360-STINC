@@ -96,7 +96,7 @@ public class View extends JFrame implements Observer
 //		add(new ContentFrame());	
 	}
 	
-	public void testContentScroller()
+	/*public void testContentScroller()
 	{
 //		System.out.print();
 		List<Contest> contests = myController.getElegibleContests(myController.getCurrentUser());
@@ -105,10 +105,10 @@ public class View extends JFrame implements Observer
 		add(new ContestScroller(contests, myController));
 		pack();
 		setVisible(true);
-	}
+	}*/
 	
 	/**
-	 * 
+	 * Instantiates a HomePanel and adds it to the view's primary content panel.
 	 */
 	public void showHomePage() {
 		Container pane = getContentPane();
@@ -156,7 +156,10 @@ public class View extends JFrame implements Observer
 		setVisible(true);
 	}
 	
-
+	/**
+	 * Instantiates an UploadPanel and adds it to the View's primary content panel.
+	 * @param theContest The contest that will be uploaded to.
+	 */
 	public void showUploadPanel(Contest theContest) {
 		Container pane = getContentPane();
 		pane.removeAll();
@@ -179,7 +182,11 @@ public class View extends JFrame implements Observer
 		pack();
 		setVisible(true);
 	}
-
+	
+	/**
+	 * Instantiates an Admin Panel and adds it to the View's primary content panel.
+	 * @param theContest The contest to be administrated.
+	 */
 	public void showAdminPanel(Contest theContest) {
 		Container pane = getContentPane();
 		pane.removeAll();
@@ -201,6 +208,10 @@ public class View extends JFrame implements Observer
 		setVisible(true);
 	}
 
+	/**
+	 * Instantiates a JudgePanel and adds it to the View's primary content panel.
+	 * @param theContest The Contest to be judged.
+	 */
 	public void showJudgePanel(Contest theContest) {
 		Container pane = getContentPane();
 		pane.removeAll();

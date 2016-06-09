@@ -25,7 +25,11 @@ public class HomePanel extends JPanel {
 	
 	
 	/**
-	 * Create the panel with scrollers.
+	 * Creates a home panel with a few scrollers, depending on the type
+	 * of user logged in.
+	 * @param aController The View controller.
+	 * @param someContests A contest scroller with useful contests.
+	 * @param someEntries An entry scroller, to be used for entrant users.
 	 */
 	public HomePanel(Controller aController, ContestScroller someContests, EntryScroller someEntries) {
 		myController = aController;
@@ -36,7 +40,7 @@ public class HomePanel extends JPanel {
 	
 	
 	/**
-	 * Setups the HomePanel
+	 * Sets up the HomePanel and defines the layout.
 	 */
 	private void create() {
 		JPanel cPane = new JPanel();
