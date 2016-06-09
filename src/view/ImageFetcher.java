@@ -45,7 +45,8 @@ public class ImageFetcher {
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			Please no do.
+//			e.printStackTrace();
 
 			if (url == PLACEHOLDER_IMAGE_URL)
 				throw new RuntimeException("Could not load placeholder image.");
@@ -53,7 +54,8 @@ public class ImageFetcher {
 				return fetchImage(PLACEHOLDER_IMAGE_URL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			Please no do.
+//			e.printStackTrace();
 			if (url == PLACEHOLDER_IMAGE_URL)
 				throw new RuntimeException("Could not load placeholder image.");
 			else

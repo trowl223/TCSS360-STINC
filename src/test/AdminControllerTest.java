@@ -69,18 +69,18 @@ public class AdminControllerTest {
 		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
 	}
 	
-	/**
-	 * Tests if removing a Contest is successful.
-	 */
-	@Test
-	public void removeContestTest()
-	{
-		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
-		List<Contest> contests = myController.getContests();
-		assertTrue("There should be a contest named jTest.", TestUtilities.checkForCDummy(contests));
-		assertTrue("The contest could not be removed.", myController.removeContest(TestUtilities.getDummyCID()));
-		
-		contests = myController.getContests();
-		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
-	}
+//	/**
+//	 * Tests if removing a Contest is successful.
+//	 */
+//	@Test
+//	public void removeContestTest()
+//	{
+//		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
+//		List<Contest> contests = myController.getContests();
+//		assertTrue("There should be a contest named jTest.", TestUtilities.checkForCDummy(contests));
+//		assertTrue("The contest could not be removed.", myController.removeContest(TestUtilities.getDummyCID()));
+//		
+//		contests = myController.getContests();
+//		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
+//	}
 }

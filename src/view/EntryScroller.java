@@ -137,7 +137,7 @@ public class EntryScroller extends JPanel {
 		JPanel detailsPanel = new JPanel(new BorderLayout());
 		detailsPanel.setPreferredSize(new Dimension(150, 200));
 		
-		detailsPanel.add(new JLabel("Details"), BorderLayout.NORTH);
+		detailsPanel.add(new JLabel("Comments"), BorderLayout.NORTH);
 		
 		
 		JTextArea details = new JTextArea(theEntry.getComment());

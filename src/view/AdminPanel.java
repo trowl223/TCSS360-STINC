@@ -78,27 +78,26 @@ public class AdminPanel extends JPanel {
 		
 		if (myEntries.isEmpty()) {
 			container.add(new JLabel("This contest does not contain any entries."), BorderLayout.CENTER);
+			
 		} else {
 			for (Entry e : myEntries) {
 				if(!e.getRejected())
 					container.add(populate(e));
 			}
-		}
-		
-		JButton Submit = new JButton("Submit");
-		container.add(Submit, BorderLayout.AFTER_LAST_LINE);
-		Submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent action){
-				for (Entry e: myEntries) {
-					if (e.getRejected()) {
-						myController.updateRejected(e);
+			JButton Submit = new JButton("Submit");
+			Submit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent action){
+					for (Entry e: myEntries) {
+						if (e.getRejected()) {
+							myController.updateRejected(e);
+						}
 					}
+					
+					myController.showHomePage();
 				}
-				
-				myController.showHomePage();
-			}
-		});
-	
+			});
+			container.add(Submit, BorderLayout.AFTER_LAST_LINE);
+		}
 	}
 	
 	/**
@@ -139,8 +138,8 @@ public class AdminPanel extends JPanel {
 			Comment.setPreferredSize(new Dimension(300, 75));
 			myContent.add(Comment, BorderLayout.CENTER);
 
-			myContent.add(Accept, BorderLayout.LINE_END);
-			myContent.add(Reject, BorderLayout.PAGE_END);
+//			myContent.add(Accept, BorderLayout.LINE_END);
+			myContent.add(Reject, BorderLayout.EAST);
 		
 		return myContent;
 	}
