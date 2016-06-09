@@ -19,6 +19,8 @@ public class Entry implements Comparable<Entry>
 	private Date myDate;
 	private int myScore;
 	private int myContestID;
+	private boolean myIsRejected;
+	private String myComment;
 	
 	/**
 	 * Constructs an Entry.
@@ -122,5 +124,21 @@ public class Entry implements Comparable<Entry>
 
 	public int getContestID() {
 		return myContestID;
+	}
+	
+	public void setRejected(boolean aval){
+		myIsRejected = aval;
+	}
+	
+	public boolean getRejected(){
+		return myIsRejected;
+	}
+	
+	public String getComment(){
+		return myComment;
+	}
+	
+	public void setComment(String comment){
+		myComment = comment;
 	}
 }
