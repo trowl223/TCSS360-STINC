@@ -186,6 +186,11 @@ public class Controller {
 		return myModel.getCurrentUser();
 	}
 	
+	/**
+	 * Updates the specified rejected entry.
+	 * @param anEntry A rejected entry whose rejected status must
+	 *  be updated in the database.
+	 */
 	public void updateRejected(Entry anEntry) {
 		myModel.updateRejected(anEntry);
 	}

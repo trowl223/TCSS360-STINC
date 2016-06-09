@@ -311,6 +311,11 @@ public class Model extends Observable
 		return myCurrentUser;
 	}
 	
+	/**
+	 * Updates the specified entry in the database.
+	 * @param anEntry the entry to be updated.
+	 * @return returns the status of the success of the DatabaseConnector.
+	 */
 	public boolean updateRejected(Entry anEntry) {
 		ArrayList<String> entryFields = new ArrayList<>();
 	    entryFields.add("updateRejected");//this is the tag
