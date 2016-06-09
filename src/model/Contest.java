@@ -49,7 +49,7 @@ public class Contest
 	{
 		myName = theName;
 		myDescription = theDescription;
-		myAgeLimit = 1;
+		myAgeLimit = 999;
 		myImageURL = "www.google.com";
 	}
 	

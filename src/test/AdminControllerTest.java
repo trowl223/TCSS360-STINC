@@ -39,8 +39,6 @@ public class AdminControllerTest {
 		List<Contest> contests = myController.getContests();
 		List<Contest> same = myController.getContests();
 		assertTrue(contests.equals(same));
-//		assertTrue("The contest was unable to be removed", myController.removeContest(theContestID))
-//		System.out.println(myController.getContests());
 	}
 	
 	@Test
@@ -48,11 +46,11 @@ public class AdminControllerTest {
 	{
 		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
 		List<Contest> contests = myController.getContests();
-		assertTrue("There should be a contest named jTest.", TestUtilities.checkForDummy(contests));
+		assertTrue("There should be a contest named jTest.", TestUtilities.checkForCDummy(contests));
 		assertTrue("The contest could not be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 		
 		contests = myController.getContests();
-		assertFalse("The dummy should not be removed.", TestUtilities.checkForDummy(contests));
+		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
 	}
 	
 	@Test
@@ -60,47 +58,10 @@ public class AdminControllerTest {
 	{
 		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
 		List<Contest> contests = myController.getContests();
-		assertTrue("There should be a contest named jTest.", TestUtilities.checkForDummy(contests));
+		assertTrue("There should be a contest named jTest.", TestUtilities.checkForCDummy(contests));
 		assertTrue("The contest could not be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 		
 		contests = myController.getContests();
-		assertFalse("The dummy should not be removed.", TestUtilities.checkForDummy(contests));
+		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
 	}
-	
-//	@Test
-//	public void removeEntryTest()
-//	{
-//		//TODO: Finish
-//		assertTrue("The contest was not able to be added", myController.addContest(new Contest("jTest", "test")));
-//		List<Contest> contests = myController.getContests();
-//		List<Contest> nameTest = new ArrayList<>();
-//		int id = -1;
-//		for (Contest c : contests)
-//		{
-//			if (c.getName().equals("jTest"))
-//			{
-//				if (c.getDescription().equals("test"))
-//				{
-//					nameTest.add(c);
-//					id = c.getID();
-//					
-//				}
-//			}
-//		}
-//		assertFalse("There should be a contest named jTest.", nameTest.size() == 0);
-//		assertTrue("There should only be one contest named jTest.", nameTest.size() == 1);
-//		assertTrue("The contest could not be removed.", myController.removeContest(id));
-//		
-//		contests = myController.getContests();
-//		for (Contest c : contests)
-//		{
-//			if (c.getName().equals("jTest"))
-//			{
-//				if (c.getDescription().equals("test"))
-//				{
-//					fail("jTest contest was not removed");
-//				}
-//			}
-//		}
-//	}
 }

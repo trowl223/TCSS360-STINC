@@ -88,11 +88,11 @@ public class Controller {
 	 * @param theEntry to add.
 	 * @return true if successful, false otherwise.
 	 */
-	public boolean addEntry(Contest theContest, Entry theEntry)
+	public boolean addEntry(int theContestID, Entry theEntry)
 	{
 		theEntry.setUser(getCurrentUser());
 		theEntry.setDate(new Date());
-		theEntry.setContestID(theContest.getID());
+		theEntry.setContestID(theContestID);
 		
 		return myModel.addEntry(theEntry);
 	}

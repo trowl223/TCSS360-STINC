@@ -154,7 +154,7 @@ public class UploadPanel extends JPanel {
 					url
 			);
 			
-			if (myController.addEntry(myContest, entry)) {
+			if (myController.addEntry(myContest.getID(), entry)) {
 				JOptionPane.showMessageDialog(null,  "Your entry has been submitted.", "Submission successful", JOptionPane.PLAIN_MESSAGE);
 				myController.showContentFrame();
 			}
