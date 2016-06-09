@@ -103,7 +103,7 @@ public class JudgePanel extends JPanel
 	{
 		JPanel judgeBox = new JPanel();
 		judgeBox.setLayout(new FlowLayout(FlowLayout.LEFT));
-		Image image = ImageFetcher.fetchImage("https://upload.wikimedia.org/wikipedia/en/9/96/Jurassic_Park_logo.jpg", IMAGE_WIDTH, IMAGE_HEIGHT);
+		Image image = ImageFetcher.fetchImage(theEntry.getSubmissionPath(), IMAGE_WIDTH, IMAGE_HEIGHT);
 		judgeBox.add(new JLabel(new ImageIcon(image)));
 		judgeBox.add(createJudgeInfo(theEntry));
 		return judgeBox;
