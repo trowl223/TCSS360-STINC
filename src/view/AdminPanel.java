@@ -40,6 +40,7 @@ public class AdminPanel extends JPanel {
 	private static final int DEFAULT_WIDTH = 800;
 	private final Contest myContest;
 	private final Controller myController;
+	private final List<Entry> myEntries;
 
 	
 	/**
@@ -51,7 +52,7 @@ public class AdminPanel extends JPanel {
 		super();
 		myController = theController;
 		myContest = theContest;
-		
+		myEntries = myController.getContestEntries(myContest);
 		JPanel container = new JPanel();
 		container.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		create(container);
@@ -75,10 +76,10 @@ public class AdminPanel extends JPanel {
 		
 		container.add(new JLabel("This panel allows you to Accept/Reject entries."), BorderLayout.NORTH);
 		
-		if (myController.getContestEntries(myContest).isEmpty()) {
+		if (myEntries.isEmpty()) {
 			container.add(new JLabel("This contest does not contain any entries."), BorderLayout.CENTER);
 		} else {
-			for (Entry e : myController.getContestEntries(myContest)) {
+			for (Entry e : myEntries) {
 				if(!e.getRejected())
 					container.add(populate(e));
 			}
@@ -88,8 +89,12 @@ public class AdminPanel extends JPanel {
 		container.add(Submit, BorderLayout.AFTER_LAST_LINE);
 		Submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent action){
+				for (Entry e: myEntries) {
+					if (e.getRejected()) {
+						myController.updateRejected(e);
+					}
+				}
 				
-				//TODO Update Database when SUMBIT is pressed
 				myController.showHomePage();
 			}
 		});

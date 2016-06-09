@@ -295,8 +295,8 @@ public class Model extends Observable
         {
         	System.out.println(loginFields);
         	
-        	int id = Integer.valueOf(loginFields.get(0));
-        	myCurrentUser = new User(id, loginFields.get(1).equals("1"), loginFields.get(2).equals("1"));
+        	int id = Integer.valueOf(loginFields.get(2));
+        	myCurrentUser = new User(id, loginFields.get(1).equals("1"), loginFields.get(0).equals("1"));
         	return true;
         }
 		return false;
@@ -311,4 +311,15 @@ public class Model extends Observable
 		return myCurrentUser;
 	}
 	
+	public boolean updateRejected(Entry anEntry) {
+		ArrayList<String> entryFields = new ArrayList<>();
+	    entryFields.add("updateRejected");//this is the tag
+	    entryFields.add(""+ anEntry.getID());//this should be a string
+	    entryFields.add(""+ anEntry.getComment());//this should be a string, admin comment
+	    entryFields.add(""+ 1);//this should be a string, was rejected.
+	    
+	    DatabaseConnector myConnector = new DatabaseConnector("adminReject", entryFields);//create an entry
+	    myConnector.connect();
+		return myConnector.getState() == DatabaseConnector.SUCCESS;
+	}
 }

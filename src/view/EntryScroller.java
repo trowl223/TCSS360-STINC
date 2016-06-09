@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import model.Contest;
 import model.Entry;
 import stinc.Controller;
 
@@ -36,8 +35,6 @@ public class EntryScroller extends JPanel {
 	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 55;
 	private static final int DEFAULT_WIDTH = 700;
 	private List<Entry> myEntries;
-	private Controller myController;
-	
 	private final HashMap<Entry,JPanel> myEntryBoxes = new HashMap<Entry, JPanel>();
 
 	/**
@@ -47,8 +44,6 @@ public class EntryScroller extends JPanel {
 	 */
 	public EntryScroller(List<Entry> theEntries, Controller theController) {
 		myEntries = theEntries;
-		myController = theController;
-		
 		setLayout(new BorderLayout());
 		
 		JPanel contents = new JPanel();

@@ -160,15 +160,6 @@ public class Controller {
 	}
 	
 	/**
-	 * Display the Content Frame.
-	 */
-	public void showContentFrame()
-	{
-		myView.testContentScroller();
-		
-	}
-	
-	/**
 	 * Display the HomePanel on the contentFrame
 	 */
 	public void showHomePage()
@@ -193,6 +184,10 @@ public class Controller {
 	 */
 	public User getCurrentUser() {
 		return myModel.getCurrentUser();
+	}
+	
+	public void updateRejected(Entry anEntry) {
+		myModel.updateRejected(anEntry);
 	}
 
 }
