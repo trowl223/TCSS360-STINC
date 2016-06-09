@@ -7,7 +7,7 @@ import model.Entry;
 
 public class TestUtilities 
 {
-	private static String dummyCName = "bbb";
+	private static String dummyCName = "nudgeNuggetsBBBBBBBBB";
 	private static String dummyCDesc = "test";
 	private static int dummyCID = -1;
 	private static String dummyEName = "bbb";
@@ -28,6 +28,7 @@ public class TestUtilities
 			{
 				if (c.getDescription().equals(dummyCDesc))
 				{
+					System.out.println(c.getID());
 					dummyCID = c.getID();
 					return true;
 				}

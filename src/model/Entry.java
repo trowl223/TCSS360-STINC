@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Nicholas Mousel
  * @version 5/24/2016
  */
-public class Entry implements Comparable<Entry>
+public class Entry
 {
 	private User myUser;
 	private String myName;
@@ -104,10 +104,19 @@ public class Entry implements Comparable<Entry>
 	public void setScore(int theScore) {
 		myScore = theScore;
 	}
-
+	
 	@Override
-	public int compareTo(Entry theOther) {
-		return theOther.myScore - myScore;
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Entry)
+		{
+			Entry temp = ((Entry) obj);
+			if (temp.myID == myID)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

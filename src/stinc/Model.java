@@ -162,7 +162,7 @@ public class Model extends Observable
 		
 		if (myConnector.getState() == myConnector.SUCCESS)
 		{
-			System.out.println(entries);
+			//System.out.println(entries);
 			for(int i = 0; i < entries.size(); i += 4)
 			{
 				
@@ -239,14 +239,15 @@ public class Model extends Observable
 		{		
 			for (int i = 0; i < dumb.size(); i += 5) {
 				
-				int entryID = Integer.valueOf(dumb.get(i + 4));
 				String entryName = dumb.get(i + 0);
-				String entryDesc = dumb.get(i + 3);
+				String date = dumb.get(i + 1);
 				String entryPath = dumb.get(i + 2);
-				int entryScore = Integer.valueOf(dumb.get(i + 1));
+				String entryDesc = dumb.get(i + 3);
+				int entryID = Integer.valueOf(dumb.get(i + 4));
+//				int entryScore = Integer.valueOf(dumb.get(i + 1));
 				
 				Entry e = new Entry(entryID, entryPath, entryName, entryDesc);
-				e.setScore(entryScore);
+//				e.setScore(entryScore);
 				
 				result.add(e);
 			}
@@ -314,7 +315,7 @@ public class Model extends Observable
 				));
 			}	
 		}
-		System.out.print(myQuery.getState());
+//		System.out.print(myQuery.getState());
 		return result;
 	}
 	
@@ -333,10 +334,10 @@ public class Model extends Observable
         myConnector.connect();
         if (myConnector.getState() == myConnector.SUCCESS)
         {
-        	System.out.println(loginFields);
+//        	System.out.println(loginFields);
         	
-        	int id = Integer.valueOf(loginFields.get(2));
-        	myCurrentUser = new User(id, loginFields.get(1).equals("1"), loginFields.get(0).equals("1"));
+        	int id = Integer.valueOf(loginFields.get(0));
+        	myCurrentUser = new User(id, loginFields.get(1).equals("1"), loginFields.get(2).equals("1"));
         	return true;
         }
 		return false;

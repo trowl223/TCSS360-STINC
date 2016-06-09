@@ -74,21 +74,16 @@ public class JudgeControllerTest {
 		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
 		if (contests.size() > 0)
 		{
-			List<Entry> contestEntries = myController.getNotJudgedEntries(contests.get(0).getID(), myController.getCurrentUser());
+			Contest temp  = contests.get(0);
+			List<Entry> contestEntries = myController.getNotJudgedEntries(temp.getID(), myController.getCurrentUser());
 			if (contestEntries.size() > 0)
 			{
 				Entry testScore = contestEntries.get(0);
 				assertTrue("The judge was unable to judge the contest.",
 							myController.judgeEntry(myController.getCurrentUser(), testScore.getID(), 99, ""));
 				
-				contestEntries = myController.getContestEntries(contests.get(0));
-				for (Entry e : contestEntries)
-				{
-					if(e.getID() == testScore.getID())
-					{
-						assertTrue(e.getScore() == 99);
-					}
-				}
+				contestEntries = myController.getNotJudgedEntries(temp.getID(), myController.getCurrentUser());
+				assertFalse("The entry should not be here", contestEntries.contains(temp));
 			}
 			else
 			{
