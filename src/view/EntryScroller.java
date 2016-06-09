@@ -24,7 +24,7 @@ import stinc.Controller;
 @SuppressWarnings("serial")
 /**
  * The ContestScroller is a horizontal scroll box for displaying contests.
- * @author taylor
+ * @author Taylor Rowland
  * Majority of code copied over from original author Stefan Titus' ContestScroller class.
  * 
  */

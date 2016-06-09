@@ -13,6 +13,12 @@ import javax.swing.SwingConstants;
 
 import stinc.Controller;
 
+/**
+ * This is the dynamic home page that users see when they log in. The content
+ * changes based on the user type.
+ * @author Taylor Rowland
+ *
+ */
 public class HomePanel extends JPanel {
 	/**
 	 * required serialVersionUID

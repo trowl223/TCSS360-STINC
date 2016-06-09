@@ -25,6 +25,12 @@ import model.Contest;
 import model.Entry;
 import stinc.Controller;
 
+/**
+ * This is the page shown when a user clicks on a contest. It allows the user
+ * to upload an entry to the contest and submit it for review.
+ * @author stefan
+ *
+ */
 @SuppressWarnings("serial")
 public class UploadPanel extends JPanel {
 
@@ -34,11 +40,19 @@ public class UploadPanel extends JPanel {
 	private JTextArea subDescBox;
 	private JTextField subUrlBox;
 	
+	/**
+	 * Class constructor, takes a contest and controller.
+	 * @param theContest The contest to be uploaded to.
+	 * @param theController The View's controller.
+	 */
 	public UploadPanel(Contest theContest, Controller theController) {
 		myContest = theContest;
 		myController = theController;
 	}
 	
+	/**
+	 * Sets up the page after it is instantiated.
+	 */
 	public void setup() {
 		setLayout(new GridBagLayout());
 		
@@ -115,7 +129,6 @@ public class UploadPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				System.out.println("User clicked Submit");
 				submit();
 			}
@@ -124,6 +137,9 @@ public class UploadPanel extends JPanel {
 		add(submitButton, right);
 	}
 	
+	/**
+	 * Internal method for handling the submission of the entry.
+	 */
 	private void submit() {
 		String errorText = "";
 		

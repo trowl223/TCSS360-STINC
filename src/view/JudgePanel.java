@@ -26,6 +26,12 @@ import model.Contest;
 import model.Entry;
 import stinc.Controller;
 
+/**
+ * The page displayed when a judge clicks on a contest. Allows the judge to
+ * assign scores and add comments to entries and submit these to the database.
+ * @author Nicholas
+ *
+ */
 @SuppressWarnings("serial")
 public class JudgePanel extends JPanel
 {

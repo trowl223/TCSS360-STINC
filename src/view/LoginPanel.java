@@ -16,9 +16,10 @@ import javax.swing.SwingConstants;
 
 import stinc.Controller;
 /**
- * @author igorgonchar
  * The login Panel allows a user to login to the system. 
  * It will check if the user has valid credentials and allow/deny access accordingly.
+ * @author igorgonchar
+ * 
  */
 
 @SuppressWarnings("serial")
