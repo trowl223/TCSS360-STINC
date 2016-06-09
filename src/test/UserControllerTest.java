@@ -2,17 +2,19 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import model.Contest;
-import model.Entry;
 import stinc.Controller;
 import stinc.Model;
 
+/**
+ * Tests the methods a User invokes in the Controller.
+ * @author Nicholas
+ */
 public class UserControllerTest {
 
 	private Controller myController;
@@ -27,6 +29,9 @@ public class UserControllerTest {
 		myController.login(myUserUser, myUserPass);
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void loginUserTest()
 	{
@@ -41,16 +46,17 @@ public class UserControllerTest {
 		myController.addContest(TestUtilities.getDummyContest());
 		List<Contest> contests = myController.getElegibleContests(myController.getCurrentUser());
 		assertTrue("The User should be able to enter the eligible contest.", TestUtilities.checkForCDummy(contests));
-		myController.removeContest(TestUtilities.getDummyCID());
+		assertTrue("The Contest unable to be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 	}
 	
 	@Test
 	public void addEntryTest()
 	{
 		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
-		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getContests()));
+		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getElegibleContests(myController.getCurrentUser())));
 		assertTrue("The entry was not able to be added.", myController.addEntry(TestUtilities.getDummyCID(), TestUtilities.getDummyEntry()));
-		assertTrue("The dummy entry should be inside the User Entries",TestUtilities.checkForEDummy(myController.getEntries(myController.getCurrentUser())));
+		assertTrue("The dummy entry should be inside the User Entries", TestUtilities.checkForEDummy(myController.getEntries(myController.getCurrentUser())));
+		assertTrue("The dummy entry couldn't be removed.", myController.removeEntry(TestUtilities.getDummyEID()));
 		assertTrue("The contest was unable to be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 	}
 	
@@ -58,9 +64,10 @@ public class UserControllerTest {
 	public void removeEntryTest()
 	{
 		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
-		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getContests()));
+		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getElegibleContests(myController.getCurrentUser())));
 		assertTrue("The entry was not able to be added.", myController.addEntry(TestUtilities.getDummyCID(), TestUtilities.getDummyEntry()));
 		assertTrue("The dummy entry should be inside the User Entries",TestUtilities.checkForEDummy(myController.getEntries(myController.getCurrentUser())));
+		assertTrue("The dummy entry couldn't be removed.", myController.removeEntry(TestUtilities.getDummyEID()));
 		assertTrue("The contest was unable to be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 	}
 	
@@ -68,9 +75,11 @@ public class UserControllerTest {
 	public void getEntriesTest ()
 	{
 		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
-		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getContests()));
+		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getElegibleContests(myController.getCurrentUser())));
 		assertTrue("The entry was not able to be added.", myController.addEntry(TestUtilities.getDummyCID(), TestUtilities.getDummyEntry()));
-		assertTrue("The dummy entry should be inside the User Entries",TestUtilities.checkForEDummy(myController.getEntries(myController.getCurrentUser())));
+		assertTrue("The dummy entry should be inside the User Entries",
+				TestUtilities.checkForEDummy(myController.getEntries(myController.getCurrentUser())));
+		assertTrue("The dummy entry couldn't be removed.", myController.removeEntry(TestUtilities.getDummyEID()));
 		assertTrue("The contest was unable to be removed.", myController.removeContest(TestUtilities.getDummyCID()));
 	}
 

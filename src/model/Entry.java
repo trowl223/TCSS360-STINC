@@ -42,6 +42,12 @@ public class Entry implements Comparable<Entry>
 		myID = theID;
 	}
 
+	/**
+	 * Constructs an Entry.
+	 * @param theName the name of the Entry.
+	 * @param theDescription the description of the Entry.
+	 * @param theSubmissionPath the path the submitted Entry.
+	 */
 	public Entry(String theName, String theDescription, String theSubmissionPath)
 	{
 		myName = theName;
@@ -49,6 +55,13 @@ public class Entry implements Comparable<Entry>
 		mySubmissionPath = theSubmissionPath;
 	}
 	
+	/**
+	 * Constructs an Entry.
+	 * @param theName the name of the Entry.
+	 * @param theDescription the description of the Entry.
+	 * @param theSubmissionPath the path the submitted Entry.
+	 * @param theEntryID the entry ID.
+	 */
 	public Entry(int theEntryID, String theSubmissionPath, String theName, String theDescription)
 	{
 		myID = theEntryID;
@@ -56,6 +69,7 @@ public class Entry implements Comparable<Entry>
 		myDescription = theDescription;
 		mySubmissionPath = theSubmissionPath;
 	}
+	
 	/**
 	 * Get the User that owns the Entry.
 	 * @return the User that owns the Entry.
@@ -83,6 +97,10 @@ public class Entry implements Comparable<Entry>
 		return myScore;
 	}
 	
+	/**
+	 * Set the contest score
+	 * @param theScore to set.
+	 */
 	public void setScore(int theScore) {
 		myScore = theScore;
 	}
@@ -92,24 +110,42 @@ public class Entry implements Comparable<Entry>
 		return theOther.myScore - myScore;
 	}
 	
+	/**
+	 * Gets the contest description.
+	 * @return the Contest description.
+	 */
 	public String getDescription() {
 		return myDescription;
 	}
+	
+	/**
+	 * Gets the submission path.
+	 * @return the submission path.
+	 */
 	public String getSubmissionPath() {
 		return mySubmissionPath;
 	}
+	
+	/**
+	 * Gets the entry name.
+	 * @return the entry name.
+	 */
 	public String getName() {
 		return myName;
 	}
-	public String getDateString() {
+	
+	public String getDateString() 
+	{
 		if (myDate == null)
 			return "00-00-0000";
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		return df.format(myDate);
 	}
+	
 	public void setUser(User theUser) {
 		myUser = theUser;
 	}
+	
 	public void setID(int theID) {
 		myID = theID;
 	}
@@ -126,19 +162,23 @@ public class Entry implements Comparable<Entry>
 		return myContestID;
 	}
 	
-	public void setRejected(boolean aval){
+	public void setRejected(boolean aval)
+	{
 		myIsRejected = aval;
 	}
 	
-	public boolean getRejected(){
+	public boolean getRejected()
+	{
 		return myIsRejected;
 	}
 	
-	public String getComment(){
+	public String getComment()
+	{
 		return myComment;
 	}
 	
-	public void setComment(String comment){
+	public void setComment(String comment)
+	{
 		myComment = comment;
 	}
 }

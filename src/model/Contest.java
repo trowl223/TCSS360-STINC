@@ -1,10 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * This class stores information and methods that deal with Contests
  * @author Nicholas Mousel
