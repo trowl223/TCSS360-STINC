@@ -257,34 +257,26 @@ public class JudgePanel extends JPanel
 	 */
 	private void submit() 
 	{
-		if(!myEntryBoxes.isEmpty())
+		for (Entry e : myEntryBoxes.keySet())
 		{
-			for (Entry e : myEntryBoxes.keySet())
+			JTextField jt = myEntryBoxes.get(e);
+			if (jt.getText().length() > 0)
 			{
-				JTextField jt = myEntryBoxes.get(e);
-				if (jt.getText().length() > 0)
+				try 
 				{
-					try 
+					Integer in = Integer.parseInt(jt.getText());
+					if (in != null)
 					{
-					    Integer in = Integer.parseInt(jt.getText());
-					    if (in != null)
-					    {
-								//System.out.println(in);
-							myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
-							myContent.removeAll();
-							repaint();
-						}
+						//System.out.println(in);
+						myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
 					}
-					catch (NumberFormatException e1) {
-						 JOptionPane.showMessageDialog(null, "You must input a valid number for the entry called: " + e.getName(), "Submission Error", JOptionPane.ERROR_MESSAGE);
-					}
+				}
+				catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "You must input a valid number for the entry called: " + e.getName() + " it will not be saved.", "Submission Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Nothing to sumbit", "Submission Error", JOptionPane.ERROR_MESSAGE);
-		}
+		myController.showHomePage();
 	}
 	
 	/**

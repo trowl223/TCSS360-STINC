@@ -362,7 +362,7 @@ public class Model extends Observable
 	    entryFields.add("updateRejected");//this is the tag
 	    entryFields.add(""+ anEntry.getID());//this should be a string
 	    entryFields.add(""+ anEntry.getComment());//this should be a string, admin comment
-	    entryFields.add(""+ 1);//this should be a string, was rejected.
+	    entryFields.add(""+ anEntry.getRejected());//this should be a string, was rejected.
 	    
 	    DatabaseConnector myConnector = new DatabaseConnector("adminReject", entryFields);//create an entry
 	    myConnector.connect();
