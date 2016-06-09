@@ -49,6 +49,11 @@ public class Controller {
 	{
 		return myModel.getContests();
 	}
+	
+	public List<Entry> getUnjudgedEntries(int theContest, User theUser)
+	{
+		return myModel.getUnjudgedEntries(theContest, theUser);
+	}
 
 	public List<Entry> getContestEntries(Contest theContest) {
 		return myModel.getContestEntries(theContest);

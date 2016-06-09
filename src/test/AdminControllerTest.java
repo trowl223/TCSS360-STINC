@@ -21,7 +21,11 @@ public class AdminControllerTest {
 	private Controller myController;
 	private String myAdminUser = "admin";
 	private String myAdminPass = "admin";
-
+	
+	/**
+	 * Set up the admin controller test.
+	 * @throws Exception if setup is unsecussful.
+	 */
 	@Before
 	public void setUp() throws Exception {
 		Model myModel = new Model();
@@ -29,6 +33,9 @@ public class AdminControllerTest {
 		myController.addModel(myModel);
 	}
 	
+	/**
+	 * Test admin login
+	 */
 	@Test
 	public void loginAdminTest()
 	{
@@ -36,7 +43,9 @@ public class AdminControllerTest {
 		assertTrue("Admin login is not an admin", myController.getCurrentUser().isAdmin());
 	}
 	
-	
+	/**
+	 * Gets all the Contests.
+	 */
 	@Test
 	public void getContestsTest()
 	{
@@ -45,6 +54,9 @@ public class AdminControllerTest {
 		assertTrue(contests.equals(same));
 	}
 	
+	/**
+	 * Tests if adding a Contest is successful.
+	 */
 	@Test
 	public void addContestTest()
 	{
@@ -57,6 +69,9 @@ public class AdminControllerTest {
 		assertFalse("The dummy should not be removed.", TestUtilities.checkForCDummy(contests));
 	}
 	
+	/**
+	 * Tests if removing a Contest is successful.
+	 */
 	@Test
 	public void removeContestTest()
 	{

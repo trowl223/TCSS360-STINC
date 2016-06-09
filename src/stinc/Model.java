@@ -183,6 +183,11 @@ public class Model extends Observable
 		return result;
 	}
 	
+	/**
+	 * Gets all the entries for a Contest
+	 * @param theContest to search for Entries.
+	 * @return list of Entry.
+	 */
 	public List<Entry> getContestEntries(Contest theContest) {
 		int STRIDE = 5;
 		
@@ -214,6 +219,42 @@ public class Model extends Observable
 		return retList;
 	}
 	
+	/**
+	 * Gets the Entries a User can judge.
+	 * @param theUser to query entries for.
+	 * @return Contests the User can judge.
+	 */
+	public List<Entry> getUnjudgedEntries(int theContestID, User theUser)
+	{
+		List<Entry> result = new ArrayList<Entry>();
+		ArrayList<String> dumb = new ArrayList<String>();
+		dumb.add("unjudgedEntries");
+		dumb.add("" + theUser.getID());
+		dumb.add("" + theContestID);
+		
+        DatabaseConnector myConnector = new DatabaseConnector(
+        		"userContests", dumb);
+		myConnector.connect();
+		
+		if (myConnector.getState() == DatabaseConnector.SUCCESS)
+		{		
+			for (int i = 0; i < dumb.size(); i += 5) {
+				
+				int entryID = Integer.valueOf(dumb.get(i + 4));
+				String entryName = dumb.get(i + 0);
+				String entryDesc = dumb.get(i + 3);
+				String entryPath = dumb.get(i + 2);
+				int entryScore = Integer.valueOf(dumb.get(i + 1));
+				
+				Entry e = new Entry(entryID, entryPath, entryName, entryDesc);
+				e.setScore(entryScore);
+				
+				result.add(e);
+			}
+		}
+		
+		return result;
+	}
 	/**
 	 * Gets the Contests a User can judge.
 	 * @param theUser to query contests for.
