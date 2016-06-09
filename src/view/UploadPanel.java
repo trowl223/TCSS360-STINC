@@ -156,7 +156,7 @@ public class UploadPanel extends JPanel {
 			
 			if (myController.addEntry(myContest.getID(), entry)) {
 				JOptionPane.showMessageDialog(null,  "Your entry has been submitted.", "Submission successful", JOptionPane.PLAIN_MESSAGE);
-				myController.showContentFrame();
+				myController.showHomePage();
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "An error prevented the submission from completing.\nPlease talk to the database administrator.", "Database Error", JOptionPane.ERROR_MESSAGE);
