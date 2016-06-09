@@ -7,11 +7,11 @@ import model.Entry;
 
 public class TestUtilities 
 {
-	private static String dummyCName = "jTestNew";
+	private static String dummyCName = "bbb";
 	private static String dummyCDesc = "test";
 	private static int dummyCID = -1;
-	private static String dummyEName = "jTest";
-	private static String dummyEDesc = "test";
+	private static String dummyEName = "bbb";
+	private static String dummyEDesc = "this is a banana";
 	private static String dummyEPath = "www.google.com";
 	private static int dummyEID = -1;
 	

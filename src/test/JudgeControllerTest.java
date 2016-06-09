@@ -2,12 +2,20 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Contest;
 import stinc.Controller;
 import stinc.Model;
 
+/**
+ * Tests the methods a Judge would use in the Controller.
+ * @author Nicholas
+ *
+ */
 public class JudgeControllerTest {
 
 	private Controller myController;
@@ -19,7 +27,7 @@ public class JudgeControllerTest {
 		Model myModel = new Model();
 		myController = new Controller();
 		myController.addModel(myModel);
-		myController.login("test", "test");
+		myController.login(myJudgeUser, myJudgePass);
 	}
 	
 	@Test
@@ -32,13 +40,23 @@ public class JudgeControllerTest {
 	@Test
 	public void getJudgableContestsTest()
 	{
-		fail("Not yet implemented");
+		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
+		List<Contest> same = myController.getJudgableContests(myController.getCurrentUser());
+		assertTrue("Judgable Contest should be the same.", contests.equals(same));
 	}
 	
 	@Test
-	public void getJudgeEntryTest()
+	public void judgeEntryTest()
 	{
-		fail("Not yet implemented");
+		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
+		if (contests.size() > 0)
+		{
+//			myController
+		}
+		else
+		{
+			System.out.println("No contests to judge");
+		}
 	}
 	
 	

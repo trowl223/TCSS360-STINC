@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,6 +11,11 @@ import model.Contest;
 import stinc.Controller;
 import stinc.Model;
 
+/**
+ * Tests the methods an Admin would use in the Controller.
+ * @author Nicholas
+ *
+ */
 public class AdminControllerTest {
 
 	private Controller myController;
