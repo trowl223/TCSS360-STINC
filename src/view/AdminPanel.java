@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ public class AdminPanel extends JPanel {
 	private static final int IMAGE_WIDTH = 100;
 	private static final int IMAGE_HEIGHT = 100;
 	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 200;
-	private static final int DEFAULT_WIDTH = 800;
+	private static final int DEFAULT_WIDTH = 600;
 	private final Contest myContest;
 	private final Controller myController;
 	private final List<Entry> myEntries;
@@ -53,8 +54,9 @@ public class AdminPanel extends JPanel {
 		myController = theController;
 		myContest = theContest;
 		myEntries = myController.getContestEntries(myContest);
+		setLayout(new BorderLayout());
 		JPanel container = new JPanel();
-		container.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+		//container.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		create(container);
 	}
 
@@ -68,35 +70,37 @@ public class AdminPanel extends JPanel {
 		add(scrPane, BorderLayout.CENTER); 
 		
 		scrPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrPane.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		
 		container.setBackground(Color.WHITE);
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		JLabel title = new JLabel("Reject an inappropiate entry below.", JLabel.CENTER);
+		title.setFont(new Font("Courier", Font.BOLD, 24));
+		add(title, BorderLayout.NORTH);
 		
-		container.add(new JLabel("This panel allows you to Accept/Reject entries."), BorderLayout.NORTH);
+		JButton Submit = new JButton("Submit");
+		Submit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				for (Entry e: myEntries) {
+					if (e.getRejected()) {
+						myController.updateRejected(e);
+					}
+				}
+				
+				myController.showHomePage();
+			}
+		});
+		add(Submit, BorderLayout.SOUTH);
 		
 		if (myEntries.isEmpty()) {
-			container.add(new JLabel("This contest does not contain any entries."), BorderLayout.CENTER);
-			
+			container.add(new JLabel("This contest does not contain any entries.", JLabel.CENTER), BorderLayout.CENTER);
+			Submit.setEnabled(false);
 		} else {
 			for (Entry e : myEntries) {
 				if(!e.getRejected())
 					container.add(populate(e));
 			}
-			JButton Submit = new JButton("Submit");
-			Submit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent action){
-					for (Entry e: myEntries) {
-						if (e.getRejected()) {
-							myController.updateRejected(e);
-						}
-					}
-					
-					myController.showHomePage();
-				}
-			});
-			container.add(Submit, BorderLayout.AFTER_LAST_LINE);
 		}
 	}
 	

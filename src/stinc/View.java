@@ -222,7 +222,7 @@ public class View extends JFrame implements Observer
 		pane.add(backButton, BorderLayout.NORTH);
 		JudgePanel jp = new JudgePanel(myController, theContest);
 		add(jp);
-		jp.populate(myController.getNotJudgedEntries(theContest.getID(), myController.getCurrentUser()));
+//		jp.populate(myController.getNotJudgedEntries(theContest.getID(), myController.getCurrentUser()));
 		pack();
 		setVisible(true);
 	}

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,6 +11,13 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -38,8 +47,8 @@ public class JudgePanel extends JPanel
 {
 	private static final int IMAGE_WIDTH = 200;
 	private static final int IMAGE_HEIGHT = 200;
-	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 55;
-	private static final int DEFAULT_WIDTH = 700;
+	private static final int DEFAULT_HEIGHT = IMAGE_HEIGHT + 200;
+	private static final int DEFAULT_WIDTH = 600;
 	private final Controller myController;
 	
 	private final HashMap<Entry, JTextField> myEntryBoxes = new HashMap<Entry, JTextField>();
@@ -56,13 +65,24 @@ public class JudgePanel extends JPanel
 	{
 		super();
 		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		myController = theController;
 		myContest = theContest;
 		myContent = new JPanel();
 		myContent.setLayout(new BoxLayout(myContent, BoxLayout.Y_AXIS));
 		add(contestInfo(), BorderLayout.NORTH);
 		add(judgeScroll(myContent), BorderLayout.CENTER);	
-		add(createSubmit(), BorderLayout.SOUTH);
+		for (Entry e : theController.getNotJudgedEntries(theContest.getID(), theController.getCurrentUser()))
+		{
+			myContent.add(judgeBox(e));
+		}
+		JButton sumbit = createSubmit();
+		if (myEntryBoxes.isEmpty())
+		{
+			sumbit.setEnabled(false);
+			add(new JLabel("There are no more entries left to judge.", JLabel.CENTER), BorderLayout.CENTER);
+		}
+		add(sumbit, BorderLayout.SOUTH);
 	}
 	
 	/**
@@ -139,7 +159,7 @@ public class JudgePanel extends JPanel
 		right.gridy++;
 		judgeInfo.add(new JLabel(theEntry.getName()), left);
 		
-		// Row 4 Sumbission description
+		// Row 4 Submission description
 		left.gridy++;
 		right.gridy++;
 		judgeInfo.add(new JLabel("Description: ", JLabel.LEFT), left);
@@ -147,7 +167,59 @@ public class JudgePanel extends JPanel
 		right.gridy++;
 		judgeInfo.add(new JLabel(theEntry.getDescription()), left);
 		
-		// Row 3 Submission title
+		// Row 4 path description
+		left.gridy++;
+		right.gridy++;
+		judgeInfo.add(new JLabel("URL: ", JLabel.LEFT), left);
+		left.gridy++;
+		right.gridy++;
+		JTextArea path = new JTextArea(theEntry.getSubmissionPath());
+		path.setEditable(false);
+		path.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Desktop d = Desktop.getDesktop();
+				try {
+					d.browse(new URI(path.getText()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		judgeInfo.add(path, left);
+		
+		// Row 3 Score
 		left.gridy++;
 		right.gridy++;
 		judgeInfo.add(new JLabel("Score: ", JLabel.LEFT), left);
@@ -199,6 +271,8 @@ public class JudgePanel extends JPanel
 					    {
 								//System.out.println(in);
 							myController.judgeEntry(myController.getCurrentUser(), e.getID(), in, "");
+							myContent.removeAll();
+							repaint();
 						}
 					}
 					catch (NumberFormatException e1) {
