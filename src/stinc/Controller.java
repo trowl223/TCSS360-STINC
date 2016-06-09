@@ -50,7 +50,7 @@ public class Controller {
 		return myModel.getContests();
 	}
 	
-	public List<Entry> getUnjudgedEntries(int theContest, User theUser)
+	public List<Entry> getNotJudgedEntries(int theContest, User theUser)
 	{
 		return myModel.getUnjudgedEntries(theContest, theUser);
 	}
