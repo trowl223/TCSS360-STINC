@@ -187,13 +187,13 @@ public class Model extends Observable
 	 * @param theContest to search for Entries.
 	 * @return list of Entry.
 	 */
-	public List<Entry> getContestEntries(Contest theContest) {
+	public List<Entry> getContestEntries(int theContest) {
 		int STRIDE = 5;
 		
 		ArrayList<String> entries = new ArrayList<String>();
 		// TODO fix this
 		entries.add("allEntries");
-		entries.add("" + theContest.getID());
+		entries.add("" + theContest);
 		DatabaseConnector myConnector = new DatabaseConnector("contestEntries", entries);
 		myConnector.connect();
 		

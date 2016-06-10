@@ -40,6 +40,7 @@ public class Entry
 		myDate = theDate;
 		myScore = theScore;
 		myID = theID;
+		myIsRejected = false;
 	}
 
 	/**
@@ -53,6 +54,7 @@ public class Entry
 		myName = theName;
 		myDescription = theDescription;
 		mySubmissionPath = theSubmissionPath;
+		myIsRejected = false;
 	}
 	
 	/**
@@ -68,6 +70,7 @@ public class Entry
 		myName = theName;
 		myDescription = theDescription;
 		mySubmissionPath = theSubmissionPath;
+		myIsRejected = false;
 	}
 	
 	/**

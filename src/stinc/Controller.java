@@ -65,7 +65,7 @@ public class Controller {
 	 * @param theContest to search for Entries.
 	 * @return list of Entry.
 	 */
-	public List<Entry> getContestEntries(Contest theContest) {
+	public List<Entry> getContestEntries(int theContest) {
 		return myModel.getContestEntries(theContest);
 	}
 	/**

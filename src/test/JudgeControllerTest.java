@@ -71,19 +71,25 @@ public class JudgeControllerTest {
 	@Test
 	public void judgeEntryTest()
 	{
+		assertTrue("The contest was not able to be added", myController.addContest(TestUtilities.getDummyContest()));
+		assertTrue("The dummy contest should be an eligible contest", TestUtilities.checkForCDummy(myController.getContests()));
+		assertTrue("The entry was not able to be added.", myController.addEntry(TestUtilities.getDummyCID(), TestUtilities.getDummyEntry()));
+		assertTrue("The dummy entry should be inside the User Entries", TestUtilities.checkForEDummy(myController.getContestEntries(TestUtilities.getDummyCID())));
 		List<Contest> contests = myController.getJudgableContests(myController.getCurrentUser());
 		if (contests.size() > 0)
 		{
-			Contest temp  = contests.get(0);
+			Contest temp  = TestUtilities.getDummyCFrom(contests);
 			List<Entry> contestEntries = myController.getNotJudgedEntries(temp.getID(), myController.getCurrentUser());
 			if (contestEntries.size() > 0)
 			{
-				Entry testScore = contestEntries.get(0);
+				Entry testScore = TestUtilities.getDummyEFrom(contestEntries);
 				assertTrue("The judge was unable to judge the contest.",
 							myController.judgeEntry(myController.getCurrentUser(), testScore.getID(), 99, ""));
 				
 				contestEntries = myController.getNotJudgedEntries(temp.getID(), myController.getCurrentUser());
 				assertFalse("The entry should not be here", contestEntries.contains(temp));
+				assertTrue("The dummy entry couldn't be removed.", myController.removeEntry(TestUtilities.getDummyEID()));
+				assertTrue("The contest was unable to be removed.", myController.removeContest(TestUtilities.getDummyCID()));	
 			}
 			else
 			{

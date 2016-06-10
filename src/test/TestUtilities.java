@@ -7,11 +7,11 @@ import model.Entry;
 
 public class TestUtilities 
 {
-	private static String dummyCName = "banananmamaaaaaaaaa";
-	private static String dummyCDesc = "test";
+	private static String dummyCName = "I am a Test.2222";
+	private static String dummyCDesc = "I am test description.";
 	private static int dummyCID = -1;
-	private static String dummyEName = "bbb";
-	private static String dummyEDesc = "this is a banana";
+	private static String dummyEName = "I am a Test Entry.";
+	private static String dummyEDesc = "I am test entry.";
 	private static String dummyEPath = "www.google.com";
 	private static int dummyEID = -1;
 	
@@ -28,7 +28,6 @@ public class TestUtilities
 			{
 				if (c.getDescription().equals(dummyCDesc))
 				{
-					System.out.println(c.getID());
 					dummyCID = c.getID();
 					return true;
 				}
@@ -37,7 +36,8 @@ public class TestUtilities
 		return false;
 	}
 
-	public static int getDummyCID() {
+	public static int getDummyCID() 
+	{
 		return dummyCID;
 	}
 	
@@ -46,11 +46,43 @@ public class TestUtilities
 		return dummyEID;
 	}
 	
-	public static Entry getDummyEntry() {
+	public static Entry getDummyEntry()
+	{
 		return new Entry(dummyEName, dummyEDesc, dummyEPath);
 	}
 	
-	public static boolean checkForEDummy(List<Entry> theEntries) {
+	public static Contest getDummyCFrom(List<Contest> theContests)
+	{
+		for (Contest c : theContests)
+		{
+			if(c.getName().equals(dummyCName))
+			{
+				if (c.getDescription().equals(dummyCDesc))
+				{				
+					return c;
+				}
+			}
+		}
+		return null;
+	}
+	public static Entry getDummyEFrom(List<Entry> theEntries)
+	{
+		for (Entry c : theEntries)
+		{
+			if(c.getName().equals(dummyEName))
+			{
+				if (c.getDescription().equals(dummyEDesc))
+				{
+					
+					return c;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static boolean checkForEDummy(List<Entry> theEntries) 
+	{
 		for (Entry c : theEntries)
 		{
 			if(c.getName().equals(dummyEName))
@@ -63,6 +95,5 @@ public class TestUtilities
 			}
 		}
 		return false;
-		
 	}
 }

@@ -53,7 +53,7 @@ public class AdminPanel extends JPanel {
 		super();
 		myController = theController;
 		myContest = theContest;
-		myEntries = myController.getContestEntries(myContest);
+		myEntries = myController.getContestEntries(myContest.getID());
 		setLayout(new BorderLayout());
 		JPanel container = new JPanel();
 		//container.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
@@ -94,7 +94,7 @@ public class AdminPanel extends JPanel {
 		add(Submit, BorderLayout.SOUTH);
 		
 		if (myEntries.isEmpty()) {
-			container.add(new JLabel("This contest does not contain any entries.", JLabel.CENTER), BorderLayout.CENTER);
+			add(new JLabel("This contest does not contain any entries.", JLabel.CENTER), BorderLayout.CENTER);
 			Submit.setEnabled(false);
 		} else {
 			for (Entry e : myEntries) {
