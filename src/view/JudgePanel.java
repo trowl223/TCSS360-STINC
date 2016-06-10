@@ -74,10 +74,7 @@ public class JudgePanel extends JPanel
 		add(judgeScroll(myContent), BorderLayout.CENTER);	
 		for (Entry e : theController.getNotJudgedEntries(theContest.getID(), theController.getCurrentUser()))
 		{
-			if (!e.getRejected())
-			{
 				myContent.add(judgeBox(e));
-			}
 		}
 		JButton sumbit = createSubmit();
 		if (myEntryBoxes.isEmpty())
