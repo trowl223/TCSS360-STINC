@@ -111,6 +111,13 @@ public class DatabaseConnector {
                 myKeys.add("contest_id");
                 QueryDB(myKeys);
                 break;
+            case "rejectEntry":
+                URL = updateEntries;
+                myKeys.add("query_type");
+                myKeys.add("admin_comment");
+                myKeys.add("entry_id");
+                QueryDB(myKeys);
+                break;
         }
     }
     public void FetchContests(ArrayList<String> myContests) {
