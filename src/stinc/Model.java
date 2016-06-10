@@ -359,12 +359,10 @@ public class Model extends Observable
 	 */
 	public boolean updateRejected(Entry anEntry) {
 		ArrayList<String> entryFields = new ArrayList<>();
-	    entryFields.add("updateRejected");//this is the tag
-	    entryFields.add(""+ anEntry.getID());//this should be a string
+	    entryFields.add("rejectEntry");//this is the tag
 	    entryFields.add(""+ anEntry.getComment());//this should be a string, admin comment
-	    entryFields.add(""+ anEntry.getRejected());//this should be a string, was rejected.
-	    
-	    DatabaseConnector myConnector = new DatabaseConnector("adminReject", entryFields);//create an entry
+	    entryFields.add(""+ anEntry.getID());//this should be a string
+	    DatabaseConnector myConnector = new DatabaseConnector("rejectEntry", entryFields);//create an entry
 	    myConnector.connect();
 		return myConnector.getState() == DatabaseConnector.SUCCESS;
 	}
